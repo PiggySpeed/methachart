@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>MethaChart 2.0</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8000;"/>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+    const script = document.createElement('script');
+    console.log('env is ', process.env.NODE_ENV);
+    script.src = (process.env.NODE_ENV === 'development')
+      ? 'http://localhost:8000/bundle.js'
+      : 'http://localhost:8080/bundle.js';
+    document.body.appendChild(script);
+    </script>
+  </body>
+</html>
