@@ -1,0 +1,65 @@
+@import '../../styles/index';
+
+.flinput-container {
+  position: relative;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.flinput-border {
+  position: absolute;
+  width: 0;
+  bottom: -8px;
+  left: 0;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: 0.25s ease-out;
+  z-index: 2;
+
+  &.focus {
+    width: 100%;
+    border-bottom: 2px solid @blue;
+  }
+}
+
+.flinput-input {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+  flex: none;
+  outline: none;
+  padding: 0.5rem 0 0 0;
+  border: none;
+  border-bottom: 2px solid @white-4;
+  transition: 0.15s ease-in-out;
+
+  &.hover {
+    border-bottom: 2px solid @grey-1;
+  }
+}
+
+.flinput-floating-label {
+  position: absolute;
+  left: 0;
+  bottom: 7px;
+
+  font-size: 1rem;
+  color: @white-4;
+  transition: 0.15s ease-in-out;
+  user-select: none;
+
+  &.float {
+    bottom: 28px;
+    left: -4px;
+    transform: scale(0.8);
+  }
+
+  &.focus {
+    color: @blue;
+  }
+
+  &.hover {
+    color: @grey-1;
+  }
+}

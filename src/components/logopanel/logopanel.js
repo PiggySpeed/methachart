@@ -5,7 +5,7 @@ import MethaChartLogo from '../../assets/methachart_logo.png';
 function LogoPanel() {
   return (
     <div className="logopanel-container">
-      <img src={MethaChartLogo} width={25} alt="logo" />
+      <img src={MethaChartLogo} width={30} alt="logo" />
     </div>
   )
 }

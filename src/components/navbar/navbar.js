@@ -3,18 +3,24 @@ import React from 'react';
 import {Link} from '@reach/router';
 import { LogoPanel } from '..';
 
+function NavBarButton({label, to}) {
+  return (
+    <Link to={to} className="navbar-button">{label}</Link>
+  )
+}
+
 function NavBar() {
   return (
     <div className="navbar-container">
       <LogoPanel />
       <div className="navbar-inner-container-left">
-        <Link to="chart/methadone">methadone</Link>
-        <Link to="chart/suboxone">suboxone</Link>
-        <Link to="chart/kadian">kadian</Link>
+        <NavBarButton to="chart/methadone" label="methadone" />
+        <NavBarButton to="chart/suboxone" label="suboxone" />
+        <NavBarButton to="chart/kadian" label="kadian" />
       </div>
 
       <div className="navbar-inner-container-right">
-        <Link to="settings">settings</Link>
+        <NavBarButton to="settings" label="settings" />
       </div>
     </div>
   )
