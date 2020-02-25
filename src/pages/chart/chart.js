@@ -1,10 +1,15 @@
 import './index.less';
 import React from 'react';
+import {ChartFooter} from '../../components';
 
-function Chart() {
+function Chart({children, location}) {
+  console.log('location is ', location);
   return (
-    <div>
-      This is the chart page
+    <div className="chart-container">
+      <div className="chart-inner-container">
+        {children}
+      </div>
+      <ChartFooter/>
     </div>
   )
 }
