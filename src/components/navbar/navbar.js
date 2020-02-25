@@ -2,7 +2,8 @@ import './index.less';
 import React from 'react';
 import {Link} from '@reach/router';
 
-function NavBar() {
+function NavBar({location}) {
+  console.log('nav location is ', location);
   return (
     <div className="navbar-container">
       <div className="navbar-inner-container-left">

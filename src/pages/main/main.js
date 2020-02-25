@@ -20,8 +20,8 @@ const history = createHistory(source);
 function Main() {
   return (
     <Provider store={store}>
-      <NavBar/>
       <LocationProvider history={history}>
+        <NavBar/>
         <Router className="main-container-router">
           <Chart default path="chart">
             <ChartMethadone default path="methadone" />
