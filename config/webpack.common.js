@@ -13,14 +13,23 @@ const config = {
       },
       {
         test: /\.(less|css)$/,
+        exclude: /node_modules/,
         use: [
           { loader: 'style-loader' },
           { loader: 'css-loader' },
-          { loader: 'less-loader' },
+          { loader: 'less-loader' }
         ]
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(jpg|png)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'url-loader'
+        }
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'file-loader',

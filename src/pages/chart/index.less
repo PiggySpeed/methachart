@@ -2,9 +2,15 @@
   display: flex;
   flex-flow: column;
   flex: 1;
+
+  // fix for reach-router inserting extra divs
+  div {
+    display: flex;
+    width: 100%;
+  }
 }
 
 .chart-inner-container {
+  display: flex;
   flex: 1;
-  border: 1px solid purple;
 }

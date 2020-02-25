@@ -23,8 +23,8 @@ function Main() {
       <LocationProvider history={history}>
         <NavBar/>
         <Router className="main-container-router">
-          <Chart default path="chart">
-            <ChartMethadone default path="methadone" />
+          <Chart path="chart">
+            <ChartMethadone path="methadone" />
             <ChartSuboxone path="suboxone" />
             <ChartKadian path="kadian" />
           </Chart>

@@ -2,8 +2,7 @@ import './index.less';
 import React from 'react';
 import {ChartFooter} from '../../components';
 
-function Chart({children, location}) {
-  console.log('location is ', location);
+function Chart({children}) {
   return (
     <div className="chart-container">
       <div className="chart-inner-container">

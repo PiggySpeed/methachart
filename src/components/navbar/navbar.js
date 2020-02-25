@@ -1,11 +1,12 @@
 import './index.less';
 import React from 'react';
 import {Link} from '@reach/router';
+import { LogoPanel } from '..';
 
-function NavBar({location}) {
-  console.log('nav location is ', location);
+function NavBar() {
   return (
     <div className="navbar-container">
+      <LogoPanel />
       <div className="navbar-inner-container-left">
         <Link to="chart/methadone">methadone</Link>
         <Link to="chart/suboxone">suboxone</Link>
