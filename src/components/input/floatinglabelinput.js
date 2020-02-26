@@ -1,17 +1,7 @@
 import './index.less';
 import React, {useState} from 'react';
-import { Input } from 'semantic-ui-react';
 
-const styles = {
-  input: {
-    borderLeft: 'none',
-    borderTop: 'none',
-    borderRight: 'none',
-    border: 'none'
-  }
-};
-
-function FloatingLabelInput({placeholder, onChange, onFocus, onBlur}) {
+function FloatingLabelInput({canFloat = true, placeholder, style, onChange, onFocus, onBlur}) {
   const [float, setFloat] = useState(false);
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
@@ -53,7 +43,6 @@ function FloatingLabelInput({placeholder, onChange, onFocus, onBlur}) {
   }
 
   function handleMouseEnter() {
-    console.log('hovering');
     setHover(true);
   }
 
@@ -62,17 +51,26 @@ function FloatingLabelInput({placeholder, onChange, onFocus, onBlur}) {
   }
 
   return (
-    <div className="flinput-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="flinput-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={style ? style : {}}>
       <hr className={`flinput-border ${focus ? 'focus' : ''}`} />
       <input
         className={`flinput-input ${hover ? 'hover' : ''}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange} />
-      <h6
+      {
+        canFloat && <h6
         className={`flinput-floating-label ${float ? 'float' : ''} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>
         {placeholder}
-      </h6>
+        </h6>
+      }
+      {
+        !canFloat && <h6
+          className={`flinput-floating-label ${float ? 'hidden' : ''} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>
+          {placeholder}
+        </h6>
+      }
+
     </div>
   )
 }

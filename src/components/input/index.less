@@ -18,11 +18,12 @@
 
   &.focus {
     width: 100%;
-    border-bottom: 2px solid @blue;
+    border-bottom: 1px solid @blue;
   }
 }
 
 .flinput-input {
+  position: relative;
   height: 100%;
   width: 100%;
   z-index: 1;
@@ -31,11 +32,11 @@
   outline: none;
   padding: 0.5rem 0 0 0;
   border: none;
-  border-bottom: 2px solid @white-4;
+  border-bottom: 1px solid @white-4;
   transition: 0.15s ease-in-out;
 
   &.hover {
-    border-bottom: 2px solid @grey-1;
+    border-bottom: 1px solid @grey-1;
   }
 }
 
@@ -43,6 +44,7 @@
   position: absolute;
   left: 0;
   bottom: 7px;
+  z-index: 0;
 
   font-size: 1rem;
   color: @white-4;
