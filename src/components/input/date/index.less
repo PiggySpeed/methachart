@@ -1,0 +1,73 @@
+@import '../../../styles/index';
+
+.dateinput-container {
+  position: relative;
+  display: flex;
+  height: 3rem;
+  margin-top: 0.5rem;
+  padding: 0 0.25rem 0.5rem;
+
+  border: 1px solid @white-4;
+  border-radius: 5px;
+}
+
+.dateinput-label {
+  position: absolute;
+  top: -9px;
+  left: 8px;
+  color: @white-4;
+  background-color: @white;
+  padding: 2px;
+  font-size: @font-s;
+}
+
+.dateinput-input-container {
+  position: relative;
+  width: 2.25rem;
+  height: 100%;
+  margin: 0 0.125rem 0 0.125rem;
+  padding: 0.25rem 0.25rem 0 0.25rem;
+}
+
+.dateinput-input {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  flex: none;
+  background: transparent;
+  outline: none;
+  padding: 0.5rem 0 0 0;
+  border: none;
+  border-bottom: 1px solid @white-4;
+  text-align: center;
+}
+
+.dateinput-placeholder {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  //left: 9px;
+  bottom: 4px;
+  color: @white-4;
+  user-select: none;
+  z-index: 0;
+}
+
+.dateinput-border {
+  position: absolute;
+  width: 0;
+  bottom: -8px;
+  left: 4px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  transition: 0.125s ease-out;
+  z-index: 2;
+  border-bottom: 1px solid @blue;
+
+  &.focus {
+    width: 1.7rem;
+  }
+}
+
+

@@ -1,12 +1,8 @@
 // order of imports matters
 import './index.less';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import './react_dates_override.less';
 import React, {useState} from 'react';
 import moment from 'moment';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
-// ref for datepicker: https://github.com/airbnb/react-dates#make-some-awesome-datepickers
+import {DateInput} from '../index';
 
 function DatePanel() {
   const [startDate, setStartDate] = useState(moment());
@@ -25,32 +21,9 @@ function DatePanel() {
   }
 
   return (
-    <div className="datepanel-container" style={{position: 'relative', zIndex:99}}>
-      <DateRangePicker
-        // momentPropTypes.momentObj or null
-        startDate={startDate}
-
-        // PropTypes.string.isRequired
-        startDateId="your_unique_start_date_id"
-
-        // momentPropTypes.momentObj or null
-        endDate={endDate}
-
-        // PropTypes.string.isRequired
-        endDateId="your_unique_end_date_id"
-
-        // PropTypes.func.isRequired
-        onDatesChange={handleDateChange}
-
-        // PropTypes.oneOf([START_DATE, END_DATE]) or null
-        focusedInput={focusedInput}
-
-        // PropTypes.func.isRequired
-        onFocusChange={handleFocusChange}
-
-        orientation="vertical"
-        anchorDirection="right"
-      />
+    <div className="datepanel-container">
+      <DateInput label="Start" style={{marginRight: '1rem'}}/>
+      <DateInput label="End" />
     </div>
   )
 }
