@@ -5,3 +5,4 @@ export {default as FloatingLabelInput} from './input/floatinglabelinput';
 export {default as InputTakehomeML} from './inputmedication/inputtakehome_ml/inputtakehome_ml';
 export {default as InputDoseML} from './inputmedication/inputdose_ml/inputdose_ml';
 export {default as MedicationDropdown} from './dropdown/medication';
+export {default as DatePanel} from './datepanel/datepanel';

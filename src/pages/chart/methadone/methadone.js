@@ -1,6 +1,7 @@
 import './index.less';
 import React from 'react';
 import {
+  DatePanel,
   FloatingLabelInput,
   InputDoseML,
   InputTakehomeML,
@@ -51,7 +52,7 @@ function ChartMethadone() {
         <InputTakehomeML inputStyle={styles.takehome} />
       </ViewRow>
       <ViewRow>
-        panel 3
+        <DatePanel />
       </ViewRow>
       <ViewRow>
         panel 4
