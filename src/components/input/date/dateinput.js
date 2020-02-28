@@ -1,5 +1,6 @@
 import './index.less';
 import React, {useState} from 'react';
+import Calendar from 'react-calendar';
 
 function DateNumberInput({min, max, placeholder, onFocus, onBlur, onChange}) {
   const [focus, setFocus] = useState(false);
@@ -54,6 +55,11 @@ function DateNumberInput({min, max, placeholder, onFocus, onBlur, onChange}) {
 function DateInput({style, label}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
+  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+
+  function handleDateChange(e) {
+    console.log('handleDateChange: ', e);
+  }
 
   function handleFocus(e) {
     setFocus(true);
@@ -73,9 +79,11 @@ function DateInput({style, label}) {
 
   return (
     <div
-      className={`dateinput-container ${focus ? 'focus' : ''}`}
-      style={style ? style : {}}>
-      <p className="dateinput-label">{label}</p>
+      className={`dateinput-container ${focus ? 'focus' : ''} ${hover ? 'hover' : ''}`}
+      style={style ? style : {}}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
+      <p className={`dateinput-label ${focus ? 'focus' : ''} ${hover ? 'hover' : ''}`}>{label}</p>
       <DateNumberInput
         min={1}
         max={31}
@@ -94,6 +102,17 @@ function DateInput({style, label}) {
         placeholder="yy"
         onFocus={handleFocus}
         onBlur={handleBlur} />
+
+      {focus &&
+        <div className="dateinput-calendar-container">
+          <Calendar
+            selectRange
+            showNeighboringMonth
+            showFixedNumberOfWeeks
+            onChange={handleDateChange}
+            value={dateRange}
+          />
+        </div>}
     </div>
   )
 }

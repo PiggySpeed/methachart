@@ -9,6 +9,14 @@
 
   border: 1px solid @white-4;
   border-radius: 5px;
+
+  &.hover {
+    border: 1px solid @grey-1;
+  }
+
+  &.focus {
+    border: 1px solid @blue;
+  }
 }
 
 .dateinput-label {
@@ -19,6 +27,14 @@
   background-color: @white;
   padding: 2px;
   font-size: @font-s;
+
+  &.hover {
+    color: @grey-1;
+  }
+
+  &.focus {
+    color: @blue;
+  }
 }
 
 .dateinput-input-container {
@@ -47,7 +63,6 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  //left: 9px;
   bottom: 4px;
   color: @white-4;
   user-select: none;
@@ -70,4 +85,9 @@
   }
 }
 
-
+.dateinput-calendar-container {
+  position: absolute;
+  left: 0;
+  top: 3.5rem;
+  border: 1px solid yellow;
+}
