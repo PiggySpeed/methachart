@@ -1,13 +1,13 @@
 import './index.less';
-import React, {useState} from 'react';
-import Calendar from 'react-calendar';
+import React, {useState, useEffect} from 'react';
+import moment from 'moment';
 
-function DateNumberInput({min, max, placeholder, onFocus, onBlur, onChange}) {
+function DateNumberInput({min, max, defaultValue, placeholder, onFocus, onBlur, onChange}) {
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(defaultValue || '');
+  const [placehold, setPlacehold] = useState(!defaultValue);
 
   function handleChange(e) {
-    console.log(e.target.value);
     setValue(e.target.value);
 
     if (onChange) {
@@ -20,13 +20,17 @@ function DateNumberInput({min, max, placeholder, onFocus, onBlur, onChange}) {
       setFocus(true);
     }
 
+    if (!defaultValue) {
+      setPlacehold(true);
+    }
+
     if (onFocus) {
       onFocus();
     }
   }
 
-  function handleBlur() {
-    if (focus && value === '') {
+  function handleBlur(e) {
+    if (focus) {
       setFocus(false);
     }
 
@@ -43,29 +47,48 @@ function DateNumberInput({min, max, placeholder, onFocus, onBlur, onChange}) {
         max={max}
         className="dateinput-input"
         maxLength={2}
+        defaultValue={defaultValue}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      <p className={`dateinput-placeholder ${focus ? 'hidden' : ''}`}>{placeholder}</p>
+      {!value && <p className={`dateinput-placeholder ${!placehold ? 'hidden' : ''}`}>{placeholder}</p>}
       <hr className={`dateinput-border ${focus ? 'focus' : ''}`} />
     </div>
   )
 }
 
-function DateInput({style, label}) {
+function DateInput({style, label, onInputValidDate}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
+  const [dd, setDD] = useState(null);
+  const [mm, setMM] = useState(null);
+  const [yy, setYY] = useState(new Date().getFullYear().toString().slice(-2)
+  );
 
-  function handleDateChange(e) {
-    console.log('handleDateChange: ', e);
+  useEffect(() => {
+    // validate date; send over if valid, otherwise error
+    if (dd && mm && yy) {
+      let isValid = moment(`${dd}/${mm}/${yy}`, 'MM/DD/YYYY', true).isValid();
+      console.log('is date valid ', isValid, `${dd}/${mm}/${yy}`);
+      // onInputValidDate();
+    }
+  }, [dd, mm, yy]);
+
+  function handleChange(key, value) {
+    if (key === 'dd') {
+      setDD(value);
+    } else if (key === 'mm') {
+      setMM(value);
+    } else if (key === 'yy') {
+      setYY(value);
+    }
   }
 
-  function handleFocus(e) {
+  function handleFocus() {
     setFocus(true);
   }
 
-  function handleBlur(e) {
+  function handleBlur() {
     setFocus(false);
   }
 
@@ -88,31 +111,24 @@ function DateInput({style, label}) {
         min={1}
         max={31}
         placeholder="dd"
+        onChange={(e) => handleChange('dd', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />
       <DateNumberInput
         min={1}
         max={12}
         placeholder="mm"
+        onChange={(e) => handleChange('mm', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />
       <DateNumberInput
         min={20}
         max={99}
+        defaultValue={yy}
         placeholder="yy"
+        onChange={(e) => handleChange('yy', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-
-      {focus &&
-        <div className="dateinput-calendar-container">
-          <Calendar
-            selectRange
-            showNeighboringMonth
-            showFixedNumberOfWeeks
-            onChange={handleDateChange}
-            value={dateRange}
-          />
-        </div>}
     </div>
   )
 }

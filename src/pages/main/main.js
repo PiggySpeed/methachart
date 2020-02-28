@@ -1,10 +1,6 @@
 import './index.less';
 import React from 'react';
-import {
-  Router,
-  createMemorySource,
-  createHistory,
-  LocationProvider} from '@reach/router';
+import { Router, LocationProvider } from '@reach/router';
 import { Provider } from 'react-redux';
 import Chart from '../chart/chart';
 import ChartMethadone from '../chart/methadone/methadone';
@@ -13,9 +9,8 @@ import ChartKadian from '../chart/kadian/kadian';
 import Settings from '../settings/settings';
 import { NavBar } from '../../components';
 import store from '../../reducers';
+import {history} from '../../utils/history';
 
-const source = createMemorySource('/chart/methadone');
-const history = createHistory(source);
 
 function Main() {
   return (

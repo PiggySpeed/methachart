@@ -2,6 +2,7 @@ import './index.less';
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import { MEDICATIONS } from '../../constants/constants';
+import {navigate} from '../../utils/history';
 
 const styles = {
   dropdown: {
@@ -11,7 +12,10 @@ const styles = {
 
 function MedicationDropdown({placeholder}) {
   function handleChange(e, data) {
-    console.log(data.value);
+    console.log('data is ', data);
+    if (data.value) {
+      navigate(`/chart/${data.value.toLowerCase()}`);
+    }
   }
 
   return (
