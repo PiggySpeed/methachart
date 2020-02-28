@@ -51,7 +51,7 @@ function DateNumberInput({min, max, defaultValue, placeholder, onFocus, onBlur, 
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      {!value && <p className={`dateinput-placeholder ${!placehold ? 'hidden' : ''}`}>{placeholder}</p>}
+      {(!value && !focus) && <p className={`dateinput-placeholder ${!placehold ? 'hidden' : ''}`}>{placeholder}</p>}
       <hr className={`dateinput-border ${focus ? 'focus' : ''}`} />
     </div>
   )

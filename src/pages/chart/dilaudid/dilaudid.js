@@ -32,15 +32,15 @@ const styles = {
   }
 };
 
-function ChartSuboxone() {
+function ChartDilaudid() {
   return (
-    <div className="suboxone-container">
+    <div className="dilaudid-container">
       <ViewRow style={styles.row1}>
         <FloatingLabelInput placeholder="Name" style={styles.name} />
         <FloatingLabelInput placeholder="Rx#" style={styles.rx} />
       </ViewRow>
       <ViewRow>
-        <MedicationDropdown defaultValue="SUBOXONE" />
+        <MedicationDropdown defaultValue="DILAUDID" />
         <InputDoseMG inputStyle={styles.dose} />
         <InputTakehomeMG inputStyle={styles.takehome} />
       </ViewRow>
@@ -51,4 +51,4 @@ function ChartSuboxone() {
   )
 }
 
-export default ChartSuboxone;
+export default ChartDilaudid;

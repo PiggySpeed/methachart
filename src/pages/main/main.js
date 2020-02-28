@@ -6,10 +6,11 @@ import Chart from '../chart/chart';
 import ChartMethadone from '../chart/methadone/methadone';
 import ChartSuboxone from '../chart/suboxone/suboxone';
 import ChartKadian from '../chart/kadian/kadian';
+import ChartDilaudid from '../chart/dilaudid/dilaudid';
 import Settings from '../settings/settings';
 import { NavBar } from '../../components';
+import { history } from '../../utils/history';
 import store from '../../reducers';
-import {history} from '../../utils/history';
 
 
 function Main() {
@@ -22,6 +23,7 @@ function Main() {
             <ChartMethadone path="methadone" />
             <ChartSuboxone path="suboxone" />
             <ChartKadian path="kadian" />
+            <ChartDilaudid path="dilaudid" />
           </Chart>
           <Settings path="settings" />
         </Router>

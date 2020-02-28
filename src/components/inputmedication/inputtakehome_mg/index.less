@@ -1,0 +1,42 @@
+@import '../../../styles/index';
+
+.input-takehome-container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+.input-takehome-label {
+  position: absolute;
+  left: -18px;
+  bottom: 28px;
+  width: 11rem;
+
+  transform: scale(0.8);
+
+  font-size: 1rem;
+  color: @white-4;
+  transition: 0.15s ease-in-out;
+  user-select: none;
+
+  &.focus {
+    color: @blue;
+  }
+
+  &.hover {
+    color: @grey-1;
+  }
+}
+
+.input-takehome-ml {
+  color: @white-4;
+  font-size: @font-m;
+
+  &.focus {
+    color: @blue;
+  }
+
+  &.hover {
+    color: @grey-1;
+  }
+}

@@ -10,9 +10,8 @@ const styles = {
   }
 };
 
-function MedicationDropdown({placeholder}) {
+function MedicationDropdown({defaultValue}) {
   function handleChange(e, data) {
-    console.log('data is ', data);
     if (data.value) {
       navigate(`/chart/${data.value.toLowerCase()}`);
     }
@@ -23,7 +22,8 @@ function MedicationDropdown({placeholder}) {
       fluid
       search
       selection
-      placeholder={placeholder}
+      selectOnNavigation={false}
+      defaultValue={defaultValue}
       onChange={handleChange}
       options={MEDICATIONS}
       style={styles.dropdown}

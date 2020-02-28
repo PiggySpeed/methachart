@@ -67,6 +67,7 @@ function DatePanel() {
             selectRange
             showNeighboringMonth
             showFixedNumberOfWeeks
+            calendarType="US"
             returnValue="range"
             onChange={handleDateChange}
             value={dateRange}

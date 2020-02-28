@@ -5,7 +5,8 @@ import {
   FloatingLabelInput,
   InputDoseML,
   InputTakehomeML,
-  MedicationDropdown
+  MedicationDropdown,
+  ViewRow
 } from '../../../components';
 
 const styles = {
@@ -31,14 +32,6 @@ const styles = {
   }
 };
 
-function ViewRow({children, style}) {
-  return (
-    <div className="methadone-viewrow" style={style ? style : {}}>
-      {children}
-    </div>
-  )
-}
-
 function ChartMethadone() {
   return (
     <div className="methadone-container">
@@ -47,15 +40,12 @@ function ChartMethadone() {
         <FloatingLabelInput placeholder="Rx#" style={styles.rx} />
       </ViewRow>
       <ViewRow>
-        <MedicationDropdown placeholder="METHADONE" />
+        <MedicationDropdown defaultValue="METHADONE" />
         <InputDoseML inputStyle={styles.dose} />
         <InputTakehomeML inputStyle={styles.takehome} />
       </ViewRow>
       <ViewRow>
         <DatePanel />
-      </ViewRow>
-      <ViewRow>
-        panel 4
       </ViewRow>
     </div>
   )
