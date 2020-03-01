@@ -30,6 +30,7 @@ function InputDoseML({inputStyle}) {
       <FloatingLabelInput
         placeholder="Dose"
         style={inputStyle ? inputStyle : {}}
+        isHovered={hover}
         onFocus={handleFocus}
         onBlur={handleBlur} />
       <p className={`input-dose-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>mL</p>

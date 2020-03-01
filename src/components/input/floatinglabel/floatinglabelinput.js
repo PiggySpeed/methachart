@@ -1,10 +1,11 @@
 import './index.less';
 import React, {useState} from 'react';
+import useHover from '../../../hooks/useHover';
 
-function FloatingLabelInput({canFloat = true, placeholder, style, onChange, onFocus, onBlur}) {
+function FloatingLabelInput({canFloat = true, isHovered, placeholder, style, onChange, onFocus, onBlur}) {
+  const {hover, handleMouseEnter, handleMouseLeave} = useHover(isHovered);
   const [float, setFloat] = useState(false);
   const [focus, setFocus] = useState(false);
-  const [hover, setHover] = useState(false);
 
   function handleChange(e) {
     if (e.target.value === '' && !focus) {
@@ -42,31 +43,23 @@ function FloatingLabelInput({canFloat = true, placeholder, style, onChange, onFo
     }
   }
 
-  function handleMouseEnter() {
-    setHover(true);
-  }
-
-  function handleMouseLeave() {
-    setHover(false);
-  }
-
   return (
     <div className="flinput-container" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={style ? style : {}}>
       <hr className={`flinput-border ${focus ? 'focus' : ''}`} />
       <input
-        className={`flinput-input ${hover ? 'hover' : ''}`}
+        className={`flinput-input ${(hover || isHovered) ? 'hover' : ''}`}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange} />
       {
         canFloat && <h6
-        className={`flinput-floating-label ${float ? 'float' : ''} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>
+        className={`flinput-floating-label ${float ? 'float' : ''} ${focus ? 'focus' : ''} ${((hover || isHovered) && !focus) ? 'hover' : ''}`}>
         {placeholder}
         </h6>
       }
       {
         !canFloat && <h6
-          className={`flinput-floating-label ${float ? 'hidden' : ''} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>
+          className={`flinput-floating-label ${float ? 'hidden' : ''} ${focus ? 'focus' : ''} ${((hover || isHovered) && !focus) ? 'hover' : ''}`}>
           {placeholder}
         </h6>
       }

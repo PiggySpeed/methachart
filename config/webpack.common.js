@@ -54,12 +54,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: false
-    }),
-    // new CopyPlugin([
-    //   { from: './src/assets', to: 'assets' },
-    //   { from: './src/content_scripts', to: 'content_scripts' },
-    //   { from: './src/manifest.json', to: './' }
-    // ])
+    })
   ]
 };
 

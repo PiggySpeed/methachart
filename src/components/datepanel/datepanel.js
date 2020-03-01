@@ -1,5 +1,5 @@
 import './index.less';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {DateInput} from '../index';
 import Calendar from "react-calendar";
 
@@ -19,6 +19,7 @@ function DatePanel() {
     setStartDate(start);
 
     // validate date range, then set it if valid; otherwise error
+    console.log('start date');
     if (start && endDate && (start <= endDate)) {
       setDateRange([start, endDate]);
     } else {
@@ -30,6 +31,7 @@ function DatePanel() {
     setEndDate(end);
 
     // validate date range, then set it if valid; otherwise error
+    console.log('end date');
     if (startDate && end && (startDate <= end)) {
       setDateRange([startDate, end]);
     } else {
