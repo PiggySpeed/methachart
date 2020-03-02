@@ -1,26 +1,12 @@
 import './index.less';
-import React, {useState} from 'react';
+import React from 'react';
 import {FloatingLabelInput} from '../../../components';
+import useFocus from '../../../hooks/useFocus';
+import useHover from '../../../hooks/useHover';
 
 function InputTakehomeMG({inputStyle}) {
-  const [focus, setFocus] = useState(false);
-  const [hover, setHover] = useState(false);
-
-  function handleFocus() {
-    setFocus(true);
-  }
-
-  function handleBlur() {
-    setFocus(false);
-  }
-
-  function handleMouseEnter() {
-    setHover(true);
-  }
-
-  function handleMouseLeave() {
-    setHover(false);
-  }
+  const {focus, handleFocus, handleBlur} = useFocus(false);
+  const {hover, handleMouseEnter, handleMouseLeave} = useHover(false);
 
   return (
     <div
@@ -29,6 +15,7 @@ function InputTakehomeMG({inputStyle}) {
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
         canFloat={false}
+        isHovered={hover}
         placeholder="&nbsp;0"
         style={inputStyle ? inputStyle : {}}
         onFocus={handleFocus}

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-function useHover() {
-  const [hover, setHover] = useState(false);
+function useHover(isHovered) {
+  const [hover, setHover] = useState(isHovered);
 
   function handleMouseEnter() {
     setHover(true);

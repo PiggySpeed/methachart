@@ -2,15 +2,15 @@ import './index.less';
 import React, {useState} from 'react';
 import {DateInput} from '../index';
 import Calendar from "react-calendar";
+import useFocus from '../../hooks/useFocus';
 
 function DatePanel() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [focus, setFocus] = useState(false);
+  const {focus, handleFocus, handleBlur} = useFocus(false);
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
   function handleDateChange([start, end]) {
-    console.log('onDateChange ', start, end);
     setStartDate(start);
     setEndDate(end);
   }
@@ -19,7 +19,6 @@ function DatePanel() {
     setStartDate(start);
 
     // validate date range, then set it if valid; otherwise error
-    console.log('start date');
     if (start && endDate && (start <= endDate)) {
       setDateRange([start, endDate]);
     } else {
@@ -31,20 +30,11 @@ function DatePanel() {
     setEndDate(end);
 
     // validate date range, then set it if valid; otherwise error
-    console.log('end date');
     if (startDate && end && (startDate <= end)) {
       setDateRange([startDate, end]);
     } else {
       setDateRange([startDate, new Date()]);
     }
-  }
-
-  function handleFocus() {
-    setFocus(true);
-  }
-
-  function handleBlur() {
-    setFocus(false);
   }
 
   return (

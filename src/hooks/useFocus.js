@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-function useFocus(isHovered) {
-  const [focus, setFocus] = useState(isHovered);
+function useFocus(isFocused) {
+  const [focus, setFocus] = useState(isFocused);
 
   function handleFocus() {
     setFocus(true);
