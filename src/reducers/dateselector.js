@@ -4,8 +4,8 @@ import {
   ON_SET_TIME_INTERVAL,
 } from '../actions/actiontypes';
 const initialState = {
-  startdate: '',
-  enddate: '',
+  startdate: null,
+  enddate: null,
   timeinterval: 0
 };
 

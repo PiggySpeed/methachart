@@ -1,7 +1,7 @@
 import {
   ON_NAME_BLUR,
   ON_RXNUM_BLUR,
-  ON_SET_DRUG,
+  ON_DRUG_BLUR,
   ON_DOSE_BLUR,
   ON_TAKEHOME_BLUR
 } from './actiontypes';
@@ -41,7 +41,7 @@ export const onSetDrug = (din) => {
   return dispatch => {
     const selecteddrug = DRUG_LIST.filter( drug => drug.din == din)[0];
 
-    dispatch({ type: ON_SET_DRUG, selecteddrug })
+    dispatch({ type: ON_DRUG_BLUR, selecteddrug })
   }
 };
 export const onDoseBlur = (dose) => {

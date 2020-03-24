@@ -1,10 +1,11 @@
 import {
   ON_NAME_BLUR,
   ON_RXNUM_BLUR,
-  ON_SET_DRUG,
+  ON_DRUG_BLUR,
   ON_DOSE_BLUR,
   ON_TAKEHOME_BLUR
 } from '../actions/actiontypes';
+
 const initialState = {
   selecteddrug: {
     displayname: "Methadone",
@@ -13,15 +14,15 @@ const initialState = {
     pseudodin: "66999997"
   },
   name: '',
-  dose: 0,
-  takehome: 0,
-  startdate: '',
-  enddate: '',
+  // dose: 0,
+  // takehome: 0,
+  // startdate: '',
+  // enddate: '',
   timeinterval: 0,
   maxinterval: 100
 };
 
-const LogBuilder = (state = initialState, action) => {
+const logBuilder = (state = initialState, action) => {
   switch(action.type) {
     case ON_NAME_BLUR: {
       return {...state, name: action.name }
@@ -29,7 +30,7 @@ const LogBuilder = (state = initialState, action) => {
     case ON_RXNUM_BLUR: {
       return {...state, rxnum: action.rxnum }
     }
-    case ON_SET_DRUG: {
+    case ON_DRUG_BLUR: {
       return {...state, selecteddrug: action.selecteddrug }
     }
     case ON_DOSE_BLUR: {
@@ -42,4 +43,4 @@ const LogBuilder = (state = initialState, action) => {
       return state
   }
 };
-export default LogBuilder;
+export default logBuilder;

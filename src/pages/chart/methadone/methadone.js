@@ -1,5 +1,6 @@
 import './index.less';
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   DatePanel,
   FloatingLabelInput,
@@ -8,6 +9,8 @@ import {
   MedicationDropdown,
   ViewRow
 } from '../../../components';
+import {bindActionCreators} from 'redux';
+import * as chartActions from '../../../actions/chart';
 
 const styles = {
   row1: {
@@ -32,7 +35,7 @@ const styles = {
   }
 };
 
-function ChartMethadone() {
+function ChartMethadoneWrapper(props) {
   return (
     <div className="methadone-container">
       <ViewRow style={styles.row1}>
@@ -50,5 +53,25 @@ function ChartMethadone() {
     </div>
   )
 }
+
+const mapStateToProps = ({chart}) => {
+  return {
+    patientName: chart.patientName,
+    rxNumber: chart.rxNumber,
+    selectedDrug: chart.selectedDrug,
+    dose: chart.dose,
+    takehome: chart.takehome,
+    startdate: chart.startdate,
+    enddate: chart.enddate,
+    timeinterval: chart.timeinterval
+  }
+
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({...chartActions}, dispatch)
+};
+
+const ChartMethadone = connect(mapStateToProps, mapDispatchToProps)(ChartMethadoneWrapper);
 
 export default ChartMethadone;

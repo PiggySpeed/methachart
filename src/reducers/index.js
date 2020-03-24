@@ -2,14 +2,16 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { combineReducers } from 'redux';
 
-import LogBuilder from './logbuilder';
+import logBuilder from './logbuilder';
 import dates from './dateselector';
 import printData from './print';
+import chart from './chart';
 
 const rootReducer = combineReducers({
-  LogBuilder,
+  logBuilder,
   dates,
-  printData
+  printData,
+  chart
 });
 
 const store = createStore(
