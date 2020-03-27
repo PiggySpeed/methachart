@@ -1,0 +1,37 @@
+@import '../../styles/index';
+
+.carries-selector-container {
+  position: relative;
+  display: flex;
+  margin: 0.5rem 0;
+  padding: 0.25rem 0;
+
+  border: 1px solid @white-4;
+  border-radius: 5px;
+
+  &.hover {
+    border: 1px solid @grey-1;
+  }
+
+  &.focus {
+    border: 1px solid @blue;
+  }
+}
+
+.carries-selector-label {
+  position: absolute;
+  top: -9px;
+  left: 8px;
+  color: @white-4;
+  background-color: @white;
+  padding: 2px;
+  font-size: @font-s;
+
+  &.hover {
+    color: @grey-1;
+  }
+
+  &.focus {
+    color: @blue;
+  }
+}

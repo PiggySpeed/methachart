@@ -9,3 +9,5 @@ export const MEDICATIONS = [
   { key: SUBOXONE, value: SUBOXONE, text: SUBOXONE },
   { key: DILAUDID, value: DILAUDID, text: DILAUDID },
 ];
+
+export const DAYS_OF_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];

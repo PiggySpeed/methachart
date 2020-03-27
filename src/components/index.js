@@ -10,3 +10,4 @@ export {default as InputDoseMG} from './inputmedication/inputdose_mg/inputdose_m
 export {default as MedicationDropdown} from './dropdown/medication';
 export {default as DatePanel} from './datepanel/datepanel';
 export {default as ViewRow} from './view/viewrow';
+export {default as CarriesSelector} from './carriesselector/carriesselector';

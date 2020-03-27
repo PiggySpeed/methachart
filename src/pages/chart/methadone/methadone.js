@@ -11,6 +11,7 @@ import {
 } from '../../../components';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
+import {CarriesPanel} from '../../../connected';
 
 const styles = {
   row1: {
@@ -108,6 +109,9 @@ function ChartMethadoneWrapper(props) {
           onSetStartDate={handleSetStartDate}
           onSetEndDate={handleSetEndDate}
           onSetDateRange={handleSetDateRange} />
+      </ViewRow>
+      <ViewRow>
+        <CarriesPanel />
       </ViewRow>
     </div>
   )

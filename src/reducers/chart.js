@@ -22,7 +22,31 @@ const initialState = {
   startdate: null,
   enddate: null,
   daterange: [new Date(), new Date()],
-  timeinterval: 0
+  timeinterval: 0,
+
+  carries: {
+    SUN: {
+      label: 'Su'
+    },
+    MON: {
+      label: 'M'
+    },
+    TUE: {
+      label: 'Tu'
+    },
+    WED: {
+      label: 'W'
+    },
+    THU: {
+      label: 'Th'
+    },
+    FRI: {
+      label: 'F'
+    },
+    SAT: {
+      label: 'Sa'
+    }
+  }
 };
 
 const chart = (state = initialState, action) => {
