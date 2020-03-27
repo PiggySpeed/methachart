@@ -4,7 +4,7 @@ import {FloatingLabelInput} from '../../../components';
 import useFocus from '../../../hooks/useFocus';
 import useHover from '../../../hooks/useHover';
 
-function InputDoseML({inputStyle}) {
+function InputDoseML({inputStyle, value="", onChange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(false);
 
@@ -15,8 +15,10 @@ function InputDoseML({inputStyle}) {
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
         placeholder="Dose"
+        value={value}
         style={inputStyle ? inputStyle : {}}
         isHovered={hover}
+        onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur} />
       <p className={`input-dose-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>mL</p>

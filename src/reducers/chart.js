@@ -6,6 +6,7 @@ import {
   SET_TAKEHOME_DOSE,
   SET_START_DATE,
   SET_END_DATE,
+  SET_DATE_RANGE,
   SET_TIME_INTERVAL
 } from '../actions/actiontypes';
 import {METHADONE} from '../constants/constants';
@@ -20,6 +21,7 @@ const initialState = {
   takehome: null,
   startdate: null,
   enddate: null,
+  daterange: [new Date(), new Date()],
   timeinterval: 0
 };
 
@@ -45,6 +47,9 @@ const chart = (state = initialState, action) => {
     }
     case SET_END_DATE: {
       return {...state, enddate: action.enddate};
+    }
+    case SET_DATE_RANGE: {
+      return {...state, daterange: action.daterange};
     }
     case SET_TIME_INTERVAL: {
       return {...state, timeinterval: action.timeinterval};

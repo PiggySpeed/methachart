@@ -10,7 +10,7 @@ import {
   ViewRow
 } from '../../../components';
 import {bindActionCreators} from 'redux';
-import * as chartActions from '../../../actions/chart';
+import chartActions from '../../../actions/chart';
 
 const styles = {
   row1: {
@@ -36,25 +36,85 @@ const styles = {
 };
 
 function ChartMethadoneWrapper(props) {
+
+  function handleSetName(e) {
+    props.onSetPatientName(e.target.value);
+  }
+
+  function handleSetRxNumber(e) {
+    props.onSetRxNumber(e.target.value);
+  }
+
+  function handleSetDrug(value) {
+    props.onSetDrug(value);
+  }
+
+  function handleSetDose(e) {
+    props.onSetDose(e.target.value);
+  }
+
+  function handleSetTakehomeDose(e) {
+    props.onSetTakehomeDose(e.target.value);
+  }
+
+  function handleSetStartDate(date) {
+    props.onSetStartDate(date);
+  }
+
+  function handleSetEndDate(date) {
+    props.onSetEndDate(date);
+  }
+
+  function handleSetDateRange(dateRange) {
+    props.onSetDateRange(dateRange);
+  }
+
+  function handleSetTimeInterval(interval) {
+    props.onSetTimeInterval(interval);
+  }
+
   return (
     <div className="methadone-container">
       <ViewRow style={styles.row1}>
-        <FloatingLabelInput placeholder="Name" style={styles.name} />
-        <FloatingLabelInput placeholder="Rx#" style={styles.rx} />
+        <FloatingLabelInput
+          value={props.patientName}
+          onChange={handleSetName}
+          placeholder="Name"
+          style={styles.name} />
+        <FloatingLabelInput
+          value={props.rxNumber}
+          onChange={handleSetRxNumber}
+          placeholder="Rx#"
+          style={styles.rx} />
       </ViewRow>
       <ViewRow>
-        <MedicationDropdown defaultValue="METHADONE" />
-        <InputDoseML inputStyle={styles.dose} />
-        <InputTakehomeML inputStyle={styles.takehome} />
+        <MedicationDropdown
+          value={props.selectedDrug}
+          onChange={handleSetDrug} />
+        <InputDoseML
+          inputStyle={styles.dose}
+          value={props.dose}
+          onChange={handleSetDose} />
+        <InputTakehomeML
+          inputStyle={styles.takehome}
+          value={props.takehome}
+          onChange={handleSetTakehomeDose} />
       </ViewRow>
       <ViewRow>
-        <DatePanel />
+        <DatePanel
+          startdate={props.startdate}
+          enddate={props.enddate}
+          daterange={props.daterange}
+          onSetStartDate={handleSetStartDate}
+          onSetEndDate={handleSetEndDate}
+          onSetDateRange={handleSetDateRange} />
       </ViewRow>
     </div>
   )
 }
 
 const mapStateToProps = ({chart}) => {
+  console.log(chart);
   return {
     patientName: chart.patientName,
     rxNumber: chart.rxNumber,
@@ -63,9 +123,9 @@ const mapStateToProps = ({chart}) => {
     takehome: chart.takehome,
     startdate: chart.startdate,
     enddate: chart.enddate,
+    daterange: chart.daterange,
     timeinterval: chart.timeinterval
   }
-
 };
 
 const mapDispatchToProps = (dispatch) => {

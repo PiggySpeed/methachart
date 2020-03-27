@@ -6,55 +6,72 @@ import {
   SET_TAKEHOME_DOSE,
   SET_START_DATE,
   SET_END_DATE,
+  SET_DATE_RANGE,
   SET_TIME_INTERVAL
 } from '../actions/actiontypes';
 
-export const onSetPatientName = (patientName) => {
+const onSetPatientName = (patientName) => {
   return dispatch => {
     dispatch({ type: SET_PATIENT_NAME, patientName });
   }
 };
 
-export const onSetRxNumber = (rxNumber) => {
+const onSetRxNumber = (rxNumber) => {
   return dispatch => {
     dispatch({ type: SET_RX_NUMBER, rxNumber });
   }
 };
 
-export const onSetDrug = (selectedDrug) => {
+const onSetDrug = (selectedDrug) => {
   return dispatch => {
     dispatch({ type: SET_DRUG, selectedDrug });
   }
 };
 
-export const onSetDose = (dose) => {
+const onSetDose = (dose) => {
   return dispatch => {
     dispatch({ type: SET_DOSE, dose });
   }
 };
 
-export const onSetTakehomeDose = (takehome) => {
+const onSetTakehomeDose = (takehome) => {
   return dispatch => {
     dispatch({ type: SET_TAKEHOME_DOSE, takehome });
   }
 };
 
-export const onSetStartDate = (startdate) => {
+const onSetStartDate = (startdate) => {
   return dispatch => {
     dispatch({ type: SET_START_DATE, startdate });
   }
 };
 
-export const onSetEndDate = (enddate) => {
+const onSetEndDate = (enddate) => {
   return dispatch => {
     dispatch({ type: SET_END_DATE, enddate });
   }
 };
 
-export const onSetTimeInterval = (timeinterval) => {
+const onSetDateRange = (daterange) => {
+  return dispatch => {
+    dispatch({ type: SET_DATE_RANGE, daterange });
+  }
+};
+
+const onSetTimeInterval = (timeinterval) => {
   return dispatch => {
     dispatch({ type: SET_TIME_INTERVAL, timeinterval });
   }
 };
 
-
+export default {
+  onSetPatientName,
+  onSetRxNumber,
+  onSetDrug,
+  onSetDose,
+  onSetTakehomeDose,
+  onSetStartDate,
+  onSetEndDate,
+  onSetDateRange,
+  onSetTimeInterval
+};

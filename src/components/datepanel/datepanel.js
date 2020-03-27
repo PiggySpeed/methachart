@@ -4,36 +4,33 @@ import {DateInput} from '../index';
 import Calendar from "react-calendar";
 import useFocus from '../../hooks/useFocus';
 
-function DatePanel() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+function DatePanel({startdate, enddate, daterange, onSetStartDate, onSetEndDate, onSetDateRange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
-  const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
   function handleDateChange([start, end]) {
-    setStartDate(start);
-    setEndDate(end);
+    onSetStartDate(start);
+    onSetEndDate(end);
   }
 
   function handleInputValidStartDate(start) {
-    setStartDate(start);
+    onSetStartDate(start);
 
     // validate date range, then set it if valid; otherwise error
-    if (start && endDate && (start <= endDate)) {
-      setDateRange([start, endDate]);
+    if (start && enddate && (start <= enddate)) {
+      onSetDateRange([start, enddate]);
     } else {
-      setDateRange([new Date(), endDate]);
+      onSetDateRange([new Date(), enddate]);
     }
   }
 
   function handleInputValidEndDate(end) {
-    setEndDate(end);
+    onSetEndDate(end);
 
     // validate date range, then set it if valid; otherwise error
-    if (startDate && end && (startDate <= end)) {
-      setDateRange([startDate, end]);
+    if (startdate && end && (startdate <= end)) {
+      onSetDateRange([startdate, end]);
     } else {
-      setDateRange([startDate, new Date()]);
+      onSetDateRange([startdate, new Date()]);
     }
   }
 
@@ -44,13 +41,13 @@ function DatePanel() {
       onBlur={handleBlur}>
       <DateInput
         label="Start"
-        value={startDate}
+        value={startdate}
         style={{marginRight: '1rem'}}
         onInputValidDate={handleInputValidStartDate}
       />
       <DateInput
         label="End"
-        value={endDate}
+        value={enddate}
         onInputValidDate={handleInputValidEndDate}
       />
       {focus &&
@@ -62,7 +59,7 @@ function DatePanel() {
             calendarType="US"
             returnValue="range"
             onChange={handleDateChange}
-            value={dateRange}
+            value={daterange}
           />
         </div>
       }
