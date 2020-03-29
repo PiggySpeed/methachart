@@ -1,16 +1,23 @@
 import './index.less';
 import React from 'react';
 
-function Day(props) {
+function Day({label, day, dose, takehome, isCarry, onClick}) {
+
+  function handleDayClick() {
+    onClick(day, !isCarry);
+  }
+
   return (
     <div className="carries-day-container">
-      <p className="carries-dwi-label">DWI 10</p>
-      <button className="carries-day-button">
-        <p className="carries-day-label">
-          {props.label}
+      {!isCarry && <p className="carries-dwi-label">DWI {dose}</p>}
+      {isCarry && <p className="carries-car-label">CAR {dose}</p>}
+      <button
+        className={`carries-day-button ${isCarry ? 'carry' : ''}`}
+        onClick={handleDayClick}>
+        <p className={`carries-day-label ${isCarry ? 'carry' : ''}`}>
+          {label}
         </p>
       </button>
-      <p className="carries-car-label">CAR 10</p>
     </div>
   )
 }

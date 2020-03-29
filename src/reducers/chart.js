@@ -7,7 +7,8 @@ import {
   SET_START_DATE,
   SET_END_DATE,
   SET_DATE_RANGE,
-  SET_TIME_INTERVAL
+  SET_TIME_INTERVAL,
+  SET_DAY_CARRY
 } from '../actions/actiontypes';
 import {METHADONE} from '../constants/constants';
 
@@ -19,32 +20,40 @@ const initialState = {
   selectedDrug: METHADONE,
   dose: null,
   takehome: null,
-  startdate: null,
-  enddate: null,
+  startdate: null, // type: Date
+  enddate: null,   // type: Date
   daterange: [new Date(), new Date()],
   timeinterval: 0,
 
+  // modify on blur
   carries: {
     SUN: {
-      label: 'Su'
+      label: 'Su',
+      isCarry: false
     },
     MON: {
-      label: 'M'
+      label: 'M',
+      isCarry: false
     },
     TUE: {
-      label: 'Tu'
+      label: 'Tu',
+      isCarry: false
     },
     WED: {
-      label: 'W'
+      label: 'W',
+      isCarry: false
     },
     THU: {
-      label: 'Th'
+      label: 'Th',
+      isCarry: false
     },
     FRI: {
-      label: 'F'
+      label: 'F',
+      isCarry: false
     },
     SAT: {
-      label: 'Sa'
+      label: 'Sa',
+      isCarry: false
     }
   }
 };
@@ -77,6 +86,18 @@ const chart = (state = initialState, action) => {
     }
     case SET_TIME_INTERVAL: {
       return {...state, timeinterval: action.timeinterval};
+    }
+    case SET_DAY_CARRY: {
+      return {
+        ...state,
+        carries: {
+          ...state.carries,
+          [action.day]: {
+            ...state.carries[action.day],
+            isCarry: action.isCarry
+          }
+        }
+      };
     }
     default:
       return state;

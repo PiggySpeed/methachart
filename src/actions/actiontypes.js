@@ -27,4 +27,5 @@ export const SET_START_DATE = 'SET_START_DATE';
 export const SET_END_DATE = 'SET_END_DATE';
 export const SET_DATE_RANGE = 'SET_DATE_RANGE';
 export const SET_TIME_INTERVAL = 'SET_TIME_INTERVAL';
+export const SET_DAY_CARRY = 'SET_DAY_CARRY';
 

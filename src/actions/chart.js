@@ -7,7 +7,8 @@ import {
   SET_START_DATE,
   SET_END_DATE,
   SET_DATE_RANGE,
-  SET_TIME_INTERVAL
+  SET_TIME_INTERVAL,
+  SET_DAY_CARRY
 } from '../actions/actiontypes';
 
 const onSetPatientName = (patientName) => {
@@ -64,6 +65,12 @@ const onSetTimeInterval = (timeinterval) => {
   }
 };
 
+const onDayClick = (day, isCarry) => {
+  return dispatch => {
+    dispatch({ type: SET_DAY_CARRY, day, isCarry });
+  }
+};
+
 export default {
   onSetPatientName,
   onSetRxNumber,
@@ -73,5 +80,6 @@ export default {
   onSetStartDate,
   onSetEndDate,
   onSetDateRange,
-  onSetTimeInterval
+  onSetTimeInterval,
+  onDayClick
 };

@@ -1,13 +1,21 @@
 import './index.less';
 import React, {useState} from 'react';
 import {bindActionCreators} from 'redux';
-import { Form, Radio } from 'semantic-ui-react';
+import { Checkbox } from 'semantic-ui-react';
 import chartActions from '../../actions/chart';
 import {connect} from 'react-redux';
 import {CarriesSelector} from '../../components';
 
 
-function CarriesPanelWrapper(props) {
+const styles = {
+  checkbox: {
+    fontSize: 12,
+    color: '#5F5F5F',
+    marginRight: 12
+  }
+};
+
+function CarriesPanelWrapper({dose, takehome, carries, onDayClick}) {
   const [carryScheme, setCarryScheme] = useState(null);
 
   function handleSetCarryScheme(e, target) {
@@ -16,40 +24,37 @@ function CarriesPanelWrapper(props) {
 
   return (
     <div>
-      <CarriesSelector carries={props.carries} />
-
-      <Form>
-        <Form.Field>
-          <Radio
-            label='Carry Weekdays'
-            name='radioGroup'
-            value='weekdays'
-            checked={carryScheme === 'weekdays'}
-            onChange={handleSetCarryScheme}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Radio
-            label='CarryWeekends'
-            name='radioGroup'
-            value='weekends'
-            checked={carryScheme === 'weekends'}
-            onChange={handleSetCarryScheme}
-          />
-        </Form.Field>
-      </Form>
+      <CarriesSelector
+        dose={dose}
+        takehome={takehome}
+        carries={carries}
+        onDayClick={onDayClick} />
+      <div className="carries-options">
+        <Checkbox label={{
+          children: 'carry weekends',
+          style: styles.checkbox
+        }} />
+        <Checkbox label={{
+          children: 'carry weekdays',
+          style: styles.checkbox
+        }} />
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = ({chart}) => {
   return {
-    carries: chart.carries
+    carries: chart.carries,
+    dose: chart.dose,
+    takehome: chart.takehome
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({...chartActions}, dispatch)
+  return bindActionCreators({
+    onDayClick: chartActions.onDayClick
+  }, dispatch)
 };
 
 const CarriesPanel = connect(mapStateToProps, mapDispatchToProps)(CarriesPanelWrapper);
