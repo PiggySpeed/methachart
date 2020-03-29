@@ -8,7 +8,8 @@ import {
   SET_END_DATE,
   SET_DATE_RANGE,
   SET_TIME_INTERVAL,
-  SET_DAY_CARRY
+  SET_DAY_CARRY,
+  SET_CARRY_SCHEME
 } from '../actions/actiontypes';
 
 const onSetPatientName = (patientName) => {
@@ -71,6 +72,13 @@ const onDayClick = (day, isCarry) => {
   }
 };
 
+const onSetCarryScheme = (scheme) => {
+  return dispatch => {
+    dispatch({ type: SET_CARRY_SCHEME, scheme })
+  }
+};
+
+
 export default {
   onSetPatientName,
   onSetRxNumber,
@@ -81,5 +89,6 @@ export default {
   onSetEndDate,
   onSetDateRange,
   onSetTimeInterval,
-  onDayClick
+  onDayClick,
+  onSetCarryScheme
 };

@@ -5,7 +5,8 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  //justify-content: center;
 
   padding-top: 0.5rem;
 }
@@ -26,16 +27,17 @@
   border-width: 1px;
   border-color: @blue;
   border-radius: 5px;
-  transition: all 0.15s ease-in-out;
+  //transition: all 0.1s ease-in-out;
 
   outline: none;
 
-  &:focus {
+  &:hover {
     border-width: 2px;
   }
 
   &.carry {
-    border: 1px solid @grey-4;
+    background-color: @white-2;
+    border-color: @grey-4;
   }
 }
 
@@ -48,16 +50,22 @@
   }
 }
 
-.carries-dwi-label {
+.carries-label {
   font-size: @font-xs;
   color: @blue;
-  margin-top: 0.25rem;
-  margin-bottom: 0.15rem;
+  margin-top: 0.15rem;
+
+  &.carry {
+    color : @grey-4;
+  }
 }
 
-.carries-car-label {
+.carries-th-label {
   font-size: @font-xs;
-  color: @grey-4;
+  color: @blue;
   margin-top: 0.15rem;
-  margin-bottom: 0.25rem;
+
+  &.carry {
+    color : @grey-4;
+  }
 }

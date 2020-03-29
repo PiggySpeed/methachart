@@ -8,9 +8,14 @@ import {
   SET_END_DATE,
   SET_DATE_RANGE,
   SET_TIME_INTERVAL,
-  SET_DAY_CARRY
+  SET_DAY_CARRY,
+  SET_CARRY_SCHEME
 } from '../actions/actiontypes';
-import {METHADONE} from '../constants/constants';
+import {
+  METHADONE,
+  SCHEME_WEEKDAYS,
+  SCHEME_WEEKENDS
+} from '../constants/constants';
 
 
 const initialState = {
@@ -26,6 +31,7 @@ const initialState = {
   timeinterval: 0,
 
   // modify on blur
+  carryScheme: null,
   carries: {
     SUN: {
       label: 'Su',
@@ -99,6 +105,40 @@ const chart = (state = initialState, action) => {
         }
       };
     }
+    case SET_CARRY_SCHEME: {
+      if (action.scheme === SCHEME_WEEKDAYS) {
+        return {
+          ...state,
+          carryScheme: SCHEME_WEEKDAYS,
+          carries: {
+            SUN: { ...state.carries.SUN, isCarry: false },
+            MON: { ...state.carries.MON, isCarry: true },
+            TUE: { ...state.carries.TUE, isCarry: true },
+            WED: { ...state.carries.WED, isCarry: true },
+            THU: { ...state.carries.THU, isCarry: true },
+            FRI: { ...state.carries.FRI, isCarry: true },
+            SAT: { ...state.carries.SAT, isCarry: false }
+          }
+        }
+      } else if (action.scheme === SCHEME_WEEKENDS) {
+        return {
+          ...state,
+          carryScheme: SCHEME_WEEKENDS,
+          carries: {
+            SUN: { ...state.carries.SUN, isCarry: true },
+            MON: { ...state.carries.MON, isCarry: false },
+            TUE: { ...state.carries.TUE, isCarry: false },
+            WED: { ...state.carries.WED, isCarry: false },
+            THU: { ...state.carries.THU, isCarry: false },
+            FRI: { ...state.carries.FRI, isCarry: false },
+            SAT: { ...state.carries.SAT, isCarry: true }
+          }
+        }
+      }
+
+      return { ...state, carryScheme: action.carryScheme }
+    }
+
     default:
       return state;
   }

@@ -11,3 +11,8 @@ export const MEDICATIONS = [
 ];
 
 export const DAYS_OF_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+export const WEEKDAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'];
+export const WEEKENDS = ['SUN', 'SAT'];
+
+export const SCHEME_WEEKENDS = 'SCHEME_WEEKENDS';
+export const SCHEME_WEEKDAYS = 'SCHEME_WEEKDAYS';

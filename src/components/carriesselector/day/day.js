@@ -9,8 +9,6 @@ function Day({label, day, dose, takehome, isCarry, onClick}) {
 
   return (
     <div className="carries-day-container">
-      {!isCarry && <p className="carries-dwi-label">DWI {dose}</p>}
-      {isCarry && <p className="carries-car-label">CAR {dose}</p>}
       <button
         className={`carries-day-button ${isCarry ? 'carry' : ''}`}
         onClick={handleDayClick}>
@@ -18,6 +16,8 @@ function Day({label, day, dose, takehome, isCarry, onClick}) {
           {label}
         </p>
       </button>
+      <p className={`carries-label ${isCarry ? 'carry' : ''}`}>{isCarry ? 'CAR' : 'DWI'} {dose}</p>
+      {takehome && <p className={`carries-th-label ${isCarry ? 'carry' : ''}`}>TH {takehome}</p>}
     </div>
   )
 }
