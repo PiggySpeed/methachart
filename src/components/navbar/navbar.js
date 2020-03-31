@@ -14,9 +14,11 @@ function NavBarIconButton({name, to}) {
 
 function NavBarTextButton({label, to}) {
   return (
-    <Link to={to} className="navbar-text-button">
-      {label}
-    </Link>
+    <div className="navbar-text-button-container">
+      <Link to={to} className="navbar-text-button">
+        {label}
+      </Link>
+    </div>
   )
 }
 
@@ -38,8 +40,6 @@ function NavBar() {
         onMouseOver={handleMouseOver}
       />
       <div className="navbar-inner-container-left">
-        <NavBarTextButton label="temp" to="methadone" />
-        <NavBarTextButton label="custom" to="methadone" />
       </div>
 
       <div className="navbar-inner-container-right">

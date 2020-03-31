@@ -12,11 +12,13 @@
 .navbar-inner-container-left {
   display: flex;
   flex: 1;
+  height: 100%;
 }
 
 .navbar-inner-container-right {
   display: flex;
   flex: none;
+  height: 100%;
 }
 
 .navbar-button {
@@ -35,6 +37,22 @@
   width: 50px;
   color: @white-4;
   transition: 0.125s ease-in-out;
+
+  &:hover {
+    color: @grey-2;
+  }
+}
+
+.navbar-text-button-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.navbar-text-button {
+  font-size: @font-ml;
+  color: @white-4;
 
   &:hover {
     color: @grey-2;

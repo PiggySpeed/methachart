@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   DatePanel,
-  FloatingLabelInput,
+  FloatingLabelInput, FormOptions,
   InputDoseML,
   InputTakehomeML,
   MedicationDropdown,
@@ -24,7 +24,8 @@ const styles = {
     width: '14rem'
   },
   rx: {
-    width: '6rem'
+    width: '6rem',
+    marginRight: '2rem'
   },
   dose: {
     width: '3rem',
@@ -87,6 +88,7 @@ function ChartMethadoneWrapper(props) {
           onChange={handleSetRxNumber}
           placeholder="Rx#"
           style={styles.rx} />
+        <FormOptions />
       </ViewRow>
       <ViewRow>
         <MedicationDropdown
