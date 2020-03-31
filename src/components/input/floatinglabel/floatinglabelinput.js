@@ -2,7 +2,7 @@ import './index.less';
 import React, {useState} from 'react';
 import useHover from '../../../hooks/useHover';
 
-function FloatingLabelInput({canFloat = true, isHovered, value="", placeholder, style, onChange, onFocus, onBlur}) {
+function FloatingLabelInput({canFloat = true, isHovered, value="", placeholder, style, type='text', onChange, onFocus, onBlur}) {
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(isHovered);
   const [float, setFloat] = useState(false);
   const [focus, setFocus] = useState(false);
@@ -53,6 +53,7 @@ function FloatingLabelInput({canFloat = true, isHovered, value="", placeholder, 
       <input
         className={`flinput-input ${(hover || isHovered) ? 'hover' : ''}`}
         value={value || ''}
+        type={type}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange} />

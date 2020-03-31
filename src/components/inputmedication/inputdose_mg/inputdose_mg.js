@@ -14,6 +14,7 @@ function InputDoseMG({inputStyle}) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
+        type="number"
         placeholder="Dose"
         style={inputStyle ? inputStyle : {}}
         isHovered={hover}

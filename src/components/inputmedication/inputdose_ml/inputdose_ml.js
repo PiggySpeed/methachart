@@ -14,6 +14,7 @@ function InputDoseML({inputStyle, value="", onChange}) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
+        type="number"
         placeholder="Dose"
         value={value}
         style={inputStyle ? inputStyle : {}}

@@ -14,6 +14,7 @@ function InputTakehomeML({inputStyle, value="", onChange}) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
+        type="number"
         canFloat={false}
         isHovered={hover}
         placeholder="&nbsp;0"
