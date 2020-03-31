@@ -29,7 +29,7 @@ function DateNumberInput({min, max, defaultValue, placeholder, onFocus, onBlur, 
     }
   }
 
-  function handleBlur(e) {
+  function handleBlur() {
     if (focus) {
       setFocus(false);
     }

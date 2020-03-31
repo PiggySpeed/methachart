@@ -1,5 +1,5 @@
 import './index.less';
-import React, {useState} from 'react';
+import React from 'react';
 import {DateInput} from '../index';
 import Calendar from "react-calendar";
 import useFocus from '../../hooks/useFocus';

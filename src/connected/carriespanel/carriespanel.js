@@ -1,5 +1,5 @@
 import './index.less';
-import React, {useState} from 'react';
+import React from 'react';
 import {bindActionCreators} from 'redux';
 import { Checkbox } from 'semantic-ui-react';
 import chartActions from '../../actions/chart';
