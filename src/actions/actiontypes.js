@@ -20,6 +20,7 @@ export const ON_PRINT_SUCCESS = 'ON_PRINT_SUCCESS';
 // Chart Actions
 export const SET_PATIENT_NAME = 'SET_PATIENT_NAME';
 export const SET_RX_NUMBER = 'SET_RX_NUMBER';
+export const SET_FORM_TYPE = 'SET_FORM_TYPE';
 export const SET_DRUG = 'SET_DRUG';
 export const SET_DOSE = 'SET_DOSE';
 export const SET_TAKEHOME_DOSE = 'SET_TAKEHOME_DOSE';

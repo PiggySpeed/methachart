@@ -9,7 +9,7 @@ import {
   SET_DATE_RANGE,
   SET_TIME_INTERVAL,
   SET_DAY_CARRY,
-  SET_CARRY_SCHEME
+  SET_CARRY_SCHEME, SET_FORM_TYPE
 } from '../actions/actiontypes';
 
 const onSetPatientName = (patientName) => {
@@ -21,6 +21,12 @@ const onSetPatientName = (patientName) => {
 const onSetRxNumber = (rxNumber) => {
   return dispatch => {
     dispatch({ type: SET_RX_NUMBER, rxNumber });
+  }
+};
+
+const onSetFormType = (formType) => {
+  return dispatch => {
+    dispatch({ type: SET_FORM_TYPE, formType });
   }
 };
 
@@ -82,6 +88,7 @@ const onSetCarryScheme = (scheme) => {
 export default {
   onSetPatientName,
   onSetRxNumber,
+  onSetFormType,
   onSetDrug,
   onSetDose,
   onSetTakehomeDose,

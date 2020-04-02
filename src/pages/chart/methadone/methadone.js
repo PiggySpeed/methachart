@@ -25,7 +25,7 @@ const styles = {
   },
   rx: {
     width: '6rem',
-    marginRight: '2rem'
+    marginRight: '1.25rem'
   },
   dose: {
     width: '3rem',
@@ -45,6 +45,10 @@ function ChartMethadoneWrapper(props) {
 
   function handleSetRxNumber(e) {
     props.onSetRxNumber(e.target.value);
+  }
+
+  function handleSetFormType(value) {
+    props.onSetFormType(value);
   }
 
   function handleSetDrug(value) {
@@ -88,7 +92,9 @@ function ChartMethadoneWrapper(props) {
           onChange={handleSetRxNumber}
           placeholder="Rx#"
           style={styles.rx} />
-        <FormOptions />
+        <FormOptions
+          formType={props.formType}
+          onSetFormType={handleSetFormType} />
       </ViewRow>
       <ViewRow>
         <MedicationDropdown
@@ -124,6 +130,7 @@ const mapStateToProps = ({chart}) => {
   return {
     patientName: chart.patientName,
     rxNumber: chart.rxNumber,
+    formType: chart.formType,
     selectedDrug: chart.selectedDrug,
     dose: chart.dose,
     takehome: chart.takehome,

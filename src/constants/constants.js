@@ -16,3 +16,6 @@ export const WEEKENDS = ['SUN', 'SAT'];
 
 export const SCHEME_WEEKENDS = 'SCHEME_WEEKENDS';
 export const SCHEME_WEEKDAYS = 'SCHEME_WEEKDAYS';
+
+export const FORMTYPE_MAIN = 'FORMTYPE_MAIN';
+export const FORMTYPE_TEMP = 'FORMTYPE_TEMP';

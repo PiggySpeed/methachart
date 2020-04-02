@@ -1,6 +1,7 @@
 import {
   SET_PATIENT_NAME,
   SET_RX_NUMBER,
+  SET_FORM_TYPE,
   SET_DRUG,
   SET_DOSE,
   SET_TAKEHOME_DOSE,
@@ -12,6 +13,8 @@ import {
   SET_CARRY_SCHEME
 } from '../actions/actiontypes';
 import {
+  FORMTYPE_MAIN,
+  FORMTYPE_TEMP,
   METHADONE,
   SCHEME_WEEKDAYS,
   SCHEME_WEEKENDS
@@ -21,6 +24,7 @@ import {
 const initialState = {
   patientName: '',
   rxNumber: null,
+  formType: FORMTYPE_MAIN,
 
   selectedDrug: METHADONE,
   dose: null,
@@ -71,6 +75,9 @@ const chart = (state = initialState, action) => {
     }
     case SET_RX_NUMBER: {
       return {...state, rxNumber: action.rxNumber};
+    }
+    case SET_FORM_TYPE: {
+      return {...state, formType: action.formType};
     }
     case SET_DRUG: {
       return {...state, selectedDrug: action.selectedDrug};
