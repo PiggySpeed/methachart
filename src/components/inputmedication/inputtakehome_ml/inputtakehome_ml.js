@@ -4,7 +4,7 @@ import {FloatingLabelInput} from '../../../components';
 import useFocus from '../../../hooks/useFocus';
 import useHover from '../../../hooks/useHover';
 
-function InputTakehomeML({inputStyle, value="", onChange}) {
+function InputTakehomeML({disabled, inputStyle, value="", onChange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(false);
 
@@ -15,7 +15,9 @@ function InputTakehomeML({inputStyle, value="", onChange}) {
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
         type="number"
+        tabindex={disabled ? -1 : 0}
         canFloat={false}
+        disabled={disabled}
         isHovered={hover}
         placeholder="&nbsp;0"
         value={value}
@@ -23,8 +25,8 @@ function InputTakehomeML({inputStyle, value="", onChange}) {
         onChange={onChange}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      <p className={`input-takehome-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>mL</p>
-      <h6 className={`input-takehome-label ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>Take Home (optional):</h6>
+      <p className={`input-takehome-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>mL</p>
+      <h6 className={`input-takehome-label ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>Take Home (optional):</h6>
     </div>
   )
 }

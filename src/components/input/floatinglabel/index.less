@@ -35,9 +35,14 @@
   border-bottom: 1px solid @white-4;
   transition: 0.15s ease-in-out;
 
+  &.disabled {
+    border-bottom: 1px dotted @white-2;
+  }
+
   &.hover {
     border-bottom: 1px solid @grey-1;
   }
+
 }
 
 .flinput-floating-label {
@@ -50,6 +55,10 @@
   color: @white-4;
   transition: 0.15s ease-in-out;
   user-select: none;
+
+  &.disabled {
+    color: @white-2;
+  }
 
   &.float {
     bottom: 28px;

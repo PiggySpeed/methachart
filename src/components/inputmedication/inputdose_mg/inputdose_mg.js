@@ -4,7 +4,7 @@ import {FloatingLabelInput} from '../../../components';
 import useFocus from '../../../hooks/useFocus';
 import useHover from '../../../hooks/useHover';
 
-function InputDoseMG({inputStyle}) {
+function InputDoseMG({disabled, inputStyle}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(false);
 
@@ -15,12 +15,14 @@ function InputDoseMG({inputStyle}) {
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
         type="number"
+        tabindex={disabled ? -1 : 0}
         placeholder="Dose"
         style={inputStyle ? inputStyle : {}}
+        disabled={disabled}
         isHovered={hover}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      <p className={`input-dose-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''}`}>mg</p>
+      <p className={`input-dose-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>mg</p>
     </div>
   )
 }

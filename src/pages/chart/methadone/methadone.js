@@ -12,6 +12,7 @@ import {
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
 import {CarriesPanel} from '../../../connected';
+import {FORMTYPE_TEMP} from '../../../constants/constants';
 
 const styles = {
   row1: {
@@ -38,6 +39,7 @@ const styles = {
 };
 
 function ChartMethadoneWrapper(props) {
+  const isTemp = props.formType === FORMTYPE_TEMP;
 
   function handleSetName(e) {
     props.onSetPatientName(e.target.value);
@@ -101,16 +103,19 @@ function ChartMethadoneWrapper(props) {
           value={props.selectedDrug}
           onChange={handleSetDrug} />
         <InputDoseML
+          disabled={isTemp}
           inputStyle={styles.dose}
           value={props.dose}
           onChange={handleSetDose} />
         <InputTakehomeML
+          disabled={isTemp}
           inputStyle={styles.takehome}
           value={props.takehome}
           onChange={handleSetTakehomeDose} />
       </ViewRow>
       <ViewRow>
         <DatePanel
+          isTemp={isTemp}
           startdate={props.startdate}
           enddate={props.enddate}
           daterange={props.daterange}
@@ -119,7 +124,7 @@ function ChartMethadoneWrapper(props) {
           onSetDateRange={handleSetDateRange} />
       </ViewRow>
       <ViewRow>
-        <CarriesPanel />
+        <CarriesPanel isTemp={isTemp} />
       </ViewRow>
     </div>
   )
