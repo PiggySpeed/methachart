@@ -2,6 +2,20 @@ import './index.less';
 import React, {useState} from 'react';
 import useHover from '../../../hooks/useHover';
 
+function FloatingLabel({canFloat, hover, float, focus, disabled, text}) {
+  let floatStyle = float ? 'float' : '';
+  if (!canFloat) {
+    floatStyle = float ? 'hidden' : '';
+  }
+
+  return (
+    <h6
+      className={`flinput-floating-label ${floatStyle} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>
+      {text}
+    </h6>
+  )
+}
+
 function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, value="", placeholder, style, type='text', onChange, onFocus, onBlur}) {
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(isHovered);
   const [float, setFloat] = useState(false);
@@ -45,7 +59,7 @@ function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, val
 
   return (
     <div
-      className="flinput-container"
+      className={`flinput-container ${disabled ? 'disabled' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={style ? style : {}}>
@@ -58,18 +72,13 @@ function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, val
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange} />
-      {
-        canFloat && <h6
-        className={`flinput-floating-label ${float ? 'float' : ''} ${focus ? 'focus' : ''} ${((hover || isHovered) && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>
-        {placeholder}
-        </h6>
-      }
-      {
-        !canFloat && <h6
-          className={`flinput-floating-label ${float ? 'hidden' : ''} ${focus ? 'focus' : ''} ${((hover || isHovered) && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>
-          {placeholder}
-        </h6>
-      }
+      <FloatingLabel
+        canFloat={canFloat}
+        hover={hover || isHovered}
+        float={float}
+        focus={focus}
+        disabled={disabled}
+        text={placeholder} />
     </div>
   )
 }

@@ -9,11 +9,11 @@ import {FORMTYPE_TEMP, SCHEME_WEEKDAYS, SCHEME_WEEKENDS} from '../../constants/c
 
 
 const styles = {
-  checkbox: {
+  checkbox: isTemp => ({
     fontSize: 12,
-    color: '#5F5F5F',
+    color: isTemp ? '#EBEBEB' : '#C3C3C3',
     marginRight: 12
-  }
+  })
 };
 
 function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, carryScheme, onSetCarryScheme}) {
@@ -44,18 +44,20 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
         onDayClick={handleDayClick} />
       <div className="carries-options">
         <Checkbox
+          disabled={isTemp}
           value={SCHEME_WEEKENDS}
           checked={carryScheme === SCHEME_WEEKENDS}
           label={{
             children: 'carry weekends',
-            style: styles.checkbox }}
+            style: styles.checkbox(isTemp) }}
           onChange={handleSetCarryScheme} />
         <Checkbox
+          disabled={isTemp}
           value={SCHEME_WEEKDAYS}
           checked={carryScheme === SCHEME_WEEKDAYS}
           label={{
             children: 'carry weekdays',
-            style: styles.checkbox }}
+            style: styles.checkbox(isTemp) }}
           onChange={handleSetCarryScheme} />
       </div>
     </div>

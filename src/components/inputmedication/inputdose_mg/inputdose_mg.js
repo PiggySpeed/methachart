@@ -10,7 +10,7 @@ function InputDoseMG({disabled, inputStyle}) {
 
   return (
     <div
-      className="input-dose-container"
+      className={`input-dose-container ${disabled ? 'disabled' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput

@@ -1,6 +1,6 @@
 import './index.less';
 import React from 'react';
-import { ChartFooter } from '../../components';
+import { ChartFooter } from '../../connected';
 
 function Chart({children}) {
   return (

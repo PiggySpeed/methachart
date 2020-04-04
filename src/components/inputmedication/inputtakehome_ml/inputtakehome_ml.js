@@ -10,7 +10,7 @@ function InputTakehomeML({disabled, inputStyle, value="", onChange}) {
 
   return (
     <div
-      className="input-takehome-container"
+      className={`input-takehome-container ${disabled ? 'disabled' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput

@@ -36,7 +36,7 @@ function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onS
 
   return (
     <div
-      className="datepanel-container"
+      className={`datepanel-container ${disabled ? 'disabled' : ''}`}
       onFocus={handleFocus}
       onBlur={handleBlur}>
       <DateInput

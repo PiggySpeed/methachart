@@ -43,6 +43,7 @@ function DateNumberInput({min, max, defaultValue, placeholder, disabled, onFocus
     <div className={`dateinput-input-container ${focus ? 'focus' : ''}`}>
       <input
         type="number"
+        tabIndex={disabled ? -1 : 0}
         min={min}
         max={max}
         className={`dateinput-input ${disabled ? 'disabled' : ''}`}

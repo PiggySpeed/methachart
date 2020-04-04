@@ -10,7 +10,7 @@ function InputTakehomeMG({disabled, inputStyle}) {
 
   return (
     <div
-      className="input-takehome-container"
+      className={`input-takehome-container ${disabled ? 'disabled' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
