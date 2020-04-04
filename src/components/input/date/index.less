@@ -10,6 +10,10 @@
   border: 1px solid @white-4;
   border-radius: 5px;
 
+  &.disabled {
+    border: 1px dotted @white-2;
+  }
+
   &.hover {
     border: 1px solid @grey-1;
   }
@@ -27,6 +31,10 @@
   background-color: @white;
   padding: 2px;
   font-size: @font-s;
+
+  &.disabled {
+    color: @white-2;
+  }
 
   &.hover {
     color: @grey-1;
@@ -57,6 +65,10 @@
   border: none;
   border-bottom: 1px solid @white-4;
   text-align: center;
+
+  &.disabled {
+    border-bottom: 1px dotted @white-2;
+  }
 }
 
 .dateinput-placeholder {
@@ -67,6 +79,10 @@
   color: @white-4;
   user-select: none;
   z-index: 0;
+
+  &.disabled {
+    color: @white-2;
+  }
 }
 
 .dateinput-border {
@@ -79,6 +95,10 @@
   transition: 0.125s ease-out;
   z-index: 2;
   border-bottom: 1px solid @blue;
+
+  &.disabled {
+    border-bottom: 1px dotted @white-2;
+  }
 
   &.focus {
     width: 1.7rem;

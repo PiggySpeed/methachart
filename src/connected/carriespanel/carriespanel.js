@@ -5,7 +5,7 @@ import { Checkbox } from 'semantic-ui-react';
 import chartActions from '../../actions/chart';
 import {connect} from 'react-redux';
 import {CarriesSelector} from '../../components';
-import {SCHEME_WEEKDAYS, SCHEME_WEEKENDS} from '../../constants/constants';
+import {FORMTYPE_TEMP, SCHEME_WEEKDAYS, SCHEME_WEEKENDS} from '../../constants/constants';
 
 
 const styles = {
@@ -16,7 +16,8 @@ const styles = {
   }
 };
 
-function CarriesPanelWrapper({dose, takehome, carries, onDayClick, carryScheme, onSetCarryScheme}) {
+function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, carryScheme, onSetCarryScheme}) {
+  const isTemp = formType === FORMTYPE_TEMP;
 
   function handleSetCarryScheme(e, target) {
     if (target.checked) {
@@ -37,6 +38,7 @@ function CarriesPanelWrapper({dose, takehome, carries, onDayClick, carryScheme, 
     <div>
       <CarriesSelector
         dose={dose}
+        disabled={isTemp}
         takehome={takehome}
         carries={carries}
         onDayClick={handleDayClick} />
@@ -62,6 +64,7 @@ function CarriesPanelWrapper({dose, takehome, carries, onDayClick, carryScheme, 
 
 const mapStateToProps = ({chart}) => {
   return {
+    formType: chart.formType,
     carries: chart.carries,
     dose: chart.dose,
     takehome: chart.takehome,

@@ -115,7 +115,7 @@ function ChartMethadoneWrapper(props) {
       </ViewRow>
       <ViewRow>
         <DatePanel
-          isTemp={isTemp}
+          disabled={isTemp}
           startdate={props.startdate}
           enddate={props.enddate}
           daterange={props.daterange}
@@ -124,7 +124,7 @@ function ChartMethadoneWrapper(props) {
           onSetDateRange={handleSetDateRange} />
       </ViewRow>
       <ViewRow>
-        <CarriesPanel isTemp={isTemp} />
+        <CarriesPanel />
       </ViewRow>
     </div>
   )

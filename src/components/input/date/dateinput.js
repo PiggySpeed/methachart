@@ -2,7 +2,7 @@ import './index.less';
 import React, {useState, useEffect} from 'react';
 import moment from 'moment';
 
-function DateNumberInput({min, max, defaultValue, placeholder, onFocus, onBlur, onChange}) {
+function DateNumberInput({min, max, defaultValue, placeholder, disabled, onFocus, onBlur, onChange}) {
   const [focus, setFocus] = useState(false);
   const [value, setValue] = useState(defaultValue || '');
   const [placehold, setPlacehold] = useState(!defaultValue);
@@ -45,14 +45,14 @@ function DateNumberInput({min, max, defaultValue, placeholder, onFocus, onBlur, 
         type="number"
         min={min}
         max={max}
-        className="dateinput-input"
+        className={`dateinput-input ${disabled ? 'disabled' : ''}`}
         maxLength={2}
         defaultValue={defaultValue}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      {(!value && !focus) && <p className={`dateinput-placeholder ${!placehold ? 'hidden' : ''}`}>{placeholder}</p>}
-      <hr className={`dateinput-border ${focus ? 'focus' : ''}`} />
+      {(!value && !focus) && <p className={`dateinput-placeholder ${!placehold ? 'hidden' : ''} ${disabled ? 'disabled' : ''}`}>{placeholder}</p>}
+      <hr className={`dateinput-border ${focus ? 'focus' : ''} ${disabled ? 'disabled' : ''}`} />
     </div>
   )
 }
@@ -61,7 +61,7 @@ function convertToDateObject(dd, mm, yy) {
   return new Date(parseInt(`20${yy}`), parseInt(mm), parseInt(dd));
 }
 
-function DateInput({style, label, onInputValidDate}) {
+function DateInput({style, disabled, label, onInputValidDate}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
   const [dd, setDD] = useState(null);
@@ -112,15 +112,16 @@ function DateInput({style, label, onInputValidDate}) {
 
   return (
     <div
-      className={`dateinput-container ${focus ? 'focus' : ''} ${hover ? 'hover' : ''}`}
+      className={`dateinput-container ${focus ? 'focus' : ''} ${hover ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}
       style={style ? style : {}}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
-      <p className={`dateinput-label ${focus ? 'focus' : ''} ${hover ? 'hover' : ''}`}>{label}</p>
+      <p className={`dateinput-label ${focus ? 'focus' : ''} ${hover ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>{label}</p>
       <DateNumberInput
         min={1}
         max={31}
         placeholder="dd"
+        disabled={disabled}
         onChange={(e) => handleChange('dd', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />
@@ -128,6 +129,7 @@ function DateInput({style, label, onInputValidDate}) {
         min={1}
         max={12}
         placeholder="mm"
+        disabled={disabled}
         onChange={(e) => handleChange('mm', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />
@@ -136,6 +138,7 @@ function DateInput({style, label, onInputValidDate}) {
         max={99}
         defaultValue={yy}
         placeholder="yy"
+        disabled={disabled}
         onChange={(e) => handleChange('yy', e.target.value)}
         onFocus={handleFocus}
         onBlur={handleBlur} />

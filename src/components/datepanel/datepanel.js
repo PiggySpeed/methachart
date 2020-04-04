@@ -4,7 +4,7 @@ import {DateInput} from '../index';
 import Calendar from "react-calendar";
 import useFocus from '../../hooks/useFocus';
 
-function DatePanel({startdate, enddate, daterange, onSetStartDate, onSetEndDate, onSetDateRange}) {
+function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onSetEndDate, onSetDateRange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
 
   function handleDateChange([start, end]) {
@@ -40,12 +40,14 @@ function DatePanel({startdate, enddate, daterange, onSetStartDate, onSetEndDate,
       onFocus={handleFocus}
       onBlur={handleBlur}>
       <DateInput
+        disabled={disabled}
         label="Start"
         value={startdate}
         style={{marginRight: '1rem'}}
         onInputValidDate={handleInputValidStartDate}
       />
       <DateInput
+        disabled={disabled}
         label="End"
         value={enddate}
         onInputValidDate={handleInputValidEndDate}

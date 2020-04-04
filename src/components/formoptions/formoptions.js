@@ -11,6 +11,7 @@ function IconButton({isActive, type, onClick}) {
 
   return (
     <button
+      tabIndex={-1}
       className={`formoptions-icon-button-container ${isActive ? 'active' : ''}`}
       onClick={handleSetFormType}>
       {(type === FORMTYPE_MAIN)

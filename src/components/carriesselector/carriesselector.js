@@ -4,7 +4,7 @@ import {DAYS_OF_WEEK} from '../../constants/constants';
 import Day from './day/day';
 
 
-function CarriesSelector({carries, dose, takehome, onDayClick}) {
+function CarriesSelector({disabled, carries, dose, takehome, onDayClick}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseEnter() {
@@ -17,15 +17,16 @@ function CarriesSelector({carries, dose, takehome, onDayClick}) {
 
   return (
     <div
-      className="carries-selector-container"
+      className={`carries-selector-container ${disabled ? 'disabled' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
-      <p className={`carries-selector-label ${hover ? 'hover' : ''}`}>Carries</p>
+      <p className={`carries-selector-label ${hover ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>Carries</p>
       {DAYS_OF_WEEK.map(day => {
         const currentDay = carries[day];
         return (
           <Day
             key={currentDay.label}
+            disabled={disabled}
             day={day}
             dose={dose}
             takehome={takehome}
