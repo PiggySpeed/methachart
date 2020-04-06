@@ -9,8 +9,10 @@
 
   border: 1px solid @white-4;
   border-radius: 5px;
+  transition: 0.15s ease-in-out;
 
   &.disabled {
+    transition: none;
     border: 1px dotted @white-2;
     pointer-events: none;
   }
@@ -32,8 +34,10 @@
   background-color: @white;
   padding: 2px;
   font-size: @font-s;
+  transition: 0.15s ease-in-out;
 
   &.disabled {
+    transition: none;
     color: @white-2;
   }
 
@@ -94,11 +98,12 @@
   left: 4px;
   border: none;
   border-bottom: 1px solid transparent;
-  transition: 0.125s ease-out;
+  transition: 0.15s ease-out;
   z-index: 2;
   border-bottom: 1px solid @blue;
 
   &.disabled {
+    transition: none;
     border-bottom: 1px dotted @white-2;
   }
 

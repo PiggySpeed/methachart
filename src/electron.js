@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron');
+const IS_DEV = true;
 
 function createWindow () {
   // Create the browser window.
@@ -12,6 +13,12 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadFile('index.html');
+
+  win.loadURL(
+    IS_DEV
+    ? 'http://localhost:8000'
+    : `file://${path.join(__dirname, '../dist/index.html')}`
+  );
 
   // Open the DevTools.
   win.webContents.openDevTools()
