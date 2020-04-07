@@ -17,12 +17,13 @@
   left: 0;
   border: none;
   border-bottom: 1px solid transparent;
-  transition: 0.15s ease-in-out;
+  transition: none;
   z-index: 2;
 
   &.focus {
     width: 100%;
     border-bottom: 1px solid @blue;
+    transition: 0.15s ease-in-out;
   }
 }
 
@@ -37,9 +38,10 @@
   padding: 0.5rem 0 0 0;
   border: none;
   border-bottom: 1px solid @white-4;
-  transition: 0.15s ease-in-out;
+  transition: none;
 
   &.hover {
+    transition: 0.15s ease-in-out;
     border-bottom: 1px solid @grey-1;
   }
 
@@ -57,21 +59,24 @@
 
   font-size: 1rem;
   color: @white-4;
-  transition: 0.15s ease-in-out;
   user-select: none;
+  transition: none;
 
   &.float {
     bottom: 28px;
     left: -4px;
     transform: scale(0.8);
+    transition: 0.15s ease-in-out;
   }
 
   &.focus {
     color: @blue;
+    transition: 0.15s ease-in-out;
   }
 
   &.hover {
     color: @grey-1;
+    transition: 0.15s ease-in-out;
   }
 
   &.disabled {
