@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function ChartFooterWrapper({formType}) {
+function ChartFooterWrapper({formType, onPrintRequest}) {
   const isTemp = formType === FORMTYPE_TEMP;
 
   return(
@@ -23,7 +23,10 @@ function ChartFooterWrapper({formType}) {
       </div>
       <div className="chartfooter-right">
         {isTemp && <p className="chartfooter-status-message">Printing Temp Log</p>}
-        <Button secondary style={styles.btn}>Print</Button>
+        <Button
+          secondary
+          style={styles.btn}
+          onClick={onPrintRequest}>Print</Button>
       </div>
     </div>
   )

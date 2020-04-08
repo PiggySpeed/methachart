@@ -36,13 +36,13 @@ export const onPrintRequest = () => {
   return (dispatch, getState) => {
     dispatch({ type: ON_PRINT_REQUEST });
 
-    const { LogBuilder, dates } = getState();
-    const { name, selecteddrug, rxnum, dose, takehome } = LogBuilder;
-    const { startdate, enddate } = dates; // dates must be in form MMM DD, YYYY
+    const { chart, dates } = getState();
+    const { patientName, selectedDrug, rxNumber, dose, takehome } = chart;
+    const { startdate, enddate } = chart; // dates must be in form MMM DD, YYYY
     let errorText = 'The start or end dates are invalid.';
 
     // Validate Name
-    if(!name){
+    if(!patientName){
       return dispatch(onPrintFailure('Please Enter a Name!'))
     }
 
@@ -52,7 +52,7 @@ export const onPrintRequest = () => {
     }
 
     // Validate RxNum
-    if(!rxnum){
+    if(!rxNumber){
       return dispatch(onPrintFailure('Please Enter an Rx Number!'))
     }
 
@@ -70,8 +70,8 @@ export const onPrintRequest = () => {
 
     // Assemble headerdata
     const headerdata = {
-        name,
-        selecteddrug,
+        name: patientName,
+        selecteddrug: selectedDrug,
         startdate,
         enddate,
         timeinterval,
@@ -90,7 +90,7 @@ export const onPrintRequest = () => {
       logdata.push({
         date: allDates[i].date,
         weekday: WEEKDAYS[allDates[i].weekday],
-        rxnum: rxnum,
+        rxnum: rxNumber,
         witness: dose + ' mL',
         takehome: takehome ? takehome + ' mL' : '-------' ,
         total: total + ' mL',
