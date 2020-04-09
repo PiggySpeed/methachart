@@ -1,15 +1,23 @@
 import './index.less';
 import React from 'react';
-import {DateInput} from '../index';
+import moment from 'moment';
 import Calendar from "react-calendar";
+import { DateInput } from '../';
 import useFocus from '../../hooks/useFocus';
+
+function convertToCalendarDateRange(daterange) {
+  const start = daterange[0] ? daterange[0].toDate() : null;
+  const end = daterange[1] ? daterange[1].toDate() : null;
+  return [start, end];
+}
 
 function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onSetEndDate, onSetDateRange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
 
-  function handleDateChange([start, end]) {
-    onSetStartDate(start);
-    onSetEndDate(end);
+  function handleCalendarDateChange([start, end]) {
+    // calendar widget returns Date() objects; convert to moment
+    onSetStartDate(moment(start));
+    onSetEndDate(moment(end));
   }
 
   function handleInputValidStartDate(start) {
@@ -19,7 +27,7 @@ function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onS
     if (start && enddate && (start <= enddate)) {
       onSetDateRange([start, enddate]);
     } else {
-      onSetDateRange([new Date(), enddate]);
+      onSetDateRange([moment(), enddate]);
     }
   }
 
@@ -30,7 +38,7 @@ function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onS
     if (startdate && end && (startdate <= end)) {
       onSetDateRange([startdate, end]);
     } else {
-      onSetDateRange([startdate, new Date()]);
+      onSetDateRange([startdate, moment()]);
     }
   }
 
@@ -53,15 +61,15 @@ function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onS
         onInputValidDate={handleInputValidEndDate}
       />
       {focus &&
-        <div tabIndex="-1"  className="dateinput-calendar-container">
+        <div tabIndex="-1" className="dateinput-calendar-container">
           <Calendar
             selectRange
             showNeighboringMonth
             showFixedNumberOfWeeks
             calendarType="US"
             returnValue="range"
-            onChange={handleDateChange}
-            value={daterange}
+            onChange={handleCalendarDateChange}
+            value={convertToCalendarDateRange(daterange)}
           />
         </div>
       }

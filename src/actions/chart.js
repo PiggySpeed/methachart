@@ -14,7 +14,6 @@ import {
   ON_PRINT_REQUEST,
   ON_PRINT_FAILURE, ON_PRINT_SUCCESS
 } from '../actions/actiontypes';
-import {onPrintFailure} from './print';
 import {getAllDates} from '../utils/date';
 import moment from 'moment';
 import openWindow from '../utils/newwindow';
@@ -69,6 +68,10 @@ const onSetEndDate = (enddate) => {
 };
 
 const onSetDateRange = (daterange) => {
+  var t = moment(daterange[0]).format('MM/DD/YYYY');
+  var g = moment(daterange[1]).format('MM/DD/YYYY');
+  console.log(t, g);
+
   return dispatch => {
     dispatch({ type: SET_DATE_RANGE, daterange });
   }
@@ -88,7 +91,7 @@ const onDayClick = (day, isCarry) => {
 
 const onSetCarryScheme = (scheme) => {
   return dispatch => {
-    dispatch({ type: SET_CARRY_SCHEME, scheme })
+    dispatch({ type: SET_CARRY_SCHEME, scheme });
   }
 };
 
@@ -171,7 +174,7 @@ const onPrintRequest = () => {
       })
     }
 
-    return dispatch(onPrintSuccess(headerdata, logdata))
+    return dispatch(onPrintSuccess(headerdata, logdata));
   }
 };
 
@@ -188,5 +191,6 @@ export default {
   onSetDateRange,
   onSetTimeInterval,
   onDayClick,
-  onSetCarryScheme
+  onSetCarryScheme,
+  onPrintRequest
 };

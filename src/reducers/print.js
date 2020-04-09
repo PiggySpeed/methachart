@@ -14,6 +14,7 @@ const printData = (state = { errorText: '' }, action) => {
       return { errorText: '' };
     }
     case ON_PRINT_FAILURE: {
+      console.log(action.errorText);
       return { errorText: action.errorText };
     }
     case ON_PRINT_SUCCESS: {

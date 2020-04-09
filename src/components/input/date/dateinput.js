@@ -58,25 +58,21 @@ function DateNumberInput({min, max, defaultValue, placeholder, disabled, onFocus
   )
 }
 
-function convertToDateObject(dd, mm, yy) {
-  return new Date(parseInt(`20${yy}`), parseInt(mm), parseInt(dd));
-}
-
 function DateInput({style, disabled, label, onInputValidDate}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
   const [dd, setDD] = useState(null);
   const [mm, setMM] = useState(null);
-  const [yy, setYY] = useState(new Date().getFullYear().toString().slice(-2));
+  const [yy, setYY] = useState(moment().format('YY'));
   const [error, setError] = useState(false);
 
   useEffect(() => {
     // validate date; send over if valid, otherwise error
     if (dd && mm && yy) {
-      let isValid = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true).isValid();
-      console.log('is date valid ', isValid, `${dd}/${mm}/${yy}`);
-      if (isValid) {
-        onInputValidDate(convertToDateObject(dd, mm, yy));
+      let date = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true);
+      console.log('is date valid ', date.isValid(), date);
+      if (date.isValid()) {
+        onInputValidDate(date);
       } else {
         setError(true);
       }

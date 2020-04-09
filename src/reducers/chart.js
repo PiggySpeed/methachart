@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   SET_PATIENT_NAME,
   SET_RX_NUMBER,
@@ -29,9 +30,9 @@ const initialState = {
   selectedDrug: METHADONE,
   dose: null,
   takehome: null,
-  startdate: null, // type: Date
-  enddate: null,   // type: Date
-  daterange: [new Date(), new Date()],
+  startdate: null, // type: Moment
+  enddate: null,   // type: Moment
+  daterange: [moment(), moment()],
   timeinterval: 0,
 
   // modify on blur
