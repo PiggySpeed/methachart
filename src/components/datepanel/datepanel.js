@@ -11,35 +11,43 @@ function convertToCalendarDateRange(daterange) {
   return [start, end];
 }
 
-function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onSetEndDate, onSetDateRange}) {
+function DatePanel({disabled, daterange, onSetDateRange}) {
   const {focus, handleFocus, handleBlur} = useFocus(false);
+  const startDate = daterange[0];
+  const endDate = daterange[1];
+  // TODO: clear error upon change?
 
   function handleCalendarDateChange([start, end]) {
     // calendar widget returns Date() objects; convert to moment
-    onSetStartDate(moment(start));
-    onSetEndDate(moment(end));
+    onSetDateRange([moment(start), moment(end)]);
   }
 
-  function handleInputValidStartDate(start) {
-    onSetStartDate(start);
-
-    // validate date range, then set it if valid; otherwise error
-    if (start && enddate && (start <= enddate)) {
-      onSetDateRange([start, enddate]);
-    } else {
-      onSetDateRange([moment(), enddate]);
+  function handleInputStartDate(start) {
+    if (!start.isValid()) {
+      onSetDateRange([null, endDate]);
+      return; // TODO: error state
     }
+
+    if (start.isAfter(endDate)) {
+      onSetDateRange([null, endDate]);
+      return; // TODO: error state
+    }
+
+    onSetDateRange([start, endDate]);
   }
 
-  function handleInputValidEndDate(end) {
-    onSetEndDate(end);
-
-    // validate date range, then set it if valid; otherwise error
-    if (startdate && end && (startdate <= end)) {
-      onSetDateRange([startdate, end]);
-    } else {
-      onSetDateRange([startdate, moment()]);
+  function handleInputEndDate(end) {
+    if (!end.isValid()) {
+      onSetDateRange([startDate, null]);
+      return; // TODO: error state
     }
+
+    if (startDate.isAfter(end)) {
+      onSetDateRange([startDate, null]);
+      return; // TODO: error state
+    }
+
+    onSetDateRange([startDate, end]);
   }
 
   return (
@@ -50,15 +58,15 @@ function DatePanel({disabled, startdate, enddate, daterange, onSetStartDate, onS
       <DateInput
         disabled={disabled}
         label="Start"
-        value={startdate}
+        value={startDate}
         style={{marginRight: '1rem'}}
-        onInputValidDate={handleInputValidStartDate}
+        onInputDate={handleInputStartDate}
       />
       <DateInput
         disabled={disabled}
         label="End"
-        value={enddate}
-        onInputValidDate={handleInputValidEndDate}
+        value={endDate}
+        onInputDate={handleInputEndDate}
       />
       {focus &&
         <div tabIndex="-1" className="dateinput-calendar-container">

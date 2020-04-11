@@ -4,10 +4,7 @@ import {
   SET_DRUG,
   SET_DOSE,
   SET_TAKEHOME_DOSE,
-  SET_START_DATE,
-  SET_END_DATE,
   SET_DATE_RANGE,
-  SET_TIME_INTERVAL,
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
   SET_FORM_TYPE,
@@ -55,31 +52,24 @@ const onSetTakehomeDose = (takehome) => {
   }
 };
 
-const onSetStartDate = (startdate) => {
-  return dispatch => {
-    dispatch({ type: SET_START_DATE, startdate });
-  }
-};
-
-const onSetEndDate = (enddate) => {
-  return dispatch => {
-    dispatch({ type: SET_END_DATE, enddate });
-  }
-};
-
 const onSetDateRange = (daterange) => {
-  var t = moment(daterange[0]).format('MM/DD/YYYY');
-  var g = moment(daterange[1]).format('MM/DD/YYYY');
-  console.log(t, g);
+  const start = daterange[0];
+  const end = daterange[1];
 
   return dispatch => {
-    dispatch({ type: SET_DATE_RANGE, daterange });
-  }
-};
 
-const onSetTimeInterval = (timeinterval) => {
-  return dispatch => {
-    dispatch({ type: SET_TIME_INTERVAL, timeinterval });
+    if (!start || !end) {
+      dispatch({ type: SET_DATE_RANGE, daterange, timeinterval: null });
+      return;
+    }
+
+    const timeinterval = moment.duration(end.diff(start)).asDays() + 1; // inclusive date range
+    // var t = moment(start).format('MM/DD/YYYY');
+    // var g = moment(end).format('MM/DD/YYYY');
+    // console.log(t, g, duration);
+    console.log('timeinterval is', timeinterval);
+
+    dispatch({ type: SET_DATE_RANGE, daterange, timeinterval });
   }
 };
 
@@ -186,8 +176,6 @@ export default {
   onSetDrug,
   onSetDose,
   onSetTakehomeDose,
-  onSetStartDate,
-  onSetEndDate,
   onSetDateRange,
   onSetTimeInterval,
   onDayClick,

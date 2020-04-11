@@ -65,20 +65,8 @@ function ChartMethadoneWrapper(props) {
     props.onSetTakehomeDose(e.target.value);
   }
 
-  function handleSetStartDate(date) {
-    props.onSetStartDate(date);
-  }
-
-  function handleSetEndDate(date) {
-    props.onSetEndDate(date);
-  }
-
   function handleSetDateRange(dateRange) {
     props.onSetDateRange(dateRange);
-  }
-
-  function handleSetTimeInterval(interval) {
-    props.onSetTimeInterval(interval);
   }
 
   return (
@@ -116,11 +104,7 @@ function ChartMethadoneWrapper(props) {
       <ViewRow>
         <DatePanel
           disabled={isTemp}
-          startdate={props.startdate}
-          enddate={props.enddate}
           daterange={props.daterange}
-          onSetStartDate={handleSetStartDate}
-          onSetEndDate={handleSetEndDate}
           onSetDateRange={handleSetDateRange} />
       </ViewRow>
       <ViewRow>
@@ -139,8 +123,6 @@ const mapStateToProps = ({chart}) => {
     selectedDrug: chart.selectedDrug,
     dose: chart.dose,
     takehome: chart.takehome,
-    startdate: chart.startdate,
-    enddate: chart.enddate,
     daterange: chart.daterange,
     timeinterval: chart.timeinterval
   }

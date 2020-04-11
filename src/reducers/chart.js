@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {
   SET_PATIENT_NAME,
   SET_RX_NUMBER,
@@ -6,10 +5,7 @@ import {
   SET_DRUG,
   SET_DOSE,
   SET_TAKEHOME_DOSE,
-  SET_START_DATE,
-  SET_END_DATE,
   SET_DATE_RANGE,
-  SET_TIME_INTERVAL,
   SET_DAY_CARRY,
   SET_CARRY_SCHEME
 } from '../actions/actiontypes';
@@ -30,10 +26,8 @@ const initialState = {
   selectedDrug: METHADONE,
   dose: null,
   takehome: null,
-  startdate: null, // type: Moment
-  enddate: null,   // type: Moment
-  daterange: [moment(), moment()],
-  timeinterval: 0,
+  daterange: [null, null], // type: [Moment, Moment]
+  timeinterval: null,
 
   // modify on blur
   carryScheme: null,
@@ -89,17 +83,8 @@ const chart = (state = initialState, action) => {
     case SET_TAKEHOME_DOSE: {
       return {...state, takehome: action.takehome};
     }
-    case SET_START_DATE: {
-      return {...state, startdate: action.startdate};
-    }
-    case SET_END_DATE: {
-      return {...state, enddate: action.enddate};
-    }
     case SET_DATE_RANGE: {
-      return {...state, daterange: action.daterange};
-    }
-    case SET_TIME_INTERVAL: {
-      return {...state, timeinterval: action.timeinterval};
+      return {...state, daterange: action.daterange, timeinterval: action.timeinterval};
     }
     case SET_DAY_CARRY: {
       return {

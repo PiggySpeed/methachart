@@ -58,7 +58,11 @@ function DateNumberInput({min, max, defaultValue, placeholder, disabled, onFocus
   )
 }
 
-function DateInput({style, disabled, label, onInputValidDate}) {
+function pad(numStr) {
+  return numStr.padStart(2, '0');
+}
+
+function DateInput({style, disabled, label, onInputDate}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
   const [dd, setDD] = useState(null);
@@ -67,15 +71,9 @@ function DateInput({style, disabled, label, onInputValidDate}) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    // validate date; send over if valid, otherwise error
     if (dd && mm && yy) {
-      let date = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true);
-      console.log('is date valid ', date.isValid(), date);
-      if (date.isValid()) {
-        onInputValidDate(date);
-      } else {
-        setError(true);
-      }
+      let date = moment(`${pad(dd)}/${pad(mm)}/20${pad(yy)}`, 'DD/MM/YYYY', true);
+      onInputDate(date);
     }
   }, [dd, mm, yy]);
 
