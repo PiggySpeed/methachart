@@ -1,6 +1,7 @@
 import './index.less';
 import React, {useState} from 'react';
 import useHover from '../../../hooks/useHover';
+import classList from '../../../utils/classlist';
 
 function FloatingLabel({canFloat, hover, float, focus, disabled, text}) {
   let floatStyle = float ? 'float' : '';
@@ -10,7 +11,7 @@ function FloatingLabel({canFloat, hover, float, focus, disabled, text}) {
 
   return (
     <h6
-      className={`flinput-floating-label ${floatStyle} ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>
+      className={`flinput-floating-label ${floatStyle} ${classList({focus, hover: (hover && !focus), disabled})} ${focus ? 'focus' : ''}`}>
       {text}
     </h6>
   )
@@ -59,14 +60,14 @@ function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, val
 
   return (
     <div
-      className={`flinput-container ${disabled ? 'disabled' : ''}`}
+      className={`flinput-container ${classList({disabled})}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={style ? style : {}}>
-      <hr className={`flinput-border ${focus ? 'focus' : ''}`} />
+      <hr className={`flinput-border ${classList({focus})}`} />
       <input
         tabIndex={tabindex}
-        className={`flinput-input ${(hover || isHovered) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}
+        className={`flinput-input ${classList({hover: (hover || isHovered), disabled})}`}
         value={value || ''}
         type={type}
         onFocus={handleFocus}

@@ -55,6 +55,7 @@ const onSetTakehomeDose = (takehome) => {
 const onSetDateRange = (daterange) => {
   const start = daterange[0];
   const end = daterange[1];
+  console.log('daterange is ', daterange);
 
   return dispatch => {
 
@@ -177,7 +178,6 @@ export default {
   onSetDose,
   onSetTakehomeDose,
   onSetDateRange,
-  onSetTimeInterval,
   onDayClick,
   onSetCarryScheme,
   onPrintRequest
