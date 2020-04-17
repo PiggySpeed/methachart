@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import moment from 'moment';
 import Calendar from "react-calendar";
 import { DateInput } from '../';
-import useFocus from '../../hooks/useFocus';
 
 function convertToCalendarDateRange(daterange) {
   const start = daterange[0] ? daterange[0].toDate() : null;
@@ -12,12 +11,8 @@ function convertToCalendarDateRange(daterange) {
 }
 
 function DatePanel({disabled, daterange, onSetDateRange}) {
-  const {focus, handleFocus, handleBlur} = useFocus(false);
-  const {
-    focus: focusCalendar,
-    handleFocus: handleFocusCalendar,
-    handleBlur: handleBlurCalendar
-  } = useFocus(false);
+  const [timerID, setTimerID] = useState(0);
+  const [calendarFocus, setCalendarFocus] = useState(false);
   const [startDateError, setStartDateError] = useState(null);
   const [endDateError, setEndDateError] = useState(null);
   const startDate = daterange[0];
@@ -27,7 +22,7 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
     // calendar widget returns Date() objects; convert to moment
     console.log('handleCalendarDateChange');
     onSetDateRange([moment(start), moment(end)]);
-    handleBlurCalendar();
+    setCalendarFocus(false);
   }
 
   function handleInputStartDate(start) {
@@ -88,34 +83,48 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
     setEndDateError(null);
   }
 
+  function handleFocusDatePanel(e) {
+    console.log('handleFocusDatePanel');
+    console.log(e.target);
+    if (timerID) {
+      // intercept blur event when focusing on
+      // next date input element
+      clearTimeout(timerID);
+      setTimerID(0);
+    }
 
-  function handleAllFocus() {
-    handleFocus();
-    handleFocusCalendar();
-    console.log('allFocus');
+    if (!calendarFocus) {
+      setCalendarFocus(true);
+    }
   }
 
-  function handleAllBlur() {
-    handleBlur();
-    console.log('allBlur');
-    // TODO: figure out calendar focus states
+  function handleBlurDatePanel() {
+    const timerID = setTimeout(() => {
+      setCalendarFocus(false);
+    }, 0);
+    setTimerID(timerID);
   }
 
-  function handleCalendarBlur() {
-    console.log('handleCalendarBlur()');
+  function handleClickCalendar() {
+    if (timerID) {
+      // cancel blur event when
+      // clicking on the calendar
+      clearTimeout(timerID);
+      setTimerID(0);
+    }
   }
 
-  function handleCalendarFocus() {
-    handleFocusCalendar();
+  function handleFocusCalendar(e) {
+    // let the datepanel blur event happen
+    // when you focus the calendar through tabs
+    e.stopPropagation();
   }
-  console.log('daterange is ', daterange);
 
   return (
     <div
       className={`datepanel-container ${disabled ? 'disabled' : ''}`}
-      onFocus={handleAllFocus}
-      onBlur={handleAllBlur}
-    >
+      onFocus={handleFocusDatePanel}
+      onBlur={handleBlurDatePanel}>
       <DateInput
         disabled={disabled}
         error={!!startDateError}
@@ -123,22 +132,20 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
         defaultValue={startDate}
         style={{marginRight: '1rem'}}
         onInputDate={handleInputStartDate}
-        onValidate={handleValidateStartDate}
-      />
+        onValidate={handleValidateStartDate} />
       <DateInput
         disabled={disabled}
         error={!!endDateError}
         label="End"
         defaultValue={endDate}
         onInputDate={handleInputEndDate}
-        onValidate={handleValidateEndDate}
-      />
-      {focusCalendar &&
+        onValidate={handleValidateEndDate} />
+      {calendarFocus &&
         <div
           tabIndex="-1"
           className="dateinput-calendar-container"
-          onFocus={handleCalendarFocus}
-          onBlur={handleCalendarBlur}>
+          onClick={handleClickCalendar}
+          onFocus={handleFocusCalendar}>
           <Calendar
             selectRange
             showNeighboringMonth

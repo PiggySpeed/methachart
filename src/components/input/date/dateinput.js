@@ -74,7 +74,6 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
   useEffect(() => {
     // to support picking date by calendar
     // if defaultValue changes, trigger update
-    console.log('default value', defaultValue);
     const [DD, MM, YY] = defaultValue
        ? defaultValue.format('DD MM YY').split(' ')
        : [null, null, moment().format('YY')];
