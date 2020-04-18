@@ -1,1 +1,0 @@
-export var PRINT_URL = window.location.pathname.replace("index.html", "").slice(1) + "components/print/print.html";

@@ -11,10 +11,10 @@ import {
   ON_PRINT_REQUEST,
   ON_PRINT_FAILURE, ON_PRINT_SUCCESS
 } from '../actions/actiontypes';
-import {getAllDates} from '../utils/date';
 import moment from 'moment';
 import openWindow from '../utils/newwindow';
-import {PRINT_URL} from '../utils/url';
+import {PRINT_URL} from '../constants/constants';
+import {WEEKDAYS} from '../constants/constants';
 
 const onSetPatientName = (patientName) => {
   return dispatch => {
@@ -106,8 +106,7 @@ const onPrintRequest = () => {
       rxNumber,
       dose,
       takehome,
-      startdate,
-      enddate,
+      daterange,
       timeinterval
     } = chart;
 
@@ -130,17 +129,20 @@ const onPrintRequest = () => {
     }
 
     // Generate Array of Dates and Check if it is Valid
-    const allDates = getAllDates(startdate, enddate, 168, err => { errorText = err });
-    if(allDates === []){
-      return dispatch(onPrintFailure(errorText))
-    }
+    console.log(daterange);
+    // const allDates = getAllDates(daterange[0], daterange[1], 168, err => { errorText = err });
+    // const allDates = getDates(daterange[0], daterange[1]);
+    // console.log('alldates', allDates);
+    // if(allDates === []){
+    //   return dispatch(onPrintFailure(errorText))
+    // }
 
     // Assemble headerdata
     const headerdata = {
       name: patientName,
       selecteddrug: selectedDrug,
-      startdate,
-      enddate,
+      startdate: daterange[0],
+      enddate: daterange[1],
       timeinterval,
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
@@ -152,20 +154,28 @@ const onPrintRequest = () => {
                   : dose;
 
     // Assemble logdata
-    const logdata = [];
-    for(var i = 0; i < allDates.length; i++ ) {
-      logdata.push({
-        date: allDates[i].date,
-        weekday: WEEKDAYS[allDates[i].weekday],
+    const logData = [];
+    let curr = daterange[0];
+    const end = daterange[1];
+    while (curr <= end) {
+      const logRow = {
+        date: curr.format('MMM DD, YYYY'),
+        weekday: curr.format('dd'),
         rxnum: rxNumber,
         witness: dose + ' mL',
         takehome: takehome ? takehome + ' mL' : '-------' ,
         total: total + ' mL',
         carry: false
-      })
+      };
+      logData.push(logRow);
+      curr = curr.add(1, 'days');
     }
 
-    return dispatch(onPrintSuccess(headerdata, logdata));
+    if (logData === []) {
+      return dispatch(onPrintFailure(errorText));
+    }
+
+    return dispatch(onPrintSuccess(headerdata, logData));
   }
 };
 

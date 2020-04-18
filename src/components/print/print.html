@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MethaChart Print Preview</title>
+  <link rel="stylesheet" type="text/css" href="printpreview.css">
+</head>
+<body>
+  <div id='preview'>
+    <section id="tables"></section>
+  </div>
+  <script>
+    const previewscript = document.createElement('script');
+    previewscript.src = window.location.pathname.replace("print.html", "printpreview.js").slice(1);
+    document.write(previewscript.outerHTML);
+  </script>
+</body>
+</html>

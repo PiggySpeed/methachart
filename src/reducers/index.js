@@ -4,13 +4,11 @@ import { combineReducers } from 'redux';
 
 import logBuilder from './logbuilder';
 import dates from './dateselector';
-import printData from './print';
 import chart from './chart';
 
 const rootReducer = combineReducers({
   logBuilder,
   dates,
-  printData,
   chart
 });
 

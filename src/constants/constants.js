@@ -19,3 +19,5 @@ export const SCHEME_WEEKDAYS = 'SCHEME_WEEKDAYS';
 
 export const FORMTYPE_MAIN = 'FORMTYPE_MAIN';
 export const FORMTYPE_TEMP = 'FORMTYPE_TEMP';
+
+export var PRINT_URL = window.location.pathname.replace("index.html", "").slice(1) + "components/print/print.html";

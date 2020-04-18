@@ -20,7 +20,6 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
 
   function handleCalendarDateChange([start, end]) {
     // calendar widget returns Date() objects; convert to moment
-    console.log('handleCalendarDateChange');
     onSetDateRange([moment(start), moment(end)]);
     setCalendarFocus(false);
   }
@@ -84,8 +83,6 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
   }
 
   function handleFocusDatePanel(e) {
-    console.log('handleFocusDatePanel');
-    console.log(e.target);
     if (timerID) {
       // intercept blur event when focusing on
       // next date input element

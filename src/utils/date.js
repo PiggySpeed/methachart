@@ -75,6 +75,24 @@ export const createDate = ( dd, mm, yy ) => {
   return moment(paddedDate.join(' '), 'DD MM YY', true).format('MMM DD, YYYY');
 };
 
+export function getDates(start, end) {
+  /**
+   * Returns an array of dates between the start and end
+   *
+   * Format: [['MMM DD, YYYY', 'dd']]
+   *
+   * @params:
+   * - start: moment
+   * - end: moment
+   * */
+  const result = [];
+  let curr = start;
+  while (curr <= end) {
+    result.push([curr.format('MMM DD, YYYY'), curr.format('dd')]);
+    curr = curr.add(1, 'days');
+  }
+  return result;
+}
 
 export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
   /**
