@@ -12,9 +12,7 @@ import {
   ON_PRINT_FAILURE, ON_PRINT_SUCCESS
 } from '../actions/actiontypes';
 import moment from 'moment';
-import openWindow from '../utils/newwindow';
-import {PRINT_URL} from '../constants/constants';
-import {WEEKDAYS} from '../constants/constants';
+import openPrintWindow from '../utils/openPrintWindow';
 
 const onSetPatientName = (patientName) => {
   return dispatch => {
@@ -90,8 +88,8 @@ export const onPrintFailure = (errorText) => {
   return { type: ON_PRINT_FAILURE, errorText }
 };
 
-const onPrintSuccess = (headerdata, logdata) => {
-  openWindow(PRINT_URL, {headerdata, logdata});
+const onPrintSuccess = (data) => {
+  openPrintWindow({data});
   return { type: ON_PRINT_SUCCESS }
 };
 
@@ -141,8 +139,8 @@ const onPrintRequest = () => {
     const headerdata = {
       name: patientName,
       selecteddrug: selectedDrug,
-      startdate: daterange[0],
-      enddate: daterange[1],
+      startdate: daterange[0].toDate(),
+      enddate: daterange[1].toDate(),
       timeinterval,
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
@@ -175,7 +173,7 @@ const onPrintRequest = () => {
       return dispatch(onPrintFailure(errorText));
     }
 
-    return dispatch(onPrintSuccess(headerdata, logData));
+    return dispatch(onPrintSuccess({headerdata, logData}));
   }
 };
 

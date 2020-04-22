@@ -3,7 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = {
-  entry: './src/index.js',
+  // https://webpack.js.org/concepts/entry-points/
+  entry: {
+    main: './src/index.js',
+    print: './src/components/print/printpreview.js'
+  },
+  target: 'node',
+  output: {
+    path: path.resolve(__dirname, '../', 'dist'),
+    publicPath: '/',
+    filename: '[name].bundle.js'
+  },
   module: {
     rules: [
       {
@@ -43,11 +53,6 @@ const config = {
   },
   resolve: {
     extensions: ['*', '.js']
-  },
-  output: {
-    path: path.resolve(__dirname, '../', 'dist'),
-    publicPath: '/',
-    filename: 'bundle.js'
   },
   plugins: [
     new CleanWebpackPlugin(),

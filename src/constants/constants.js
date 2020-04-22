@@ -20,4 +20,6 @@ export const SCHEME_WEEKDAYS = 'SCHEME_WEEKDAYS';
 export const FORMTYPE_MAIN = 'FORMTYPE_MAIN';
 export const FORMTYPE_TEMP = 'FORMTYPE_TEMP';
 
-export var PRINT_URL = window.location.pathname.replace("index.html", "").slice(1) + "components/print/print.html";
+export const IS_DEV = process.env.NODE_ENV === 'development';
+export const PRINT_URL =  IS_DEV ? 'http://localhost:8000/print.html' : window.location.pathname.replace("index.html", "").slice(1) + "components/print/print.html";
+// `file://${path.join(__dirname, '/dist/index.html')}`

@@ -11,8 +11,9 @@
   </div>
   <script>
     const previewscript = document.createElement('script');
-    previewscript.src = window.location.pathname.replace("print.html", "printpreview.js").slice(1);
+    previewscript.src = window.location.pathname.replace("print.html", "print.bundle.js").slice(1);
     document.write(previewscript.outerHTML);
+    console.log('here we go12', previewscript.src);
   </script>
 </body>
 </html>

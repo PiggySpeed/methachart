@@ -1,4 +1,4 @@
-var ipcRenderer = require('electron').ipcRenderer;
+var ipcRenderer = window.require('electron').ipcRenderer;
 
 ipcRenderer.on('asynchronous-reply', function(event, data) {
   buildTables(data.logdata, data.headerdata);
