@@ -23,7 +23,7 @@ export default function openPrintWindow(data) {
   });
 
   if (IS_DEV) {
-    win.openDevTools();
+    // win.openDevTools();
   }
 
   win.loadURL(PRINT_URL).catch(err => console.error(err));

@@ -1,7 +1,7 @@
 var ipcRenderer = window.require('electron').ipcRenderer;
 
 ipcRenderer.on('asynchronous-reply', function(event, data) {
-  buildTables(data.logdata, data.headerdata);
+  buildTables(data.logData, data.header);
 });
 
 function splitData(data, chunksize) {
@@ -11,6 +11,7 @@ function splitData(data, chunksize) {
    * data (arr): an array of data to be split up
    * chunksize (int): the maximum size of chunks
    * **/
+  console.log('data is ', data);
   var feed = data.slice(); // copy the original array
   var arrLength = Math.ceil(feed.length/chunksize);
   var arr = new Array(arrLength);
@@ -18,6 +19,7 @@ function splitData(data, chunksize) {
   for(var i = 0; i<arrLength-1; ++i){
     arr[i] = feed.splice(0, chunksize)
   }
+  console.log('feed is ', feed);
   arr[arr.length-1] = feed.slice(); // add the remainder
   return arr;
 }

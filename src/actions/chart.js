@@ -89,14 +89,12 @@ export const onPrintFailure = (errorText) => {
 };
 
 const onPrintSuccess = (data) => {
-  openPrintWindow({data});
+  openPrintWindow(data);
   return { type: ON_PRINT_SUCCESS }
 };
 
 const onPrintRequest = () => {
   return (dispatch, getState) => {
-    // do print request here
-
     const { chart } = getState();
     const {
       patientName,
@@ -105,7 +103,8 @@ const onPrintRequest = () => {
       dose,
       takehome,
       daterange,
-      timeinterval
+      timeinterval,
+      carries
     } = chart;
 
     let errorText = 'The start or end dates are invalid.';
@@ -128,28 +127,12 @@ const onPrintRequest = () => {
 
     // Generate Array of Dates and Check if it is Valid
     console.log(daterange);
-    // const allDates = getAllDates(daterange[0], daterange[1], 168, err => { errorText = err });
-    // const allDates = getDates(daterange[0], daterange[1]);
-    // console.log('alldates', allDates);
-    // if(allDates === []){
-    //   return dispatch(onPrintFailure(errorText))
-    // }
-
-    // Assemble headerdata
-    const headerdata = {
-      name: patientName,
-      selecteddrug: selectedDrug,
-      startdate: daterange[0].toDate(),
-      enddate: daterange[1].toDate(),
-      timeinterval,
-      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
-    };
 
     // Calculate total dose - calculations must handle the floating-point problem in javascript
     const cx = 10;
     const total = (takehome > 0)
-                  ? ((dose*cx) + (takehome*cx))/(cx)
-                  : dose;
+      ? ((dose*cx) + (takehome*cx))/(cx)
+      : dose;
 
     // Assemble logdata
     const logData = [];
@@ -163,7 +146,7 @@ const onPrintRequest = () => {
         witness: dose + ' mL',
         takehome: takehome ? takehome + ' mL' : '-------' ,
         total: total + ' mL',
-        carry: false
+        carry: carries[curr.format('ddd').toUpperCase()].isCarry
       };
       logData.push(logRow);
       curr = curr.add(1, 'days');
@@ -173,7 +156,17 @@ const onPrintRequest = () => {
       return dispatch(onPrintFailure(errorText));
     }
 
-    return dispatch(onPrintSuccess({headerdata, logData}));
+    // Assemble header
+    const header = {
+      name: patientName,
+      selecteddrug: selectedDrug,
+      startdate: daterange[0].toDate(),
+      enddate: daterange[1].toDate(),
+      timeinterval: Number(timeinterval.toPrecision(1)),
+      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
+    };
+
+    return dispatch(onPrintSuccess({header, logData}));
   }
 };
 
