@@ -23,7 +23,7 @@ export default function openPrintWindow(data) {
   });
 
   if (IS_DEV) {
-    // win.openDevTools();
+    win.openDevTools();
   }
 
   win.loadURL(PRINT_URL).catch(err => console.error(err));
@@ -31,9 +31,11 @@ export default function openPrintWindow(data) {
   win.on('closed', () => {
     win = null
   });
+  console.log('data1 is ', data);
 
   // Printing
   win.webContents.on('did-finish-load', () => {
+    console.log('data is ', data);
     win.webContents.send('asynchronous-reply', data);
     win.webContents.print({}, (error) => {
       if (error) throw error;

@@ -95,7 +95,6 @@ const onPrintSuccess = (data) => {
 
 const onPrintRequest = () => {
   return (dispatch, getState) => {
-    const { chart } = getState();
     const {
       patientName,
       selectedDrug,
@@ -105,7 +104,7 @@ const onPrintRequest = () => {
       daterange,
       timeinterval,
       carries
-    } = chart;
+    } = getState().chart;
 
     let errorText = 'The start or end dates are invalid.';
 
@@ -125,9 +124,6 @@ const onPrintRequest = () => {
       return dispatch(onPrintFailure(errorText));
     }
 
-    // Generate Array of Dates and Check if it is Valid
-    console.log(daterange);
-
     // Calculate total dose - calculations must handle the floating-point problem in javascript
     const cx = 10;
     const total = (takehome > 0)
@@ -136,10 +132,11 @@ const onPrintRequest = () => {
 
     // Assemble logdata
     const logData = [];
-    let curr = daterange[0];
-    const end = daterange[1];
+    let curr = daterange[0].clone();
+    const end = daterange[1].clone();
+    let logRow = null;
     while (curr <= end) {
-      const logRow = {
+      logRow = {
         date: curr.format('MMM DD, YYYY'),
         weekday: curr.format('dd'),
         rxnum: rxNumber,
@@ -151,8 +148,7 @@ const onPrintRequest = () => {
       logData.push(logRow);
       curr = curr.add(1, 'days');
     }
-
-    if (logData === []) {
+    if (!(Array.isArray(logData) && logData.length)) {
       return dispatch(onPrintFailure(errorText));
     }
 
