@@ -4,10 +4,32 @@ import moment from 'moment';
 import Calendar from "react-calendar";
 import { DateInput } from '../';
 
+const DATE_ERROR = {
+  INVALID_START_DATE: -100,
+  INVALID_END_DATE: -101,
+  START_COMES_AFTER_END: -102
+};
+
 function convertToCalendarDateRange(daterange) {
   const start = daterange[0] ? daterange[0].toDate() : null;
   const end = daterange[1] ? daterange[1].toDate() : null;
   return [start, end];
+}
+
+function checkDateRange(start, end) {
+  if (!start || !start.isValid()) {
+    return DATE_ERROR.INVALID_START_DATE;
+  }
+
+  if (!end || !end.isValid()) {
+    return DATE_ERROR.INVALID_END_DATE;
+  }
+
+  if (start.isAfter(end)) {
+    return DATE_ERROR.START_COMES_AFTER_END;
+  }
+
+  return 1;
 }
 
 function DatePanel({disabled, daterange, onSetDateRange}) {
@@ -25,13 +47,14 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
   }
 
   function handleInputStartDate(start) {
+    // do not change redux date store unless dates are valid
     if (!start.isValid()) {
-      onSetDateRange([null, endDate]);
+      // onSetDateRange([null, endDate]);
       return;
     }
 
     if (start.isAfter(endDate)) {
-      onSetDateRange([null, endDate]);
+      // onSetDateRange([null, endDate]);
       return;
     }
 
@@ -45,7 +68,7 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
       return;
     }
 
-    if (start.isAfter(endDate)) {
+    if (endDate && start.isAfter(endDate)) {
       setStartDateError('Start should come before end');
       return;
     }
@@ -54,13 +77,14 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
   }
 
   function handleInputEndDate(end) {
+    // do not change redux date store unless dates are valid
     if (!end.isValid()) {
-      onSetDateRange([startDate, null]);
+      // onSetDateRange([startDate, null]);
       return;
     }
 
-    if (startDate.isAfter(end)) {
-      onSetDateRange([startDate, null]);
+    if (startDate && startDate.isAfter(end)) {
+      // onSetDateRange([startDate, null]);
       return;
     }
 
@@ -74,7 +98,7 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
       return;
     }
 
-    if (startDate.isAfter(end)) {
+    if (startDate && startDate.isAfter(end)) {
       setEndDateError('Start should come before end');
       return;
     }

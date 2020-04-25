@@ -31,7 +31,6 @@ export default function openPrintWindow(data) {
   win.on('closed', () => {
     win = null
   });
-  console.log('data1 is ', data);
 
   // Printing
   win.webContents.on('did-finish-load', () => {
