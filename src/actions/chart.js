@@ -13,6 +13,7 @@ import {
 } from '../actions/actiontypes';
 import moment from 'moment';
 import openPrintWindow from '../utils/openPrintWindow';
+import {FORMTYPE_TEMP, FORMTYPE_MAIN} from '../constants/constants';
 
 const onSetPatientName = (patientName) => {
   return dispatch => {
@@ -93,6 +94,27 @@ const onPrintSuccess = (data) => {
   return { type: ON_PRINT_SUCCESS }
 };
 
+const onPrintTempRequest = () => {
+  return (dispatch, getState) => {
+    const {
+      patientName,
+      rxNumber,
+      selectedDrug
+    } = getState().chart;
+
+    // Assemble header
+    const header = {
+      formtype: FORMTYPE_TEMP,
+      name: patientName,
+      rxnum: rxNumber,
+      selecteddrug: selectedDrug,
+      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
+    };
+
+    return dispatch(onPrintSuccess({header}));
+  }
+};
+
 const onPrintRequest = () => {
   return (dispatch, getState) => {
     const {
@@ -154,7 +176,9 @@ const onPrintRequest = () => {
 
     // Assemble header
     const header = {
+      formtype: FORMTYPE_MAIN,
       name: patientName,
+      rxnum: rxNumber,
       selecteddrug: selectedDrug,
       startdate: daterange[0].toDate(),
       enddate: daterange[1].toDate(),

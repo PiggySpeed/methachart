@@ -21,30 +21,17 @@ export default function openPrintWindow(data) {
       nodeIntegration: true
     }
   });
+  win.on('closed', () => win = null);
+  if (IS_DEV) win.openDevTools();
 
-  if (IS_DEV) {
-    win.openDevTools();
-  }
-
-  win.loadURL(PRINT_URL).catch(err => console.error(err));
-
-  win.on('closed', () => {
-    win = null
-  });
+  win.loadURL(PRINT_URL)
+    .catch(err => console.error(err));
 
   // Printing
   win.webContents.on('did-finish-load', () => {
-    console.log('data is ', data);
     win.webContents.send('asynchronous-reply', data);
-    win.webContents.print({}, (error) => {
-      if (error) throw error;
-    });
+    // win.webContents.print({}, (error) => {
+    //   if (error) throw error;
+    // });
   });
-
-  //win.webContents.on('did-finish-load', () => {
-  //  // Use default printing options
-  //  win.webContents.print({}, (error) => {
-  //    if (error) throw error;
-  //  });
-  //});
 };

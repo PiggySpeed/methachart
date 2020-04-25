@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>MethaChart Print Preview</title>
-  <link rel="stylesheet" type="text/css" href="printpreview.css">
+  <link rel="stylesheet" type="text/css" href="printlog/printpreview.css">
 </head>
 <body>
   <div id='preview'>
@@ -13,7 +13,6 @@
     const previewscript = document.createElement('script');
     previewscript.src = window.location.pathname.replace("print.html", "print.bundle.js").slice(1);
     document.write(previewscript.outerHTML);
-    console.log('here we go12', previewscript.src);
   </script>
 </body>
 </html>

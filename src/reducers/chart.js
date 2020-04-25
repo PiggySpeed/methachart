@@ -11,7 +11,6 @@ import {
 } from '../actions/actiontypes';
 import {
   FORMTYPE_MAIN,
-  FORMTYPE_TEMP,
   METHADONE,
   SCHEME_WEEKDAYS,
   SCHEME_WEEKENDS

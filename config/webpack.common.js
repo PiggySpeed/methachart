@@ -6,7 +6,7 @@ const config = {
   // https://webpack.js.org/concepts/entry-points/
   entry: {
     main: './src/index.js',
-    print: './src/components/print/printpreview.js'
+    print: './src/print/index.js'
   },
   target: 'node',
   output: {

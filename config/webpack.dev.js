@@ -11,7 +11,7 @@ const config = {
       path: './.env.development'
     }),
     new CopyPlugin([
-      { from: './src/components/print', to: './' },
+      { from: './src/print', to: './' },
     ]),
   ],
   devServer: {
