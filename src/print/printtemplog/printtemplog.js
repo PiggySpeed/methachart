@@ -1,4 +1,4 @@
-import './index.css';
+// import './index.css';
 import { addTableRowDWI, addTableRowMessage } from '../utils/addRow';
 import { buildHeaderTemp } from '../utils/addHeader';
 import { addPageFooter } from '../utils/addPageFooter';

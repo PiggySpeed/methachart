@@ -61,8 +61,12 @@ function buildTableBody(data, table){
   }
 
   // Build table body
-  for(let i = 0; i<data.length; ++i){
-    table.appendChild(addTableRowDWI(data[i]));
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].carry) {
+      table.appendChild(addTableRowCarry(data[i]));
+    } else {
+      table.appendChild(addTableRowDWI(data[i]));
+    }
   }
 }
 

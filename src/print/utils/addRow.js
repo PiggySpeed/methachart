@@ -1,16 +1,16 @@
 export function addTableRowDWI(data){
-  var row = document.createElement("tr");
+  const row = document.createElement("tr");
   row.setAttribute("class", "table-row");
 
-  var cell0 = row.insertCell(0);
-  var cell1 = row.insertCell(1);
-  var cell2 = row.insertCell(2);
-  var cell3 = row.insertCell(3);
-  var cell4 = row.insertCell(4);
-  var cell5 = row.insertCell(5);
-  var cell6 = row.insertCell(6);
-  var cell7 = row.insertCell(7);
-  var cell8 = row.insertCell(8);
+  const cell0 = row.insertCell(0);
+  const cell1 = row.insertCell(1);
+  const cell2 = row.insertCell(2);
+  const cell3 = row.insertCell(3);
+  const cell4 = row.insertCell(4);
+  const cell5 = row.insertCell(5);
+  const cell6 = row.insertCell(6);
+  const cell7 = row.insertCell(7);
+  const cell8 = row.insertCell(8);
 
   cell0.setAttribute('class', 'table-cell col0');
   cell1.setAttribute('class', 'table-cell col1');
@@ -36,25 +36,41 @@ export function addTableRowDWI(data){
 }
 
 export function addTableRowCarry(data){
-  var row = document.createElement("tr");
+  const row = document.createElement("tr");
   row.setAttribute("class", "table-row");
 
-  var cell0 = row.insertCell(0);
-  var cell1 = row.insertCell(1);
+  const cell0 = row.insertCell(0);
+  const cell1 = row.insertCell(1);
+  const cell2 = row.insertCell(2);
+  const cell3 = row.insertCell(3);
+  const cell4 = row.insertCell(4);
+  const cell5 = row.insertCell(5);
+  const cell6 = row.insertCell(6);
+  const cell7 = row.insertCell(7);
 
-  cell0.setAttribute('class', 'table-cell-carry');
-  cell0.setAttribute('colspan', 9);
+  cell0.setAttribute('class', 'table-cell col0');
+  cell1.setAttribute('class', 'table-cell col1');
+  cell2.setAttribute('class', 'table-cell col2');
+  cell3.setAttribute('class', 'table-cell col3 shaded');
+  cell4.setAttribute('class', 'table-cell col4 shaded');
+  cell5.setAttribute('class', 'table-cell col5 shaded');
+  cell6.setAttribute('class', 'table-cell col-carry shaded');
+  cell6.setAttribute('colspan', '2');
+  cell7.setAttribute('class', 'table-cell');
 
-  cell1.setAttribute('class', 'table-cell');
-
-  cell0.innerHTML = data.date;
-  cell1.innerHTML = "CARRY DOSE";
-
+  cell0.innerHTML = data.weekday  || '';
+  cell1.innerHTML = data.date     || '';
+  cell2.innerHTML = data.rxnum    || '';
+  cell3.innerHTML = '-------'; // witness
+  cell4.innerHTML = '-------'; // takehome
+  cell5.innerHTML = '-------'; // total
+  cell6.innerHTML = 'CARRY';
+  cell7.innerHTML = ''; // Notes
   return row;
 }
 
 export function addTableRowMessage(row, message){
-  var cell = row.insertCell(0);
+  const cell = row.insertCell(0);
   cell.setAttribute("colspan", 9);
   cell.setAttribute('class', 'table-endrow-cell');
   cell.innerHTML = message;
@@ -69,10 +85,10 @@ function insertTableMessage(table, location, message) {
    * message (str): the message
    *
    * **/
-  for(var i=0; i<location.length; ++i){
+  for (let i = 0; i < location.length; ++i) {
     table.deleteRow(location[i]);
-    var row = table.insertRow(location[i]);
-    var rowcell = row.insertCell(0);
+    const row = table.insertRow(location[i]);
+    const rowcell = row.insertCell(0);
     rowcell.setAttribute('class', 'table-endrow-cell');
     rowcell.setAttribute('colspan', '9');
     rowcell.innerHTML = message;

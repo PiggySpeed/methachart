@@ -123,6 +123,13 @@ h2#rx-label-text {
 .col5 { width: 75px; font-style: italic; }
 .col6 { width: 50px; }
 .col7 { width: 100px; }
+.col-carry {
+  width: 150px; /* sum of cols 6-7 */
+  font-style: italic;
+}
+.shaded {
+  background-color: #e6e6e6;
+}
 
 .table-cell-carry {
   border: 1px solid black;

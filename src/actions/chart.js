@@ -9,7 +9,9 @@ import {
   SET_CARRY_SCHEME,
   SET_FORM_TYPE,
   ON_PRINT_REQUEST,
-  ON_PRINT_FAILURE, ON_PRINT_SUCCESS
+  ON_PRINT_FAILURE,
+  ON_PRINT_SUCCESS,
+  ON_PRINT_TEMP_SUCCESS,
 } from '../actions/actiontypes';
 import moment from 'moment';
 import openPrintWindow from '../utils/openPrintWindow';
@@ -94,6 +96,11 @@ const onPrintSuccess = (data) => {
   return { type: ON_PRINT_SUCCESS }
 };
 
+const onPrintTempSuccess = (data) => {
+  openPrintWindow(data);
+  return { type: ON_PRINT_TEMP_SUCCESS }
+};
+
 const onPrintTempRequest = () => {
   return (dispatch, getState) => {
     const {
@@ -111,7 +118,7 @@ const onPrintTempRequest = () => {
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
 
-    return dispatch(onPrintSuccess({header}));
+    return dispatch(onPrintTempSuccess({header}));
   }
 };
 

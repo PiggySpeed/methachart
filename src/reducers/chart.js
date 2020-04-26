@@ -7,7 +7,8 @@ import {
   SET_TAKEHOME_DOSE,
   SET_DATE_RANGE,
   SET_DAY_CARRY,
-  SET_CARRY_SCHEME
+  SET_CARRY_SCHEME,
+  ON_PRINT_TEMP_SUCCESS
 } from '../actions/actiontypes';
 import {
   FORMTYPE_MAIN,
@@ -129,6 +130,14 @@ const chart = (state = initialState, action) => {
       }
 
       return { ...state, carryScheme: action.carryScheme }
+    }
+
+    case ON_PRINT_TEMP_SUCCESS: {
+      console.log('herer11');
+      return {
+        ...state,
+        formType: FORMTYPE_MAIN
+      }
     }
 
     default:
