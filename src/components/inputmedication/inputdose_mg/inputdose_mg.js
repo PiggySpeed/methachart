@@ -22,7 +22,7 @@ function InputDoseMG({disabled, inputStyle}) {
         isHovered={hover}
         onFocus={handleFocus}
         onBlur={handleBlur} />
-      <p className={`input-dose-ml ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>mg</p>
+      <p className={`input-dose-mg ${focus ? 'focus' : ''} ${(hover && !focus) ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>mg</p>
     </div>
   )
 }
