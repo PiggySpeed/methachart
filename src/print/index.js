@@ -1,5 +1,7 @@
+import './index.css';
 const ipcRenderer = window.require('electron').ipcRenderer;
 import printLog from './printlog/printlog';
+import printTempLog from './printtemplog/printtemplog';
 
 const FORMTYPE = {
   FORMTYPE_MAIN: 'FORMTYPE_MAIN',
@@ -14,5 +16,7 @@ const FORMTYPE = {
 ipcRenderer.on('asynchronous-reply', function(event, data) {
   if (data.header.formtype === FORMTYPE.FORMTYPE_MAIN) {
     printLog(data.logData, data.header);
+  } else {
+    printTempLog(data.header);
   }
 });

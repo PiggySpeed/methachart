@@ -1,0 +1,13 @@
+html {
+  background-color: white;
+}
+
+/* Page Styles */
+@page {
+  size: portrait;
+  margin: 1cm;
+}
+.page-break {
+  width: 100%;
+  page-break-after: always;
+}

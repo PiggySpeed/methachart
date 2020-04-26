@@ -1,7 +1,3 @@
-html {
-  background-color: white;
-}
-
 /* Header Styles */
 header#header {
   position: relative;
@@ -167,14 +163,4 @@ p#page-order-label {
   color: #727272;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 2px 2px 0 0;
-}
-
-/* Page Styles */
-@page {
-  size: portrait;
-  margin: 1cm;
-}
-.page-break {
-  width: 100%;
-  page-break-after: always;
 }

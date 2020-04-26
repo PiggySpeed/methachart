@@ -3,8 +3,7 @@ import { addTableRowDWI, addTableRowCarry, addTableRowMessage } from '../utils/a
 import { buildHeader } from '../utils/addHeader';
 import './index.css';
 
-export default function printLog(data, headerdata) {
-  console.log('data is ', data);
+export default function printTempLog(data, headerdata) {
   var tables = document.getElementById("tables");
 
   // Divide the log data into 28 rows per page

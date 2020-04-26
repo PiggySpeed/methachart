@@ -201,5 +201,6 @@ export default {
   onSetDateRange,
   onDayClick,
   onSetCarryScheme,
-  onPrintRequest
+  onPrintRequest,
+  onPrintTempRequest
 };
