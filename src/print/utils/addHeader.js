@@ -3,15 +3,14 @@ export function buildHeader(data) {
    * Returns a header section with data passed into it.
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
-
-    // Create Header Section
+  // Create Header Section
   var header = document.createElement("header");
   header.setAttribute("id", "header");
 
   // Add Title
   var headertitle = document.createElement("h1");
   headertitle.setAttribute("id", "header-title");
-  headertitle.innerHTML = "Methadone Accountability Log";
+  headertitle.innerHTML = `${data.selecteddrug.charAt(0).toUpperCase() + data.selecteddrug.slice(1).toLowerCase()} Accountability Log`;
 
   // Add Name
   var namelabel = document.createElement("h1");
@@ -47,6 +46,50 @@ export function buildHeader(data) {
   return header;
 }
 
+export function buildHeaderTemp(data) {
+  /**
+   * Returns a header section with data passed into it.
+   * data (obj): data with fields: name, startdate, enddate, and timeinterval
+   * **/
+    // Create Header Section
+  var header = document.createElement("header");
+  header.setAttribute("id", "header");
+
+  // Add Title
+  var headertitle = document.createElement("h1");
+  headertitle.setAttribute("id", "header-title");
+  headertitle.innerHTML = `TEMP LOG: ${data.selecteddrug.charAt(0).toUpperCase() + data.selecteddrug.slice(1).toLowerCase()} **ATTACH TO ORIGINAL**`;
+
+  // Add Name
+  var namelabel = document.createElement("h1");
+  namelabel.setAttribute("id", "name-label");
+  namelabel.innerHTML = data.name;
+
+  // Add Details
+  var detailslabel = document.createElement("p");
+  detailslabel.setAttribute("id", "details-label");
+
+  // Add Extra Options Area
+  var extraoptions = document.createElement("section");
+  extraoptions.setAttribute("class", "header-options-container");
+  extraoptions.appendChild(detailslabel);
+
+  // Add Label Area
+  var rxlabel = document.createElement("aside");
+  var rxlabeltext = document.createElement("h2");
+  rxlabel.setAttribute("id", "rx-label");
+  rxlabeltext.setAttribute("id", "rx-label-text");
+  rxlabeltext.innerHTML = "Place Label Here";
+  rxlabel.appendChild(rxlabeltext);
+
+  // Add Everything into Header
+  header.appendChild(headertitle);
+  header.appendChild(namelabel);
+  header.appendChild(extraoptions);
+  header.appendChild(rxlabel);
+
+  return header;
+}
 
 function createCheckbox(label) {
   var container = document.createElement("div");

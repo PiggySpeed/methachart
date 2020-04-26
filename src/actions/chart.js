@@ -180,8 +180,8 @@ const onPrintRequest = () => {
       name: patientName,
       rxnum: rxNumber,
       selecteddrug: selectedDrug,
-      startdate: daterange[0].toDate(),
-      enddate: daterange[1].toDate(),
+      startdate: daterange[0].format('MMM DD, YYYY'),
+      enddate: daterange[1].format('MMM DD, YYYY'),
       timeinterval: Number(timeinterval.toPrecision(1)),
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };

@@ -13,7 +13,7 @@ import { IS_DEV, PRINT_URL } from '../constants/constants';
  * **/
 export default function openPrintWindow(data) {
   let win = new BrowserWindow({
-    width: 800,
+    width: 1600,
     height: 600,
     icon: 'src/resources/methachart-favicon.ico',
     webPreferences: {

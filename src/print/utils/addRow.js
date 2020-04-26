@@ -22,12 +22,12 @@ export function addTableRowDWI(data){
   cell7.setAttribute('class', 'table-cell col7');
   cell8.setAttribute('class', 'table-cell');
 
-  cell0.innerHTML = data.weekday;
-  cell1.innerHTML = data.date;
-  cell2.innerHTML = data.rxnum;
-  cell3.innerHTML = data.witness;
-  cell4.innerHTML = data.takehome;
-  cell5.innerHTML = data.total;
+  cell0.innerHTML = data.weekday  || '';
+  cell1.innerHTML = data.date     || '';
+  cell2.innerHTML = data.rxnum    || '';
+  cell3.innerHTML = data.witness  || '';
+  cell4.innerHTML = data.takehome || '';
+  cell5.innerHTML = data.total    || '';
   cell6.innerHTML = ''; // RPh
   cell7.innerHTML = ''; // Patient
   cell8.innerHTML = ''; // Notes
