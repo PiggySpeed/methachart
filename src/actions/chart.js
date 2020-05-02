@@ -15,7 +15,10 @@ import {
 } from '../actions/actiontypes';
 import moment from 'moment';
 import openPrintWindow from '../utils/openPrintWindow';
-import {FORMTYPE_TEMP, FORMTYPE_MAIN} from '../constants/constants';
+import {
+  FORMTYPE_TEMP,
+  FORMTYPE_MAIN,
+  getDosageUnit} from '../constants/constants';
 
 const onSetPatientName = (patientName) => {
   return dispatch => {
@@ -142,6 +145,7 @@ const onPrintRequest = () => {
     }
 
     if (!dose) {
+      // allows '0' value
       return dispatch(onPrintFailure('Please Enter a Dose!'));
     }
 
@@ -153,33 +157,64 @@ const onPrintRequest = () => {
       return dispatch(onPrintFailure(errorText));
     }
 
+    // Convert strings to numbers
+    const doseFloat = parseFloat(dose) || 0;
+    const takehomeFloat = parseFloat(takehome) || 0;
+
     // Calculate total dose - calculations must handle the floating-point problem in javascript
     const cx = 10;
-    const total = (takehome > 0)
-      ? ((dose*cx) + (takehome*cx))/(cx)
-      : dose;
+    const total = (takehomeFloat > 0)
+      ? ((doseFloat*cx) + (takehomeFloat*cx))/(cx)
+      : doseFloat;
 
     // Assemble logdata
     const logData = [];
     let curr = daterange[0].clone();
     const end = daterange[1].clone();
-    let logRow = null;
+    let n = 0;
+    let lastSeenDWIIndex = -1;
+    let runningCarryTotal = 0;
     while (curr <= end) {
-      logRow = {
+      const isCarry = carries[curr.format('ddd').toUpperCase()].isCarry;
+
+      // Sum up the carry dosages and retroactively
+      // apply the dosage additions to the last DWI row
+      if (isCarry) {
+        runningCarryTotal += doseFloat + takehomeFloat;
+      }
+      if (!isCarry || curr.isSame(end)) {
+        console.log('date is ', curr.toString(), runningCarryTotal);
+
+        if (runningCarryTotal > 0) {
+          logData[lastSeenDWIIndex].carrydose += runningCarryTotal;
+          logData[lastSeenDWIIndex].total += runningCarryTotal;
+          runningCarryTotal = 0;
+        }
+        if (!isCarry) {
+          lastSeenDWIIndex = n;
+        }
+      }
+
+      logData.push({
         date: curr.format('MMM DD, YYYY'),
         weekday: curr.format('dd'),
         rxnum: rxNumber,
-        witness: dose + ' mL',
-        takehome: takehome ? takehome + ' mL' : '-------' ,
-        total: total + ' mL',
-        carry: carries[curr.format('ddd').toUpperCase()].isCarry
-      };
-      logData.push(logRow);
+        witness: doseFloat,
+        takehome: takehomeFloat,
+        total,
+        carry: isCarry,
+        carrydose: 0,
+        unit: getDosageUnit(selectedDrug)
+      });
       curr = curr.add(1, 'days');
+      n++;
     }
+
     if (!(Array.isArray(logData) && logData.length)) {
       return dispatch(onPrintFailure(errorText));
     }
+
+    console.log('logdata is ', logData);
 
     // Assemble header
     const header = {

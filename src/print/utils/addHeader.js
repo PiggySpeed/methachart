@@ -4,13 +4,22 @@ export function buildHeader(data) {
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
   // Create Header Section
-  var header = document.createElement("header");
-  header.setAttribute("id", "header");
+  var header = document.getElementById("header");
+  var headerleft = document.getElementById("header-left");
+  var headerright = document.getElementById("header-right");
 
   // Add Title
   var headertitle = document.createElement("h1");
   headertitle.setAttribute("id", "header-title");
   headertitle.innerHTML = `${data.selecteddrug.charAt(0).toUpperCase() + data.selecteddrug.slice(1).toLowerCase()} Accountability Log`;
+
+  // Add Delivery Field
+  var deliverycontainer = document.createElement("div");
+  deliverycontainer.setAttribute("id", "delivery-container");
+  var deliverylabel = document.createElement("p");
+  deliverylabel.setAttribute("id", "delivery-label");
+  deliverylabel.innerHTML = "code";
+  deliverycontainer.appendChild(deliverylabel);
 
   // Add Name
   var namelabel = document.createElement("h1");
@@ -38,10 +47,11 @@ export function buildHeader(data) {
   rxlabel.appendChild(rxlabeltext);
 
   // Add Everything into Header
-  header.appendChild(headertitle);
-  header.appendChild(namelabel);
-  header.appendChild(extraoptions);
-  header.appendChild(rxlabel);
+  headerleft.appendChild(headertitle);
+  headerleft.appendChild(deliverycontainer);
+  headerleft.appendChild(namelabel);
+  headerleft.appendChild(extraoptions);
+  headerright.appendChild(rxlabel);
 
   return header;
 }

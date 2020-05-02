@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import { Checkbox } from 'semantic-ui-react';
 import chartActions from '../../actions/chart';
 import {connect} from 'react-redux';
-import {CarriesSelector} from '../../components';
+import {CarriesSelector, FloatingLabelInput} from '../../components';
 import {FORMTYPE_TEMP, SCHEME_WEEKDAYS, SCHEME_WEEKENDS} from '../../constants/constants';
 
 

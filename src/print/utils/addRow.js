@@ -25,9 +25,9 @@ export function addTableRowDWI(data){
   cell0.innerHTML = data.weekday  || '';
   cell1.innerHTML = data.date     || '';
   cell2.innerHTML = data.rxnum    || '';
-  cell3.innerHTML = data.witness  || '';
-  cell4.innerHTML = data.takehome || '';
-  cell5.innerHTML = data.total    || '';
+  cell3.innerHTML = data.witness ? `${data.witness} ${data.unit}` : '';
+  cell4.innerHTML = calculateTakehome(data.takehome, data.carrydose, data.unit);
+  cell5.innerHTML = data.total ? `${data.total} ${data.unit}` : '';
   cell6.innerHTML = ''; // RPh
   cell7.innerHTML = ''; // Patient
   cell8.innerHTML = ''; // Notes
@@ -93,4 +93,12 @@ function insertTableMessage(table, location, message) {
     rowcell.setAttribute('colspan', '9');
     rowcell.innerHTML = message;
   }
+}
+
+function calculateTakehome(takehome, carrydose, unit) {
+  const cd = carrydose ? carrydose : '';
+  const th = takehome ? takehome : '';
+  const sep = (carrydose && takehome) ? ' + ' : '';
+  const end = (carrydose || takehome) ? ` ${unit}` : '-------';
+  return cd + sep + th + end;
 }

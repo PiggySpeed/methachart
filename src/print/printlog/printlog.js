@@ -1,6 +1,9 @@
 import './index.css';
 import splitData from '../utils/splitData';
-import { addTableRowDWI, addTableRowCarry, addTableRowMessage } from '../utils/addRow';
+import {
+  addTableRowDWI,
+  addTableRowCarry,
+  addTableRowMessage } from '../utils/addRow';
 import { buildHeader } from '../utils/addHeader';
 import { addPageFooter } from '../utils/addPageFooter';
 
@@ -54,7 +57,7 @@ function buildTableBody(data, table){
   let tableheaders = ["", "Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
   let tableheaderrow = table.insertRow(0);
   tableheaderrow.setAttribute('class', 'table-header');
-  for(let n = 0; n<tableheaders.length; ++n ) {
+  for(let n = 0; n < tableheaders.length; ++n) {
     let headercell = tableheaderrow.insertCell(n);
     headercell.innerHTML = tableheaders[n];
     headercell.setAttribute('class', 'table-header-cell');
