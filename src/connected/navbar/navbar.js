@@ -1,8 +1,9 @@
 import './index.less';
 import React, {useState} from 'react';
 import {Link} from '@reach/router';
-import { LogoPanel } from '../';
+import { LogoPanel } from '../../components';
 import {Icon} from 'semantic-ui-react';
+import {connect} from 'react-redux';
 
 function NavBarIconButton({name, to}) {
   return (
@@ -22,7 +23,7 @@ function NavBarTextButton({label, to}) {
   )
 }
 
-function NavBar() {
+function NavBarWrapper({selectedDrug}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
@@ -37,6 +38,7 @@ function NavBar() {
   return (
     <div className="navbar-container">
       <LogoPanel
+        selectedDrug={selectedDrug}
         onMouseOver={handleMouseOver}
       />
       <div className="navbar-inner-container-left">
@@ -48,5 +50,13 @@ function NavBar() {
     </div>
   )
 }
+
+const mapStateToProps = ({chart}) => {
+  return {
+    selectedDrug: chart.selectedDrug
+  }
+};
+
+const NavBar = connect(mapStateToProps, () => ({}))(NavBarWrapper);
 
 export default NavBar;

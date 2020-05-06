@@ -19,7 +19,7 @@ function FloatingLabel({canFloat, hover, float, focus, disabled, text}) {
 
 function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, value="", placeholder, style, type='text', onChange, onFocus, onBlur}) {
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(isHovered);
-  const [float, setFloat] = useState(false);
+  const [float, setFloat] = useState(!!value);
   const [focus, setFocus] = useState(false);
 
   function handleChange(e) {

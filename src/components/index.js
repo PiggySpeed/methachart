@@ -1,4 +1,3 @@
-export {default as NavBar} from './navbar/navbar';
 export {default as LogoPanel} from './logopanel/logopanel';
 export {default as FloatingLabelInput} from './input/floatinglabel/floatinglabelinput';
 export {default as DateInput} from './input/date/dateinput';

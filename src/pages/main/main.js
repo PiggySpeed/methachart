@@ -4,11 +4,9 @@ import { Router, LocationProvider } from '@reach/router';
 import { Provider } from 'react-redux';
 import Chart from '../chart/chart';
 import ChartMethadone from '../chart/methadone/methadone';
-import ChartSuboxone from '../chart/suboxone/suboxone';
-import ChartKadian from '../chart/kadian/kadian';
-import ChartDilaudid from '../chart/dilaudid/dilaudid';
+import ChartMAR from '../chart/mar/mar';
 import Settings from '../settings/settings';
-import { NavBar } from '../../components';
+import { NavBar } from '../../connected';
 import { history } from '../../utils/history';
 import store from '../../reducers';
 
@@ -21,9 +19,7 @@ function Main() {
         <Router className="main-container-router">
           <Chart path="chart">
             <ChartMethadone path="methadone" />
-            <ChartSuboxone path="suboxone" />
-            <ChartKadian path="kadian" />
-            <ChartDilaudid path="dilaudid" />
+            <ChartMAR path="mar" />
           </Chart>
           <Settings path="settings" />
         </Router>

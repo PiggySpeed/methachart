@@ -1,18 +1,17 @@
 import './index.less';
 import React from 'react';
-import { connect } from 'react-redux';
 import {
   DatePanel,
-  FloatingLabelInput, FormOptions,
-  InputDoseML,
-  InputTakehomeML,
+  FloatingLabelInput,
+  InputDoseMG,
+  InputTakehomeMG,
   MedicationDropdown,
   ViewRow
 } from '../../../components';
+import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
-import {CarriesPanel} from '../../../connected';
-import {FORMTYPE_MAIN, FORMTYPE_TEMP, isMAR} from '../../../constants/constants';
+import {isMAR} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
 
 const styles = {
@@ -26,8 +25,7 @@ const styles = {
     width: '14rem'
   },
   rx: {
-    width: '6rem',
-    marginRight: '1.25rem'
+    width: '6rem'
   },
   dose: {
     width: '3rem',
@@ -39,36 +37,18 @@ const styles = {
   }
 };
 
-function ChartMethadoneWrapper(props) {
-  const isTemp = props.formType === FORMTYPE_TEMP;
+function ChartMARWrapper(props) {
 
   function handleSetName(e) {
     props.onSetPatientName(e.target.value);
   }
 
-  function handleSetRxNumber(e) {
-    props.onSetRxNumber(e.target.value);
-  }
-
-  function handleSetFormType(value) {
-    props.onSetFormType(value);
-  }
-
   function handleSetDrug(value) {
     props.onSetDrug(value);
 
-    if (isMAR(value)) {
-      props.onSetFormType(FORMTYPE_MAIN);
-      navigate('chart/mar');
+    if (!isMAR(value)) {
+      navigate('/chart/methadone');
     }
-  }
-
-  function handleSetDose(e) {
-    props.onSetDose(e.target.value);
-  }
-
-  function handleSetTakehomeDose(e) {
-    props.onSetTakehomeDose(e.target.value);
   }
 
   function handleSetDateRange(dateRange) {
@@ -76,52 +56,29 @@ function ChartMethadoneWrapper(props) {
   }
 
   return (
-    <div className="methadone-container">
+    <div className="mar-container">
       <ViewRow style={styles.row1}>
         <FloatingLabelInput
           value={props.patientName}
           onChange={handleSetName}
           placeholder="Name"
           style={styles.name} />
-        <FloatingLabelInput
-          value={props.rxNumber}
-          onChange={handleSetRxNumber}
-          placeholder="Rx#"
-          style={styles.rx} />
-        <FormOptions
-          formType={props.formType}
-          onSetFormType={handleSetFormType} />
       </ViewRow>
       <ViewRow>
         <MedicationDropdown
-          value={props.selectedDrug}
+          defaultValue={props.selectedDrug}
           onChange={handleSetDrug} />
-        <InputDoseML
-          disabled={isTemp}
-          inputStyle={styles.dose}
-          value={props.dose}
-          onChange={handleSetDose} />
-        <InputTakehomeML
-          disabled={isTemp}
-          inputStyle={styles.takehome}
-          value={props.takehome}
-          onChange={handleSetTakehomeDose} />
       </ViewRow>
       <ViewRow>
         <DatePanel
-          disabled={isTemp}
           daterange={props.daterange}
           onSetDateRange={handleSetDateRange} />
-      </ViewRow>
-      <ViewRow>
-        <CarriesPanel />
       </ViewRow>
     </div>
   )
 }
 
 const mapStateToProps = ({chart}) => {
-  console.log(chart);
   return {
     patientName: chart.patientName,
     rxNumber: chart.rxNumber,
@@ -138,6 +95,6 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({...chartActions}, dispatch)
 };
 
-const ChartMethadone = connect(mapStateToProps, mapDispatchToProps)(ChartMethadoneWrapper);
+const ChartMAR = connect(mapStateToProps, mapDispatchToProps)(ChartMARWrapper);
 
-export default ChartMethadone;
+export default ChartMAR;

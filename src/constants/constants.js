@@ -1,22 +1,29 @@
 export const METHADONE = 'METHADONE';
 export const KADIAN = 'KADIAN';
 export const SUBOXONE = 'SUBOXONE';
-export const DILAUDID = 'DILAUDID';
+export const ARVS = 'ARVS';
+export const HEPC = 'HEPC';
 
 export const MEDICATIONS = [
   { key: METHADONE, value: METHADONE, text: METHADONE },
   { key: KADIAN, value: KADIAN, text: KADIAN },
   { key: SUBOXONE, value: SUBOXONE, text: SUBOXONE },
-  { key: DILAUDID, value: DILAUDID, text: DILAUDID },
+  { key: ARVS, value: ARVS, text: ARVS },
+  { key: HEPC, value: HEPC, text: HEPC }
 ];
 
+export function isMAR(med) {
+  return (med === ARVS || med === HEPC);
+}
+
 export function getDosageUnit(med) {
-  return {
+  const unit = {
     METHADONE: 'mL',
     KADIAN: 'mg',
-    SUBOXONE: 'mg',
-    DILAUDID: 'mg'
+    SUBOXONE: 'mg'
   }[med];
+
+  return unit || null;
 }
 
 export const DAYS_OF_WEEK = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
