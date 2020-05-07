@@ -28,7 +28,7 @@ function LogoPanel({onMouseOver, onMouseLeave, selectedDrug}) {
     if (isMAR(selectedDrug)) {
       navigate('/chart/mar');
     } else {
-      navigate('/chart/methadone');
+      navigate('/chart/oat');
     }
   }
 

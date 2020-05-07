@@ -3,7 +3,7 @@ import React from 'react';
 import { Router, LocationProvider } from '@reach/router';
 import { Provider } from 'react-redux';
 import Chart from '../chart/chart';
-import ChartMethadone from '../chart/methadone/methadone';
+import ChartOAT from '../chart/oat/oat';
 import ChartMAR from '../chart/mar/mar';
 import Settings from '../settings/settings';
 import { NavBar } from '../../connected';
@@ -18,7 +18,7 @@ function Main() {
         <NavBar/>
         <Router className="main-container-router">
           <Chart path="chart">
-            <ChartMethadone path="methadone" />
+            <ChartOAT path="oat" />
             <ChartMAR path="mar" />
           </Chart>
           <Settings path="settings" />

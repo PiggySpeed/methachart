@@ -3,16 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   DatePanel,
-  FloatingLabelInput, FormOptions,
-  InputDoseML,
-  InputTakehomeML,
+  FloatingLabelInput,
+  FormOptions,
+  InputDose,
+  InputTakehome,
   MedicationDropdown,
   ViewRow
 } from '../../../components';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
 import {CarriesPanel} from '../../../connected';
-import {FORMTYPE_MAIN, FORMTYPE_TEMP, isMAR} from '../../../constants/constants';
+import {FORMTYPE_MAIN, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
 
 const styles = {
@@ -96,15 +97,17 @@ function ChartMethadoneWrapper(props) {
         <MedicationDropdown
           value={props.selectedDrug}
           onChange={handleSetDrug} />
-        <InputDoseML
+        <InputDose
           disabled={isTemp}
           inputStyle={styles.dose}
           value={props.dose}
+          doseUnit={getDosageUnit(props.selectedDrug)}
           onChange={handleSetDose} />
-        <InputTakehomeML
+        <InputTakehome
           disabled={isTemp}
           inputStyle={styles.takehome}
           value={props.takehome}
+          doseUnit={getDosageUnit(props.selectedDrug)}
           onChange={handleSetTakehomeDose} />
       </ViewRow>
       <ViewRow>

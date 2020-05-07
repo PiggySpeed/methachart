@@ -3,8 +3,6 @@ import React from 'react';
 import {
   DatePanel,
   FloatingLabelInput,
-  InputDoseMG,
-  InputTakehomeMG,
   MedicationDropdown,
   ViewRow
 } from '../../../components';
@@ -47,7 +45,7 @@ function ChartMARWrapper(props) {
     props.onSetDrug(value);
 
     if (!isMAR(value)) {
-      navigate('/chart/methadone');
+      navigate('/chart/oat');
     }
   }
 
