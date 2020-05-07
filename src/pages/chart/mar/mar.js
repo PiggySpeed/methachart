@@ -67,11 +67,12 @@ function ChartMARWrapper(props) {
           defaultValue={props.selectedDrug}
           onChange={handleSetDrug} />
       </ViewRow>
-      <ViewRow>
+      <div className="mar-date-row">
         <DatePanel
           daterange={props.daterange}
           onSetDateRange={handleSetDateRange} />
-      </ViewRow>
+          <p className="mar-date-comment">date is optional</p>
+      </div>
     </div>
   )
 }
