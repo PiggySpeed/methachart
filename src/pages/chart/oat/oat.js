@@ -13,7 +13,7 @@ import {
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
 import {CarriesPanel} from '../../../connected';
-import {FORMTYPE_MAIN, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../constants/constants';
+import {FORMTYPE_MAIN, FORMTYPE_MAR, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
 
 const styles = {
@@ -59,7 +59,8 @@ function ChartMethadoneWrapper(props) {
     props.onSetDrug(value);
 
     if (isMAR(value)) {
-      props.onSetFormType(FORMTYPE_MAIN);
+      // TODO: figure out formtypes and routing
+      props.onSetFormType(FORMTYPE_MAR);
       navigate('chart/mar');
     }
   }

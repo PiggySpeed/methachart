@@ -8,10 +8,10 @@ import {
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
   SET_FORM_TYPE,
-  ON_PRINT_REQUEST,
   ON_PRINT_FAILURE,
   ON_PRINT_SUCCESS,
   ON_PRINT_TEMP_SUCCESS,
+  ON_PRINT_MAR_SUCCESS,
 } from '../actions/actiontypes';
 import moment from 'moment';
 import openPrintWindow from '../utils/openPrintWindow';
@@ -104,6 +104,30 @@ const onPrintTempSuccess = (data) => {
   return { type: ON_PRINT_TEMP_SUCCESS }
 };
 
+const onPrintMARSuccess = (data) => {
+  openPrintWindow(data);
+  return { type: ON_PRINT_MAR_SUCCESS }
+};
+
+
+const onPrintMARRequest = () => {
+  return (dispatch, getState) => {
+    const {
+      patientName,
+      selectedDrug
+    } = getState().chart;
+
+    const header = {
+      formtype: FORMTYPE_TEMP,
+      name: patientName,
+      selecteddrug: selectedDrug,
+      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
+    };
+
+    return dispatch(onPrintMARSuccess({header}));
+  }
+};
+
 const onPrintTempRequest = () => {
   return (dispatch, getState) => {
     const {
@@ -112,7 +136,6 @@ const onPrintTempRequest = () => {
       selectedDrug
     } = getState().chart;
 
-    // Assemble header
     const header = {
       formtype: FORMTYPE_TEMP,
       name: patientName,
@@ -183,8 +206,6 @@ const onPrintRequest = () => {
         runningCarryTotal += doseFloat + takehomeFloat;
       }
       if (!isCarry || curr.isSame(end)) {
-        console.log('date is ', curr.toString(), runningCarryTotal);
-
         if (runningCarryTotal > 0) {
           logData[lastSeenDWIIndex].carrydose += runningCarryTotal;
           logData[lastSeenDWIIndex].total += runningCarryTotal;
@@ -214,9 +235,6 @@ const onPrintRequest = () => {
       return dispatch(onPrintFailure(errorText));
     }
 
-    console.log('logdata is ', logData);
-
-    // Assemble header
     const header = {
       formtype: FORMTYPE_MAIN,
       name: patientName,
@@ -244,5 +262,6 @@ export default {
   onDayClick,
   onSetCarryScheme,
   onPrintRequest,
-  onPrintTempRequest
+  onPrintTempRequest,
+  onPrintMARRequest
 };

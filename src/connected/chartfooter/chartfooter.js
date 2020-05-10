@@ -4,7 +4,7 @@ import {Button} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../actions/chart';
-import {FORMTYPE_TEMP} from '../../constants/constants';
+import {FORMTYPE_TEMP, FORMTYPE_MAR} from '../../constants/constants';
 
 const styles = {
   btn: {
@@ -13,12 +13,14 @@ const styles = {
   }
 };
 
-function ChartFooterWrapper({formType, onPrintRequest, onPrintTempRequest}) {
+function ChartFooterWrapper({formType, onPrintRequest, onPrintTempRequest, onPrintMARRequest}) {
   const isTemp = formType === FORMTYPE_TEMP;
 
   function handlePrintRequest() {
     if (isTemp) {
       onPrintTempRequest();
+    } else if (formType === FORMTYPE_MAR) {
+      onPrintMARRequest();
     } else {
       onPrintRequest();
     }

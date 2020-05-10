@@ -2,9 +2,9 @@ import './index.less';
 import React, {useState} from 'react';
 import MethaChartLogo from '../../assets/methachart_logo.png';
 import {navigate} from '../../utils/history';
-import {isMAR} from '../../constants/constants';
+import {FORMTYPE_MAR, isMAR} from '../../constants/constants';
 
-function LogoPanel({onMouseOver, onMouseLeave, selectedDrug}) {
+function LogoPanel({onMouseOver, onMouseLeave, selectedDrug, onSetFormType}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
@@ -24,8 +24,8 @@ function LogoPanel({onMouseOver, onMouseLeave, selectedDrug}) {
   }
 
   function handleLogoClick() {
-    console.log('selected', selectedDrug);
     if (isMAR(selectedDrug)) {
+      onSetFormType(FORMTYPE_MAR);
       navigate('/chart/mar');
     } else {
       navigate('/chart/oat');
