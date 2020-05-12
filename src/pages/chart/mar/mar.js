@@ -9,8 +9,10 @@ import {
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
-import {isMAR} from '../../../constants/constants';
+import {FORMTYPE_MAIN, isMAR} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
+
+const DISABLE_CALENDAR = false;
 
 const styles = {
   row1: {
@@ -45,6 +47,7 @@ function ChartMARWrapper(props) {
     props.onSetDrug(value);
 
     if (!isMAR(value)) {
+      props.onSetFormType(FORMTYPE_MAIN);
       navigate('/chart/oat');
     }
   }
@@ -67,12 +70,13 @@ function ChartMARWrapper(props) {
           defaultValue={props.selectedDrug}
           onChange={handleSetDrug} />
       </ViewRow>
-      <div className="mar-date-row">
-        <DatePanel
-          daterange={props.daterange}
-          onSetDateRange={handleSetDateRange} />
-          <p className="mar-date-comment">date is optional</p>
-      </div>
+      {DISABLE_CALENDAR &&
+        <div className="mar-date-row">
+          <DatePanel
+            daterange={props.daterange}
+            onSetDateRange={handleSetDateRange} />
+            <p className="mar-date-comment">date is optional</p>
+        </div>}
     </div>
   )
 }

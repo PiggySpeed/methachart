@@ -18,6 +18,7 @@ import openPrintWindow from '../utils/openPrintWindow';
 import {
   FORMTYPE_TEMP,
   FORMTYPE_MAIN,
+  FORMTYPE_MAR,
   getDosageUnit} from '../constants/constants';
 
 const onSetPatientName = (patientName) => {
@@ -118,7 +119,7 @@ const onPrintMARRequest = () => {
     } = getState().chart;
 
     const header = {
-      formtype: FORMTYPE_TEMP,
+      formtype: FORMTYPE_MAR,
       name: patientName,
       selecteddrug: selectedDrug,
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')

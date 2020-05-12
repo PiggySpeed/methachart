@@ -59,7 +59,6 @@ function ChartMethadoneWrapper(props) {
     props.onSetDrug(value);
 
     if (isMAR(value)) {
-      // TODO: figure out formtypes and routing
       props.onSetFormType(FORMTYPE_MAR);
       navigate('chart/mar');
     }
