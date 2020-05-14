@@ -1,166 +1,19 @@
-/* Header Styles */
-header#header {
-  position: relative;
-  width: 100%;
-  height: 195px;
-  padding: 0;
-}
-h1#name-label {
-  position: relative;
-  float: left;
-  clear: left;
-  font-size: 20pt;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2px;
-  padding: 0;
-}
-h1#header-title {
-  position: relative;
-  float: left;
-  font-size: 12pt;
-  color: #727272;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2px;
-  padding: 0;
-}
-p#details-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  color: #727272;
-  font-size: 10pt;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2px;
-  padding: 0;
-}
-aside#rx-label {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 250px;
-  height: 165px;
-  border: 1px dashed #727272;
-  margin: 10px;
-}
-h2#rx-label-text {
-  position: relative;
-  width: 160px;
-  height: auto;
-  text-align: center;
-  font-size: 12pt;
-  color: #727272;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 80px auto;
-}
-.header-options-container {
-  position: relative;
-  float: left;
-  clear: left;
-  min-width: 440px;
-  min-height: 120px;
-  margin: 2px;
-  padding: 0;
-}
-.checkbox-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 22px;
-  margin: 0;
-}
-.checkbox-box {
-  position: relative;
-  float: left;
-  -webkit-appearance: none;
-  width: 15px;
-  height: 15px;
-  outline: none;
-  border: 1px solid #727272;
-}
-.checkbox-label {
-  position: relative;
-  float: left;
-  height: 15px;
-  color: #727272;
-  font-size: 10pt;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 4px 2px;
-}
-
-/* Table Styles */
-.table-style {
-  border: 1px solid black;
-  width: 100%;
-  border-collapse: collapse;
-  padding: 0;
-}
-.table-header {
-  height: 25px;
-}
-.table-header-cell {
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-  padding: 4px;
-  border-right: 1px solid black;
-}
-.table-row {
-  border: 1px solid black;
-  height: 25px;
-  text-align: center;
-}
-.table-cell {
-  border-right: 1px solid black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-}
-
-.col0 { width: 25px; font-size: 8pt; }
-.col1 { width: 100px; }
-.col2 { width: 65px; }
-.col3 { width: 75px; font-weight: bold; border: 2px solid black; }
-.col4 { width: 75px; font-style: italic; }
-.col5 { width: 75px; font-style: italic; }
-.col6 { width: 50px; }
-.col7 { width: 100px; }
-
-.table-cell-carry {
-  border: 1px solid black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-  background-color: #d1d1d1;
-}
-.table-endrow {
-  border: 1px solid black;
-  height: 25px;
-  text-align: center;
-  background-color: #d1d1d1;
-}
-.table-endrow-cell {
-  border-right: 1px solid black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10pt;
-  font-style: italic;
-}
-
-/* Footer Styles */
-.footer {
+.table-mar-container {
   display: flex;
-  flex: none;
-  justify-content: space-between;
+  flex-flow: column;
 }
 
-p#timestamp {
-  font-size: 10pt;
-  color: #727272;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2px 0 0 2px;
+.table-mar-body {
+  display: flex;
+  width: 100%;
 }
 
-p#page-order-label {
-  text-align: right;
-  font-size: 10pt;
-  color: #727272;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: 2px 2px 0 0;
+.table-mar-left-col {
+  height: 100%;
+  width: 100%;
+}
+
+.table-mar-right-col {
+  height: 100%;
+  width: 100%;
 }

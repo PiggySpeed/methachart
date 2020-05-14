@@ -69,6 +69,28 @@ export function addTableRowCarry(data){
   return row;
 }
 
+export function addTableRowMAR(data) {
+  const row = document.createElement("tr");
+  row.setAttribute("class", "table-row");
+
+  const cell0 = row.insertCell(0);
+  const cell1 = row.insertCell(1);
+  const cell2 = row.insertCell(2);
+  const cell3 = row.insertCell(3);
+
+  cell0.setAttribute('class', 'table-cell col0');
+  cell1.setAttribute('class', 'table-cell col1');
+  cell2.setAttribute('class', 'table-cell col2');
+  cell3.setAttribute('class', 'table-cell');
+
+  cell0.innerHTML = data.weekday  || '';
+  cell1.innerHTML = data.date     || '';
+  cell2.innerHTML = ''; // RPh
+  cell3.innerHTML = ''; // Notes
+
+  return row;
+}
+
 export function addTableRowMessage(row, message){
   const cell = row.insertCell(0);
   cell.setAttribute("colspan", 9);

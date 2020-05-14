@@ -1,32 +1,44 @@
-import { addTableRowDWI, addTableRowMessage } from '../utils/addRow';
-import { buildHeaderTemp } from '../utils/addHeader';
+import './index.css';
+import { addTableRowMAR } from '../utils/addRow';
+import { buildHeaderMAR } from '../utils/addHeader';
 import { addPageFooter } from '../utils/addPageFooter';
 
-export default function printMAR(headerdata) {
-  console.log('here we go');
-
+export default function printMAR(headerdata, logData) {
   let tables = document.getElementById("tables");
 
-  // build a page of 28 blank rows
-  let blankData = new Array(28).fill({});
+  // split dates into two columns - saturate first column
+  // TODO: support >56 days?
+  let leftColData = logData.slice(0, 28);
+  let rightColData = logData.slice(28);
 
   // attach header
-  tables.appendChild(buildHeaderTemp(headerdata));
+  tables.appendChild(buildHeaderMAR(headerdata));
+
+  // set MAR layout
+  tables.setAttribute("class", "table-mar-container");
+  let tableBody = document.createElement("div");
+  tableBody.setAttribute("class", "table-mar-body");
+  tables.appendChild(tableBody);
+
+  // attach left and right columns
+  let leftCol = document.createElement("div");
+  let rightCol = document.createElement("div");
+  leftCol.setAttribute("class", "table-mar-left-col");
+  rightCol.setAttribute("class", "table-mar-right-col");
+  tableBody.appendChild(leftCol);
+  tableBody.appendChild(rightCol);
 
   // attach table
-  let table = buildTable(blankData);
-  tables.appendChild(table);
-
-  // attach last row
-  let lastRow = table.insertRow(table.rows.length);
-  lastRow.setAttribute("class", "table-endrow");
-  addTableRowMessage(lastRow, `END OF ${headerdata.selecteddrug.toUpperCase()} RX - SEE DOCTOR FOR REFILLS`);
+  let leftTable = buildMARTable(leftColData);
+  let rightTable = buildMARTable(rightColData);
+  leftCol.appendChild(leftTable);
+  rightCol.appendChild(rightTable);
 
   // add page number
   tables.appendChild(addPageFooter(1, 1, headerdata.timestamp));
 }
 
-function buildTable(data) {
+function buildMARTable(data) {
   /**
    * Adds a table to the tablenode.
    * Returns a reference to the table that was just created.
@@ -36,14 +48,14 @@ function buildTable(data) {
    * **/
   let table = document.createElement("table");
   table.setAttribute('class', 'table-style');
-  buildTableBody(data, table);
+  buildMARTableBody(data, table);
 
   return table;
 }
 
-function buildTableBody(data, table) {
+function buildMARTableBody(data, table) {
   // Build table header
-  let tableheaders = ["", "Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
+  let tableheaders = ["", "Date", "RPh", "Notes"];
   let tableheaderrow = table.insertRow(0);
   tableheaderrow.setAttribute('class', 'table-header');
   for(let n = 0; n < tableheaders.length; ++n ) {
@@ -54,6 +66,6 @@ function buildTableBody(data, table) {
 
   // Build table body
   for(let i = 0; i<data.length; ++i){
-    table.appendChild(addTableRowDWI(data[i]));
+    table.appendChild(addTableRowMAR(data[i]));
   }
 }

@@ -20,7 +20,7 @@ ipcRenderer.on('asynchronous-reply', function(event, data) {
   if (data.header.formtype === FORMTYPE.FORMTYPE_MAIN) {
     printLog(data.logData, data.header);
   } else if (data.header.formtype === FORMTYPE_MAR) {
-    printMAR(data.header);
+    printMAR(data.header, data.logData);
   } else {
     printTempLog(data.header);
   }

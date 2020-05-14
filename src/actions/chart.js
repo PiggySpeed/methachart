@@ -21,6 +21,10 @@ import {
   FORMTYPE_MAR,
   getDosageUnit} from '../constants/constants';
 
+function calculateTimeInterval(start, end) {
+  return Math.round(moment.duration(end.diff(start)).asDays() + 1); // inclusive date range
+}
+
 const onSetPatientName = (patientName) => {
   return dispatch => {
     dispatch({ type: SET_PATIENT_NAME, patientName });
@@ -60,7 +64,6 @@ const onSetTakehomeDose = (takehome) => {
 const onSetDateRange = (daterange) => {
   const start = daterange[0];
   const end = daterange[1];
-  // console.log('daterange is ', daterange);
 
   return dispatch => {
 
@@ -69,11 +72,9 @@ const onSetDateRange = (daterange) => {
       return;
     }
 
-    const timeinterval = moment.duration(end.diff(start)).asDays() + 1; // inclusive date range
+    const timeinterval = calculateTimeInterval(start, end);
     // var t = moment(start).format('MM/DD/YYYY');
     // var g = moment(end).format('MM/DD/YYYY');
-    // console.log(t, g, duration);
-    console.log('timeinterval is', timeinterval);
 
     dispatch({ type: SET_DATE_RANGE, daterange, timeinterval });
   }
@@ -115,17 +116,43 @@ const onPrintMARRequest = () => {
   return (dispatch, getState) => {
     const {
       patientName,
-      selectedDrug
+      selectedDrug,
+      daterange
     } = getState().chart;
+
+    const startdate = daterange[0]
+      ? daterange[0]
+      : moment();
+
+    const enddate = daterange[1]
+      ? daterange[1]
+      : moment().add(55, 'days');
+
+    // Assemble logdata
+    const logData = [];
+    let curr = startdate.clone();
+    const end = enddate.clone();
+    let n = 0;
+    while (curr <= end) {
+      logData.push({
+        date: curr.format('MMM DD, YYYY'),
+        weekday: curr.format('dd')
+      });
+      curr = curr.add(1, 'days');
+      n++;
+    }
 
     const header = {
       formtype: FORMTYPE_MAR,
       name: patientName,
       selecteddrug: selectedDrug,
-      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
+      timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)'),
+      startdate: startdate.format('MMM DD, YYYY'),
+      enddate: enddate.format('MMM DD, YYYY'),
+      timeinterval: Number(calculateTimeInterval(startdate, enddate)),
     };
 
-    return dispatch(onPrintMARSuccess({header}));
+    return dispatch(onPrintMARSuccess({header, logData}));
   }
 };
 
@@ -243,7 +270,7 @@ const onPrintRequest = () => {
       selecteddrug: selectedDrug,
       startdate: daterange[0].format('MMM DD, YYYY'),
       enddate: daterange[1].format('MMM DD, YYYY'),
-      timeinterval: Number(timeinterval.toPrecision(1)),
+      timeinterval: Number(Math.round(timeinterval)),
       timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
 
