@@ -4,6 +4,10 @@ import {Link} from '@reach/router';
 import { LogoPanel } from '../../components';
 import {Icon} from 'semantic-ui-react';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import chartActions from '../../actions/chart';
+import {FORMTYPE_MAR, isMAR} from '../../constants/constants';
+import {navigate} from '../../utils/history';
 
 function NavBarIconButton({name, to}) {
   return (
@@ -23,16 +27,20 @@ function NavBarTextButton({label, to}) {
   )
 }
 
-function NavBarWrapper({selectedDrug}) {
+function NavBarWrapper({selectedDrug, onSetFormType}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
     setHover(true);
   }
 
-  function handleMouseLeave() {
-    console.log('leaving');
-    setHover(false);
+  function handleLogoClick() {
+    if (isMAR(selectedDrug)) {
+      onSetFormType(FORMTYPE_MAR);
+      navigate('/chart/mar');
+    } else {
+      navigate('/chart/oat');
+    }
   }
 
   return (
@@ -40,6 +48,7 @@ function NavBarWrapper({selectedDrug}) {
       <LogoPanel
         selectedDrug={selectedDrug}
         onMouseOver={handleMouseOver}
+        onLogoClick={handleLogoClick}
       />
       <div className="navbar-inner-container-left">
       </div>
@@ -57,6 +66,14 @@ const mapStateToProps = ({chart}) => {
   }
 };
 
-const NavBar = connect(mapStateToProps, () => ({}))(NavBarWrapper);
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    onSetFormType: chartActions.onSetFormType
+  }, dispatch)
+};
+
+
+const NavBar = connect(mapStateToProps, mapDispatchToProps)(NavBarWrapper);
 
 export default NavBar;
