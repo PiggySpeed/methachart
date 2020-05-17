@@ -12,7 +12,6 @@ import chartActions from '../../../actions/chart';
 import {FORMTYPE_MAIN, isMAR} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
 
-const DISABLE_CALENDAR = false;
 
 const styles = {
   row1: {
@@ -70,13 +69,12 @@ function ChartMARWrapper(props) {
           defaultValue={props.selectedDrug}
           onChange={handleSetDrug} />
       </ViewRow>
-      {DISABLE_CALENDAR &&
-        <div className="mar-date-row">
-          <DatePanel
-            daterange={props.daterange}
-            onSetDateRange={handleSetDateRange} />
-            <p className="mar-date-comment">date is optional</p>
-        </div>}
+      <div className="mar-date-row">
+        <DatePanel
+          daterange={props.daterange}
+          onSetDateRange={handleSetDateRange} />
+          <p className="mar-date-comment">date is optional</p>
+      </div>
     </div>
   )
 }

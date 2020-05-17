@@ -3,7 +3,7 @@ body {
 }
 
 /* Header Styles */
-header#header {
+header.header {
   position: relative;
   display: flex;
   width: 100%;
@@ -11,13 +11,13 @@ header#header {
   padding: 0;
 }
 
-div#header-left {
+div.header-left {
   position: relative;
   flex: 1;
   height: 100%;
 }
 
-div#header-right {
+div.header-right {
   height: 100%;
 }
 

@@ -4,42 +4,47 @@ export function buildHeader(data) {
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
   // Create Header Section
-  var header = document.getElementById("header");
-  var headerleft = document.getElementById("header-left");
-  var headerright = document.getElementById("header-right");
+  let header = document.createElement("header");
+  let headerleft = document.createElement("div");
+  let headerright = document.createElement("div");
+  header.appendChild(headerleft);
+  header.appendChild(headerright);
+  header.setAttribute("class", "header");
+  headerleft.setAttribute("class", "header-left");
+  headerright.setAttribute("class", "header-right");
 
   // Add Title
-  var headertitle = document.createElement("h1");
+  let headertitle = document.createElement("h1");
   headertitle.setAttribute("id", "header-title");
   headertitle.innerHTML = `${data.selecteddrug.charAt(0).toUpperCase() + data.selecteddrug.slice(1).toLowerCase()} Accountability Log`;
 
   // Add Delivery Field
-  var deliverycontainer = document.createElement("div");
+  let deliverycontainer = document.createElement("div");
   deliverycontainer.setAttribute("id", "delivery-container");
-  var deliverylabel = document.createElement("p");
+  let deliverylabel = document.createElement("p");
   deliverylabel.setAttribute("id", "delivery-label");
   deliverylabel.innerHTML = "code";
   deliverycontainer.appendChild(deliverylabel);
 
   // Add Name
-  var namelabel = document.createElement("h1");
+  let namelabel = document.createElement("h1");
   namelabel.setAttribute("id", "name-label");
   namelabel.innerHTML = data.name;
 
   // Add Details
-  var detailslabel = document.createElement("p");
+  let detailslabel = document.createElement("p");
   detailslabel.setAttribute("id", "details-label");
   detailslabel.innerHTML = `Start: ${data.startdate}&nbsp;&nbsp;&nbsp;End: ${data.enddate} (${data.timeinterval} days)`;
 
   // Add Extra Options Area
-  var extraoptions = document.createElement("section");
+  let extraoptions = document.createElement("section");
   extraoptions.setAttribute("class", "header-options-container");
   extraoptions.appendChild(createCheckbox("Signed original?"));
   extraoptions.appendChild(detailslabel);
 
   // Add Label Area
-  var rxlabel = document.createElement("aside");
-  var rxlabeltext = document.createElement("h2");
+  let rxlabel = document.createElement("aside");
+  let rxlabeltext = document.createElement("h2");
   rxlabel.setAttribute("id", "rx-label");
   rxlabeltext.setAttribute("id", "rx-label-text");
   rxlabeltext.innerHTML = "Place Label Here";
@@ -61,32 +66,37 @@ export function buildHeaderTemp(data) {
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
   // Create Header Section
-  var header = document.getElementById("header");
-  var headerleft = document.getElementById("header-left");
-  var headerright = document.getElementById("header-right");
+  let header = document.createElement("header");
+  let headerleft = document.createElement("div");
+  let headerright = document.createElement("div");
+  header.appendChild(headerleft);
+  header.appendChild(headerright);
+  header.setAttribute("class", "header");
+  headerleft.setAttribute("class", "header-left");
+  headerright.setAttribute("class", "header-right");
 
   // Add Title
-  var headertitle = document.createElement("h1");
+  let headertitle = document.createElement("h1");
   headertitle.setAttribute("id", "header-title");
   headertitle.innerHTML = `TEMP LOG: ${data.selecteddrug.charAt(0).toUpperCase() + data.selecteddrug.slice(1).toLowerCase()} **ATTACH TO ORIGINAL**`;
 
   // Add Name
-  var namelabel = document.createElement("h1");
+  let namelabel = document.createElement("h1");
   namelabel.setAttribute("id", "name-label");
   namelabel.innerHTML = data.name;
 
   // Add Details
-  var detailslabel = document.createElement("p");
+  let detailslabel = document.createElement("p");
   detailslabel.setAttribute("id", "details-label");
 
   // Add Extra Options Area
-  var extraoptions = document.createElement("section");
+  let extraoptions = document.createElement("section");
   extraoptions.setAttribute("class", "header-options-container");
   extraoptions.appendChild(detailslabel);
 
   // Add Label Area
-  var rxlabel = document.createElement("aside");
-  var rxlabeltext = document.createElement("h2");
+  let rxlabel = document.createElement("aside");
+  let rxlabeltext = document.createElement("h2");
   rxlabel.setAttribute("id", "rx-label");
   rxlabeltext.setAttribute("id", "rx-label-text");
   rxlabeltext.innerHTML = "Place Label Here";
@@ -107,33 +117,38 @@ export function buildHeaderMAR(data) {
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
   // Create Header Section
-  var header = document.getElementById("header");
-  var headerleft = document.getElementById("header-left");
-  var headerright = document.getElementById("header-right");
+  let header = document.createElement("header");
+  let headerleft = document.createElement("div");
+  let headerright = document.createElement("div");
+  header.appendChild(headerleft);
+  header.appendChild(headerright);
+  header.setAttribute("class", "header");
+  headerleft.setAttribute("class", "header-left");
+  headerright.setAttribute("class", "header-right");
 
   // Add Title
-  var headertitle = document.createElement("h1");
+  let headertitle = document.createElement("h1");
   headertitle.setAttribute("id", "header-title");
   headertitle.innerHTML = `MAR: ${data.selecteddrug.toUpperCase()}`;
 
   // Add Name
-  var namelabel = document.createElement("h1");
+  let namelabel = document.createElement("h1");
   namelabel.setAttribute("id", "name-label");
   namelabel.innerHTML = data.name;
 
   // Add Details
-  var detailslabel = document.createElement("p");
+  let detailslabel = document.createElement("p");
   detailslabel.setAttribute("id", "details-label");
   detailslabel.innerHTML = `Start: ${data.startdate}&nbsp;&nbsp;&nbsp;End: ${data.enddate} (${data.timeinterval} days)`;
 
   // Add Extra Options Area
-  var extraoptions = document.createElement("section");
+  let extraoptions = document.createElement("section");
   extraoptions.setAttribute("class", "header-options-container");
   extraoptions.appendChild(detailslabel);
 
   // Add Label Area
-  var rxlabel = document.createElement("aside");
-  var rxlabeltext = document.createElement("h2");
+  let rxlabel = document.createElement("aside");
+  let rxlabeltext = document.createElement("h2");
   rxlabel.setAttribute("id", "rx-label");
   rxlabeltext.setAttribute("id", "rx-label-text");
   rxlabeltext.innerHTML = "Place Label Here";
@@ -150,14 +165,14 @@ export function buildHeaderMAR(data) {
 
 
 function createCheckbox(label) {
-  var container = document.createElement("div");
+  let container = document.createElement("div");
   container.setAttribute("class", "checkbox-container");
 
-  var checkbox = document.createElement("input");
+  let checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.setAttribute("class", "checkbox-box");
 
-  var checkboxlabel = document.createElement("p");
+  let checkboxlabel = document.createElement("p");
   checkboxlabel.innerHTML = label;
   checkboxlabel.setAttribute("class", "checkbox-label");
 

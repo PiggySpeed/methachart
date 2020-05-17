@@ -6,6 +6,7 @@ import {
   addTableRowMessage } from '../utils/addRow';
 import { buildHeader } from '../utils/addHeader';
 import { addPageFooter } from '../utils/addPageFooter';
+import addPageBreak from '../utils/addPageBreak';
 
 export default function printLog(data, headerdata) {
   let tables = document.getElementById("tables");
@@ -73,12 +74,3 @@ function buildTableBody(data, table){
   }
 }
 
-function addPageBreak(){
-  /**
-   * Adds an empty div that create a page break after it.
-   * **/
-  let pageBreak = document.createElement('div');
-  pageBreak.innerHTML = " "; // the page-break-after property won't work on empty divs
-  pageBreak.setAttribute('class', 'page-break');
-  return pageBreak;
-}
