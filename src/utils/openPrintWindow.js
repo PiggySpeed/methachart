@@ -22,7 +22,8 @@ export default function openPrintWindow(data) {
     }
   });
   win.on('closed', () => win = null);
-  if (IS_DEV) win.openDevTools();
+  // if (IS_DEV) win.openDevTools();
+  win.openDevTools();
 
   win.loadURL(PRINT_URL)
     .catch(err => console.error(err));

@@ -2,24 +2,26 @@
   "name": "methachart",
   "version": "1.0.0",
   "description": "the great revival",
+  "author": "John Lee",
   "main": "index.js",
+  "homepage": "https://github.com/PiggySpeed/methachart#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiggySpeed/methachart.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiggySpeed/methachart/issues"
+  },
   "scripts": {
     "electron:dev": "NODE_ENV=development electron src/electron.js",
     "electron:prod": "NODE_ENV=production electron src/electron.js",
     "start:dev": "webpack-dev-server --config config/webpack.config.js --env.env=dev",
     "start:prod": "webpack --config config/webpack.config.js --env.env=prod",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/PiggySpeed/methachart.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/PiggySpeed/methachart/issues"
-  },
-  "homepage": "https://github.com/PiggySpeed/methachart#readme",
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-transform-runtime": "^7.8.3",
@@ -55,5 +57,11 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.2",
     "url": "^0.11.0"
+  },
+  "build": {
+    "appId": "cnstimulant.methachart",
+    "mac": {
+      "category": "public.app-category.productivity"
+    }
   }
 }
