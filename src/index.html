@@ -11,10 +11,9 @@
     <div id="root"></div>
     <script>
     const script = document.createElement('script');
-    console.log('env is ', process.env.NODE_ENV, '__dirname is ', __dirname);
     script.src = (process.env.NODE_ENV === 'development')
       ? 'http://localhost:8000/main.bundle.js'
-      : `file://${__dirname + '../dist/main.bundle.js'}`;
+      : `../dist/main.bundle.js`;
     document.body.appendChild(script);
     </script>
   </body>

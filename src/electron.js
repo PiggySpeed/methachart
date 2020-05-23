@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const IS_DEV = true;
+
+const IS_DEV = process.env.NODE_ENV === 'development';
 
 function createWindow () {
   // Create the browser window.
@@ -11,12 +12,6 @@ function createWindow () {
       nodeIntegration: true
     },
   });
-
-  // and load the index.html of the app.
-  // win.loadFile('index.html');
-
-  console.log('here1');
-  console.log(`file://${path.join(__dirname, '../dist/index.html')}`);
 
   win.loadURL(
     IS_DEV
