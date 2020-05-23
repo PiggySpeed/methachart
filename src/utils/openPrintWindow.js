@@ -15,7 +15,7 @@ export default function openPrintWindow(data) {
   let win = new BrowserWindow({
     width: 1600,
     height: 600,
-    icon: 'src/resources/methachart-favicon.ico',
+    icon: '/assets/methachart-favicon.ico',
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true

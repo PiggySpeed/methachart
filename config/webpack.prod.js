@@ -10,6 +10,7 @@ const config = {
     }),
     new CopyPlugin([
       { from: './src/print', to: './' },
+      { from: './src/assets', to: './assets/' }
     ]),
   ]
 };

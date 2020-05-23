@@ -6,8 +6,9 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 600,
+    width: 1600,
     height: 730,
+    icon: '/assets/methachart-favicon.ico',
     webPreferences: {
       nodeIntegration: true
     },
