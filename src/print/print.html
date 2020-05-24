@@ -11,7 +11,9 @@
   </div>
   <script>
     const previewscript = document.createElement('script');
-    previewscript.src = window.location.pathname.replace("print.html", "print.bundle.js").slice(1);
+    previewscript.src = (process.env.NODE_ENV === 'development')
+      ? window.location.pathname.replace("print.html", "print.bundle.js").slice(1)
+      : './print.bundle.js';
     document.write(previewscript.outerHTML);
   </script>
 </body>

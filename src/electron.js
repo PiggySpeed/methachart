@@ -6,9 +6,10 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1600,
+    width: IS_DEV ? 1600 : 800,
     height: 730,
-    icon: '/assets/methachart-favicon.ico',
+    // icon: './assets/methachart-favicon.ico',
+    icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
     webPreferences: {
       nodeIntegration: true
     },
@@ -20,8 +21,9 @@ function createWindow () {
     : `file://${path.join(__dirname, '../build/index.html')}`
   );
 
-  // Open the DevTools.
-  win.webContents.openDevTools()
+  if (IS_DEV) {
+    win.webContents.openDevTools();
+  }
 }
 
 // This method will be called when Electron has finished

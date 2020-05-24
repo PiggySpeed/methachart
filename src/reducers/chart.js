@@ -133,7 +133,6 @@ const chart = (state = initialState, action) => {
     }
 
     case ON_PRINT_TEMP_SUCCESS: {
-      console.log('herer11');
       return {
         ...state,
         formType: FORMTYPE_MAIN

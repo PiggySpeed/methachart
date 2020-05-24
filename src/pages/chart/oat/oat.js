@@ -124,7 +124,6 @@ function ChartMethadoneWrapper(props) {
 }
 
 const mapStateToProps = ({chart}) => {
-  console.log(chart);
   return {
     patientName: chart.patientName,
     rxNumber: chart.rxNumber,

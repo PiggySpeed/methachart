@@ -4,6 +4,11 @@ const CopyPlugin = require('copy-webpack-plugin');
 const config = {
   mode: 'production',
   devtool: 'source-map',
+  target: 'node',
+  node: {
+    __dirname: false,
+    __filename: false,
+  },
   plugins: [
     new Dotenv({
       path: './.env.production'

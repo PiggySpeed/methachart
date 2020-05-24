@@ -37,7 +37,3 @@ export const FORMTYPE_MAIN = 'FORMTYPE_MAIN';
 export const FORMTYPE_TEMP = 'FORMTYPE_TEMP';
 export const FORMTYPE_MAR = 'FORMTYPE_MAR';
 
-export const IS_DEV = process.env.NODE_ENV === 'development';
-export const PRINT_URL =  IS_DEV ? 'http://localhost:8000/print.html' : window.location.pathname.replace("index.html", "").slice(1) + "print/print.html";
-// `file://${path.join(__dirname, '/build/index.html')}`
-
