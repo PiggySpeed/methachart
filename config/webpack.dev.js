@@ -15,7 +15,7 @@ const config = {
     ]),
   ],
   devServer: {
-    contentBase: 'dist',
+    contentBase: 'build',
     hot: true,
     port: 8000
   },

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "the great revival",
   "author": "John Lee",
-  "main": "index.js",
+  "main": "src/electron.js",
   "homepage": "https://github.com/PiggySpeed/methachart#readme",
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "css-loader": "^3.4.2",
     "dotenv-webpack": "^1.7.0",
     "electron": "^8.0.1",
+    "electron-builder": "^22.6.1",
     "file-loader": "^5.1.0",
     "html-webpack-plugin": "^3.2.0",
     "less": "^3.11.1",
@@ -61,7 +62,17 @@
   "build": {
     "appId": "cnstimulant.methachart",
     "mac": {
-      "category": "public.app-category.productivity"
-    }
+      "category": "public.app-category.productivity",
+      "identity": false
+    },
+    "productName": "Methachart",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "build"
+    ]
   }
 }

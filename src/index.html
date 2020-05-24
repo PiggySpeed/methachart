@@ -13,7 +13,7 @@
     const script = document.createElement('script');
     script.src = (process.env.NODE_ENV === 'development')
       ? 'http://localhost:8000/main.bundle.js'
-      : `../dist/main.bundle.js`;
+      : `../build/main.bundle.js`;
     document.body.appendChild(script);
     </script>
   </body>

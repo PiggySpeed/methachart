@@ -10,7 +10,7 @@ const config = {
   },
   target: 'node',
   output: {
-    path: path.resolve(__dirname, '../', 'dist'),
+    path: path.resolve(__dirname, '../', 'build'),
     publicPath: '/',
     filename: '[name].bundle.js'
   },
