@@ -60,10 +60,6 @@ function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlu
   )
 }
 
-function pad(numStr) {
-  return numStr.padStart(2, '0');
-}
-
 function DateInput({style, disabled, error, label, defaultValue, onInputDate, onValidate}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
@@ -85,7 +81,7 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
   useEffect(() => {
     // allow real-time changes to calendar ui
     if (dd && mm && yy) {
-      let date = moment(`${pad(dd)}/${pad(mm)}/20${pad(yy)}`, 'DD/MM/YYYY', true);
+      let date = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true);
       onInputDate(date);
     }
   }, [dd, mm, yy]);
@@ -109,7 +105,7 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
 
     // validate error states upon blur
     if (dd && mm && yy) {
-      let date = moment(`${pad(dd)}/${pad(mm)}/20${pad(yy)}`, 'DD/MM/YYYY', true);
+      let date = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true);
       onValidate(date);
     }
   }
