@@ -54,9 +54,9 @@ export function addTableRowCarry(data){
   cell3.setAttribute('class', 'table-cell col3 shaded crossed-out');
   cell4.setAttribute('class', 'table-cell col4 shaded crossed-out');
   cell5.setAttribute('class', 'table-cell col5 shaded crossed-out');
-  cell6.setAttribute('class', 'table-cell col-carry shaded');
+  cell6.setAttribute('class', 'table-cell col-carry shaded col-carry-signatures');
   cell6.setAttribute('colspan', '2');
-  cell7.setAttribute('class', 'table-cell');
+  cell7.setAttribute('class', 'table-cell col-carry-notes');
 
   cell0.innerHTML = data.weekday  || '';
   cell1.innerHTML = data.date     || '';
@@ -64,8 +64,8 @@ export function addTableRowCarry(data){
   cell3.innerHTML = ''; // witness
   cell4.innerHTML = ''; // takehome
   cell5.innerHTML = ''; // total
-  cell6.innerHTML = '- CARRY -';
-  cell7.innerHTML = ''; // Notes
+  cell6.innerHTML = '';
+  cell7.innerHTML = 'CARRY'; // Notes
   return row;
 }
 

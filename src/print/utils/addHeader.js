@@ -23,7 +23,7 @@ export function buildHeader(data) {
   deliverycontainer.setAttribute("id", "delivery-container");
   let deliverylabel = document.createElement("p");
   deliverylabel.setAttribute("id", "delivery-label");
-  deliverylabel.innerHTML = "code";
+  deliverylabel.innerHTML = "CODE";
   deliverycontainer.appendChild(deliverylabel);
 
   // Add Name
