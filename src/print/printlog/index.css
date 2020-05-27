@@ -151,17 +151,27 @@ h2#rx-label-text {
 .col7 { width: 100px; }
 .col-carry {
   width: 150px; /* sum of cols 6-7 */
-  font-style: italic;
-}
-.shaded {
-  background-color: #e6e6e6;
+  font-size: 8pt;
+  color: #c3c3c3;
 }
 
-.table-cell-carry {
-  border: 1px solid black;
-  font-size: 10pt;
-  background-color: #d1d1d1;
+.shaded {
+  background-color: #fafafa;
 }
+
+.crossed-out {
+  position: relative;
+}
+.crossed-out:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  border-top: 1px dashed #dcdcdc;
+  /* for a 75x25 cell; hypotenuse is 79 */
+  width: 79px;
+  transform: rotate(17deg);
+}
+
 .table-endrow {
   border: 1px solid black;
   height: 25px;

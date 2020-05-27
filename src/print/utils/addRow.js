@@ -51,9 +51,9 @@ export function addTableRowCarry(data){
   cell0.setAttribute('class', 'table-cell col0');
   cell1.setAttribute('class', 'table-cell col1');
   cell2.setAttribute('class', 'table-cell col2');
-  cell3.setAttribute('class', 'table-cell col3 shaded');
-  cell4.setAttribute('class', 'table-cell col4 shaded');
-  cell5.setAttribute('class', 'table-cell col5 shaded');
+  cell3.setAttribute('class', 'table-cell col3 shaded crossed-out');
+  cell4.setAttribute('class', 'table-cell col4 shaded crossed-out');
+  cell5.setAttribute('class', 'table-cell col5 shaded crossed-out');
   cell6.setAttribute('class', 'table-cell col-carry shaded');
   cell6.setAttribute('colspan', '2');
   cell7.setAttribute('class', 'table-cell');
@@ -61,10 +61,10 @@ export function addTableRowCarry(data){
   cell0.innerHTML = data.weekday  || '';
   cell1.innerHTML = data.date     || '';
   cell2.innerHTML = data.rxnum    || '';
-  cell3.innerHTML = '-------'; // witness
-  cell4.innerHTML = '-------'; // takehome
-  cell5.innerHTML = '-------'; // total
-  cell6.innerHTML = 'CARRY';
+  cell3.innerHTML = ''; // witness
+  cell4.innerHTML = ''; // takehome
+  cell5.innerHTML = ''; // total
+  cell6.innerHTML = '- CARRY -';
   cell7.innerHTML = ''; // Notes
   return row;
 }
