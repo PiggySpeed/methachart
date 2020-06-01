@@ -32,7 +32,7 @@ function checkDateRange(start, end) {
   return 1;
 }
 
-function DatePanel({disabled, daterange, onSetDateRange}) {
+function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
   const [timerID, setTimerID] = useState(0);
   const [calendarFocus, setCalendarFocus] = useState(false);
   const [startDateError, setStartDateError] = useState(null);
@@ -178,6 +178,10 @@ function DatePanel({disabled, daterange, onSetDateRange}) {
           />
         </div>
       }
+      <div className="datepanel-container-notes">
+        {(startDate && endDate) && <p>{startDate.format('MMM DD, YYYY')} to {endDate.format('MMM DD, YYYY')}</p>}
+        {timeinterval && <p>{timeinterval} days</p>}
+      </div>
     </div>
   )
 }
