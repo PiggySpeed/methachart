@@ -9,8 +9,10 @@ export default function printMAR(headerdata, logData) {
 
   // split dates into two columns - saturate first column
   while (logData.length > 0) {
+    console.log('right', logData.slice());
     let leftColData = logData.splice(0, 28);
     let rightColData = logData.splice(0, 28);
+    console.log('right', rightColData);
 
     // attach header
     tables.appendChild(buildHeaderMAR(headerdata));

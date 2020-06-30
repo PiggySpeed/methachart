@@ -13,8 +13,9 @@ import {
 import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
 import {CarriesPanel} from '../../../connected';
-import {FORMTYPE_MAIN, FORMTYPE_MAR, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../constants/constants';
+import {FORMTYPE_MAR, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
+import getDateRange from '../../../utils/getDateRange';
 
 const styles = {
   row1: {
@@ -52,6 +53,9 @@ function ChartMethadoneWrapper(props) {
   }
 
   function handleSetFormType(value) {
+    if (value === FORMTYPE_MAR) {
+      props.onSetDateRange(getDateRange());
+    }
     props.onSetFormType(value);
   }
 
@@ -60,6 +64,7 @@ function ChartMethadoneWrapper(props) {
 
     if (isMAR(value)) {
       props.onSetFormType(FORMTYPE_MAR);
+      props.onSetDateRange(getDateRange());
       navigate('chart/mar');
     }
   }

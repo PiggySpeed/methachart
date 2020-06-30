@@ -1,5 +1,6 @@
 import './index.less';
 import React from 'react';
+import { Checkbox } from 'semantic-ui-react';
 import {IconChartMain, IconChartTemp} from '..';
 import {FORMTYPE_MAIN, FORMTYPE_TEMP} from '../../constants/constants';
 

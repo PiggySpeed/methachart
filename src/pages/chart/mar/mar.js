@@ -11,7 +11,7 @@ import {bindActionCreators} from 'redux';
 import chartActions from '../../../actions/chart';
 import {FORMTYPE_MAIN, isMAR} from '../../../constants/constants';
 import {navigate} from '../../../utils/history';
-
+import getDateRange from '../../../utils/getDateRange';
 
 const styles = {
   row1: {
@@ -48,6 +48,8 @@ function ChartMARWrapper(props) {
     if (!isMAR(value)) {
       props.onSetFormType(FORMTYPE_MAIN);
       navigate('/chart/oat');
+    } else {
+      props.onSetDateRange(getDateRange());
     }
   }
 
@@ -72,8 +74,8 @@ function ChartMARWrapper(props) {
       <div className="mar-date-row">
         <DatePanel
           daterange={props.daterange}
+          timeinterval={props.timeinterval}
           onSetDateRange={handleSetDateRange} />
-          <p className="mar-date-comment">date is optional</p>
       </div>
     </div>
   )

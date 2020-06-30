@@ -8,6 +8,7 @@ import {bindActionCreators} from 'redux';
 import chartActions from '../../actions/chart';
 import {FORMTYPE_MAR, isMAR} from '../../constants/constants';
 import {navigate} from '../../utils/history';
+import getDateRange from '../../utils/getDateRange';
 
 function NavBarIconButton({name, to}) {
   return (
@@ -27,7 +28,7 @@ function NavBarTextButton({label, to}) {
   )
 }
 
-function NavBarWrapper({selectedDrug, onSetFormType}) {
+function NavBarWrapper({selectedDrug, onSetFormType, onSetDateRange}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
@@ -37,6 +38,7 @@ function NavBarWrapper({selectedDrug, onSetFormType}) {
   function handleLogoClick() {
     if (isMAR(selectedDrug)) {
       onSetFormType(FORMTYPE_MAR);
+      onSetDateRange(getDateRange());
       navigate('/chart/mar');
     } else {
       navigate('/chart/oat');
@@ -66,10 +68,10 @@ const mapStateToProps = ({chart}) => {
   }
 };
 
-
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    onSetFormType: chartActions.onSetFormType
+    onSetFormType: chartActions.onSetFormType,
+    onSetDateRange: chartActions.onSetDateRange
   }, dispatch)
 };
 

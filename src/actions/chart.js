@@ -117,30 +117,29 @@ const onPrintMARRequest = () => {
     const {
       patientName,
       selectedDrug,
-      daterange
+      daterange,
+      timeinterval
     } = getState().chart;
 
-    const startdate = daterange[0]
-      ? daterange[0]
-      : moment();
+    if (timeinterval <= 0) {
+      return dispatch(onPrintFailure('The start or end dates are invalid.'));
+    }
 
-    const enddate = daterange[1]
-      ? daterange[1]
-      : moment().add(55, 'days');
+    const startdate = daterange[0];
+    const enddate = daterange[1];
 
     // Assemble logdata
     const logData = [];
     let curr = startdate.clone();
     const end = enddate.clone();
-    let n = 0;
-    while (curr <= end) {
+    while (curr < end || curr.isSame(end, 'day')) {
       logData.push({
         date: curr.format('MMM DD, YYYY'),
         weekday: curr.format('dd')
       });
       curr = curr.add(1, 'days');
-      n++;
     }
+    console.log('sending ', curr.toString(), end.toString());
 
     const header = {
       formtype: FORMTYPE_MAR,
@@ -223,9 +222,9 @@ const onPrintRequest = () => {
     let curr = daterange[0].clone();
     const end = daterange[1].clone();
     let n = 0;
-    let lastSeenDWIIndex = -1;
+    let lastSeenDWIIndex = 0; // allow printing carries on first day
     let runningCarryTotal = 0;
-    while (curr <= end) {
+    while (curr < end || curr.isSame(end, 'day')) {
       const isCarry = carries[curr.format('ddd').toUpperCase()].isCarry;
 
       // Sum up the carry dosages and retroactively
@@ -233,7 +232,7 @@ const onPrintRequest = () => {
       if (isCarry) {
         runningCarryTotal += doseFloat + takehomeFloat;
       }
-      if (!isCarry || curr.isSame(end)) {
+      if (!isCarry || curr.isSame(end, 'day')) {
         if (runningCarryTotal > 0) {
           logData[lastSeenDWIIndex].carrydose += runningCarryTotal;
           logData[lastSeenDWIIndex].total += runningCarryTotal;
