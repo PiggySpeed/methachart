@@ -139,7 +139,6 @@ const onPrintMARRequest = () => {
       });
       curr = curr.add(1, 'days');
     }
-    console.log('sending ', curr.toString(), end.toString());
 
     const header = {
       formtype: FORMTYPE_MAR,
@@ -222,10 +221,11 @@ const onPrintRequest = () => {
     let curr = daterange[0].clone();
     const end = daterange[1].clone();
     let n = 0;
-    let lastSeenDWIIndex = 0; // allow printing carries on first day
+    let lastSeenDWIIndex = -1;
     let runningCarryTotal = 0;
     while (curr < end || curr.isSame(end, 'day')) {
-      const isCarry = carries[curr.format('ddd').toUpperCase()].isCarry;
+      const firstDay = lastSeenDWIIndex <= -1;
+      const isCarry = !firstDay && carries[curr.format('ddd').toUpperCase()].isCarry;
 
       // Sum up the carry dosages and retroactively
       // apply the dosage additions to the last DWI row
