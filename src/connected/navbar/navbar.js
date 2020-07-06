@@ -6,9 +6,7 @@ import {Icon} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../actions/chart';
-import {FORMTYPE_MAR, isMAR} from '../../constants/constants';
 import {navigate} from '../../utils/history';
-import getDateRange from '../../utils/getDateRange';
 
 function NavBarIconButton({name, to}) {
   return (
@@ -28,7 +26,7 @@ function NavBarTextButton({label, to}) {
   )
 }
 
-function NavBarWrapper({selectedDrug, onSetFormType, onSetDateRange}) {
+function NavBarWrapper({selectedDrug, onClearFields}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
@@ -36,13 +34,9 @@ function NavBarWrapper({selectedDrug, onSetFormType, onSetDateRange}) {
   }
 
   function handleLogoClick() {
-    if (isMAR(selectedDrug)) {
-      onSetFormType(FORMTYPE_MAR);
-      onSetDateRange(getDateRange());
-      navigate('/chart/mar');
-    } else {
-      navigate('/chart/oat');
-    }
+    // reset button
+    onClearFields();
+    navigate('/chart/oat');
   }
 
   return (
@@ -71,7 +65,8 @@ const mapStateToProps = ({chart}) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     onSetFormType: chartActions.onSetFormType,
-    onSetDateRange: chartActions.onSetDateRange
+    onSetDateRange: chartActions.onSetDateRange,
+    onClearFields: chartActions.onClearFields
   }, dispatch)
 };
 

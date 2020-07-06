@@ -46,6 +46,7 @@ function ChartMARWrapper(props) {
     props.onSetDrug(value);
 
     if (!isMAR(value)) {
+      props.onSetDateRange([null, null]);
       props.onSetFormType(FORMTYPE_MAIN);
       navigate('/chart/oat');
     } else {

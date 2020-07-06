@@ -8,6 +8,7 @@ import {
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
   SET_FORM_TYPE,
+  ON_CLEAR_FIELDS,
   ON_PRINT_FAILURE,
   ON_PRINT_SUCCESS,
   ON_PRINT_TEMP_SUCCESS,
@@ -19,7 +20,8 @@ import {
   FORMTYPE_TEMP,
   FORMTYPE_MAIN,
   FORMTYPE_MAR,
-  getDosageUnit} from '../constants/constants';
+  getDosageUnit
+} from '../constants/constants';
 
 function calculateTimeInterval(start, end) {
   return Math.round(moment.duration(end.diff(start)).asDays() + 1); // inclusive date range
@@ -91,6 +93,12 @@ const onSetCarryScheme = (scheme) => {
     dispatch({ type: SET_CARRY_SCHEME, scheme });
   }
 };
+
+const onClearFields = () => {
+  return dispatch => {
+    dispatch({ type: ON_CLEAR_FIELDS });
+  }
+}
 
 export const onPrintFailure = (errorText) => {
   return { type: ON_PRINT_FAILURE, errorText }
@@ -288,6 +296,7 @@ export default {
   onSetDateRange,
   onDayClick,
   onSetCarryScheme,
+  onClearFields,
   onPrintRequest,
   onPrintTempRequest,
   onPrintMARRequest

@@ -8,6 +8,7 @@ import {
   SET_DATE_RANGE,
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
+  ON_CLEAR_FIELDS,
   ON_PRINT_TEMP_SUCCESS
 } from '../actions/actiontypes';
 import {
@@ -130,6 +131,10 @@ const chart = (state = initialState, action) => {
       }
 
       return { ...state, carryScheme: action.carryScheme }
+    }
+
+    case ON_CLEAR_FIELDS: {
+      return initialState;
     }
 
     case ON_PRINT_TEMP_SUCCESS: {
