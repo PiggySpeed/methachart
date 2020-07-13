@@ -7,7 +7,9 @@
 }
 
 .chartfooter-left {
+  display: flex;
   flex: 1;
+  align-items: center;
 }
 
 .chartfooter-right {
@@ -19,6 +21,18 @@
 
 .chartfooter-status-message {
   margin-right: 1rem;
-  font-size: @font-m;
+  font-size: @font-ml;
   color: @grey-4;
+}
+
+.chartfooter-error-container {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-left: 1rem;
+
+  p {
+    font-size: @font-ml;
+    color: #fbbd08;
+  }
 }

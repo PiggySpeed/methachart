@@ -5,6 +5,7 @@ import {
   SET_DRUG,
   SET_DOSE,
   SET_TAKEHOME_DOSE,
+  SET_ERROR,
   SET_DATE_RANGE,
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
@@ -29,6 +30,7 @@ const initialState = {
   takehome: null,
   daterange: [null, null], // type: [Moment, Moment]
   timeinterval: null,
+  error: '',
 
   // modify on blur
   carryScheme: null,
@@ -83,6 +85,9 @@ const chart = (state = initialState, action) => {
     }
     case SET_TAKEHOME_DOSE: {
       return {...state, takehome: action.takehome};
+    }
+    case SET_ERROR: {
+      return {...state, error: action.error};
     }
     case SET_DATE_RANGE: {
       return {...state, daterange: action.daterange, timeinterval: action.timeinterval};

@@ -4,6 +4,7 @@ import {
   SET_DRUG,
   SET_DOSE,
   SET_TAKEHOME_DOSE,
+  SET_ERROR,
   SET_DATE_RANGE,
   SET_DAY_CARRY,
   SET_CARRY_SCHEME,
@@ -60,6 +61,12 @@ const onSetDose = (dose) => {
 const onSetTakehomeDose = (takehome) => {
   return dispatch => {
     dispatch({ type: SET_TAKEHOME_DOSE, takehome });
+  }
+};
+
+const onSetError = (error) => {
+  return dispatch => {
+    dispatch({ type: SET_ERROR, error });
   }
 };
 

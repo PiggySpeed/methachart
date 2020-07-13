@@ -13,7 +13,16 @@ const styles = {
   }
 };
 
-function ChartFooterWrapper({formType, onPrintRequest, onPrintTempRequest, onPrintMARRequest}) {
+function Error({error}) {
+  return (
+    <div className="chartfooter-error-container">
+      <i className="exclamation triangle icon yellow"></i>
+      <p>{error}</p>
+    </div>
+  )
+}
+
+function ChartFooterWrapper({formType, error, onPrintRequest, onPrintTempRequest, onPrintMARRequest}) {
   const isTemp = formType === FORMTYPE_TEMP;
 
   function handlePrintRequest() {
@@ -29,7 +38,7 @@ function ChartFooterWrapper({formType, onPrintRequest, onPrintTempRequest, onPri
   return(
     <div className="chartfooter-container">
       <div className="chartfooter-left">
-
+        {!!error && <Error error={error} />}
       </div>
       <div className="chartfooter-right">
         {isTemp && <p className="chartfooter-status-message">Printing Temp Log</p>}
@@ -44,7 +53,8 @@ function ChartFooterWrapper({formType, onPrintRequest, onPrintTempRequest, onPri
 
 const mapStateToProps = ({chart}) => {
   return {
-    formType: chart.formType
+    formType: chart.formType,
+    error: chart.error
   }
 };
 
