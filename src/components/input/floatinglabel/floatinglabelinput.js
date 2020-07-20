@@ -1,5 +1,5 @@
 import './index.less';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import useHover from '../../../hooks/useHover';
 import classList from '../../../utils/classlist';
 
@@ -21,6 +21,10 @@ function FloatingLabelInput({disabled, tabindex, canFloat = true, isHovered, val
   const {hover, handleMouseEnter, handleMouseLeave} = useHover(isHovered);
   const [float, setFloat] = useState(!!value);
   const [focus, setFocus] = useState(false);
+
+  useEffect(() => {
+    setFloat(!!value);
+  }, [value])
 
   function handleChange(e) {
     if (e.target.value === '' && !focus) {

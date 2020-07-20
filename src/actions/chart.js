@@ -10,7 +10,6 @@ import {
   SET_CARRY_SCHEME,
   SET_FORM_TYPE,
   ON_CLEAR_FIELDS,
-  ON_PRINT_FAILURE,
   ON_PRINT_SUCCESS,
   ON_PRINT_TEMP_SUCCESS,
   ON_PRINT_MAR_SUCCESS,
@@ -107,10 +106,6 @@ const onClearFields = () => {
   }
 }
 
-export const onPrintFailure = (errorText) => {
-  return { type: ON_PRINT_FAILURE, errorText }
-};
-
 const onPrintSuccess = (data) => {
   openPrintWindow(data);
   return { type: ON_PRINT_SUCCESS }
@@ -137,7 +132,10 @@ const onPrintMARRequest = () => {
     } = getState().chart;
 
     if (timeinterval <= 0) {
-      return dispatch(onPrintFailure('The start or end dates are invalid.'));
+      return dispatch({
+        type: SET_ERROR,
+        error: 'The start or end dates are invalid.'
+      });
     }
 
     const startdate = daterange[0];
@@ -202,23 +200,32 @@ const onPrintRequest = () => {
       carries
     } = getState().chart;
 
-    let errorText = 'The start or end dates are invalid.';
+    let error = 'Date range is invalid.';
 
     if (!patientName) {
-      return dispatch(onPrintFailure('Please Enter a Name!'));
+      return dispatch({
+        type: SET_ERROR,
+        error: 'Enter a Name.'
+      });
     }
 
     if (!dose) {
       // allows '0' value
-      return dispatch(onPrintFailure('Please Enter a Dose!'));
+      return dispatch({
+        type: SET_ERROR,
+        error: 'Enter a Dose.'
+      });
     }
 
     if (!rxNumber) {
-      return dispatch(onPrintFailure('Please Enter an Rx Number!'));
+      return dispatch({
+        type: SET_ERROR,
+        error: 'Enter an Rx Number.'
+      });
     }
 
     if (timeinterval <= 0) {
-      return dispatch(onPrintFailure(errorText));
+      return dispatch({ type: SET_ERROR, error });
     }
 
     // Convert strings to numbers
@@ -274,7 +281,7 @@ const onPrintRequest = () => {
     }
 
     if (!(Array.isArray(logData) && logData.length)) {
-      return dispatch(onPrintFailure(errorText));
+      return dispatch({type: SET_ERROR, error});
     }
 
     const header = {
@@ -300,6 +307,7 @@ export default {
   onSetDrug,
   onSetDose,
   onSetTakehomeDose,
+  onSetError,
   onSetDateRange,
   onDayClick,
   onSetCarryScheme,

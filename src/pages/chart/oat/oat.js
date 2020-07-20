@@ -45,14 +45,17 @@ function ChartMethadoneWrapper(props) {
   const isTemp = props.formType === FORMTYPE_TEMP;
 
   function handleSetName(e) {
+    props.onSetError("");
     props.onSetPatientName(e.target.value);
   }
 
   function handleSetRxNumber(e) {
+    props.onSetError("");
     props.onSetRxNumber(e.target.value);
   }
 
   function handleSetFormType(value) {
+    props.onSetError("");
     if (value === FORMTYPE_MAR) {
       props.onSetDateRange(getDateRange());
     }
@@ -60,6 +63,7 @@ function ChartMethadoneWrapper(props) {
   }
 
   function handleSetDrug(value) {
+    props.onSetError("");
     props.onSetDrug(value);
 
     if (isMAR(value)) {
@@ -70,14 +74,17 @@ function ChartMethadoneWrapper(props) {
   }
 
   function handleSetDose(e) {
+    props.onSetError("");
     props.onSetDose(e.target.value);
   }
 
   function handleSetTakehomeDose(e) {
+    props.onSetError("");
     props.onSetTakehomeDose(e.target.value);
   }
 
   function handleSetDateRange(dateRange) {
+    props.onSetError("");
     props.onSetDateRange(dateRange);
   }
 

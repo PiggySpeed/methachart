@@ -39,10 +39,12 @@ const styles = {
 function ChartMARWrapper(props) {
 
   function handleSetName(e) {
+    props.onSetError("");
     props.onSetPatientName(e.target.value);
   }
 
   function handleSetDrug(value) {
+    props.onSetError("");
     props.onSetDrug(value);
 
     if (!isMAR(value)) {
@@ -55,6 +57,7 @@ function ChartMARWrapper(props) {
   }
 
   function handleSetDateRange(dateRange) {
+    props.onSetError("");
     props.onSetDateRange(dateRange);
   }
 

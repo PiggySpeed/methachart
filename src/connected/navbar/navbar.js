@@ -26,7 +26,7 @@ function NavBarTextButton({label, to}) {
   )
 }
 
-function NavBarWrapper({selectedDrug, onClearFields}) {
+function NavBarWrapper({selectedDrug, onClearFields, onSetError}) {
   const [hover, setHover] = useState(false);
 
   function handleMouseOver() {
@@ -34,6 +34,7 @@ function NavBarWrapper({selectedDrug, onClearFields}) {
   }
 
   function handleLogoClick() {
+    onSetError("");
     // reset button
     onClearFields();
     navigate('/chart/oat');
@@ -66,6 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     onSetFormType: chartActions.onSetFormType,
     onSetDateRange: chartActions.onSetDateRange,
+    onSetError: chartActions.onSetError,
     onClearFields: chartActions.onClearFields
   }, dispatch)
 };
