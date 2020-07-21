@@ -10,19 +10,9 @@ import {navigate} from '../../utils/history';
 
 function NavBarIconButton({name, to}) {
   return (
-    <Link to={to} className="navbar-icon-button">
+    <Link tabIndex={-1} to={to} className="navbar-icon-button">
       <Icon name={name} size="large" />
     </Link>
-  )
-}
-
-function NavBarTextButton({label, to}) {
-  return (
-    <div className="navbar-text-button-container">
-      <Link to={to} className="navbar-text-button">
-        {label}
-      </Link>
-    </div>
   )
 }
 

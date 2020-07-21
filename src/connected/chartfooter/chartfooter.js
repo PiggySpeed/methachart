@@ -35,6 +35,13 @@ function ChartFooterWrapper({formType, error, onPrintRequest, onPrintTempRequest
     }
   }
 
+  function handleKeyPress(e) {
+    if (e.charCode === 13) {
+      e.preventDefault();
+      handlePrintRequest();
+    }
+  }
+
   return(
     <div className="chartfooter-container">
       <div className="chartfooter-left">
@@ -43,8 +50,11 @@ function ChartFooterWrapper({formType, error, onPrintRequest, onPrintTempRequest
       <div className="chartfooter-right">
         {isTemp && <p className="chartfooter-status-message">Printing Temp Log</p>}
         <Button
+          id="printButton"
           secondary
+          className="chartfooter-print-btn"
           style={styles.btn}
+          onKeyPress={handleKeyPress}
           onClick={handlePrintRequest}>Print</Button>
       </div>
     </div>

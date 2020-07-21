@@ -1,7 +1,7 @@
 import './index.less';
 import React, {useState} from 'react';
 import moment from 'moment';
-import Calendar from "react-calendar";
+import Calendar from 'react-calendar';
 import { DateInput } from '../';
 
 const DATE_ERROR = {
@@ -44,6 +44,9 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
     // calendar widget returns Date() objects; convert to moment
     onSetDateRange([moment(start), moment(end)]);
     setCalendarFocus(false);
+
+    // focus print button as soon as date is selected
+    document.getElementById('printButton').focus();
   }
 
   function handleInputStartDate(start) {
@@ -122,7 +125,7 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
   function handleBlurDatePanel() {
     const timerID = setTimeout(() => {
       setCalendarFocus(false);
-    }, 500); // small delay required
+    }, 250); // small delay required
     setTimerID(timerID);
   }
 
@@ -133,6 +136,18 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
       clearTimeout(timerID);
       setTimerID(0);
     }
+  }
+
+  function handleTabLastField() {
+    // this prevents user from tabbing into
+    // calendar widget
+    if (timerID) {
+      // cancel blur event when
+      // tabbing out
+      clearTimeout(timerID);
+      setTimerID(0);
+    }
+    setCalendarFocus(false);
   }
 
   function handleFocusCalendar(e) {
@@ -159,11 +174,12 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
         error={!!endDateError}
         label="End"
         defaultValue={endDate}
+        onTabLastField={handleTabLastField}
         onInputDate={handleInputEndDate}
         onValidate={handleValidateEndDate} />
       {calendarFocus &&
         <div
-          tabIndex="-1"
+          tabIndex={-1}
           className="dateinput-calendar-container"
           onClick={handleClickCalendar}
           onFocus={handleFocusCalendar}>

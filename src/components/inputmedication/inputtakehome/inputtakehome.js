@@ -16,7 +16,7 @@ function InputTakehome({disabled, inputStyle, value="", doseUnit="mL", onChange}
       onMouseLeave={handleMouseLeave}>
       <FloatingLabelInput
         type="number"
-        tabindex={disabled ? -1 : 0}
+        tabindex={-1}
         canFloat={false}
         disabled={disabled}
         isHovered={hover}

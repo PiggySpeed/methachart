@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import classList from '../../../utils/classlist';
 import moment from 'moment';
 
-function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlur, onChange}) {
+function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlur, onChange, onKeyDown}) {
   const [focus, setFocus] = useState(false);
   const [placehold, setPlacehold] = useState(!value);
 
@@ -53,14 +53,15 @@ function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlu
         value={value || ''}
         onChange={handleChange}
         onFocus={handleFocus}
-        onBlur={handleBlur} />
+        onBlur={handleBlur}
+        onKeyDown={onKeyDown}/>
       {(!value && !focus) && <p className={`dateinput-placeholder ${classList({hidden: !placehold, disabled})}`}>{placeholder}</p>}
       <hr className={`dateinput-border ${classList({focus, disabled})}`} />
     </div>
   )
 }
 
-function DateInput({style, disabled, error, label, defaultValue, onInputDate, onValidate}) {
+function DateInput({style, disabled, error, label, defaultValue, onInputDate, onValidate, onTabLastField}) {
   const [focus, setFocus] = useState(false);
   const [hover, setHover] = useState(false);
   const [dd, setDD] = useState(null);
@@ -110,6 +111,12 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
     }
   }
 
+  function handleKeyDown(e) {
+    if (onTabLastField && e.keyCode === 9) {
+      onTabLastField();
+    }
+  }
+
   function handleMouseEnter() {
     setHover(true);
   }
@@ -154,6 +161,7 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
         onChange={(e) => handleChange('yy', e.target.value)}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
       />
     </div>
   )
