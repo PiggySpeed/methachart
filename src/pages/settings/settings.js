@@ -6,7 +6,7 @@ function Settings() {
     <div id="settings">
       <div className="settings-header">
         <h1>MethaChart v.2.0 (Beta)</h1>
-        <h2>June 2, 2020 | by John Lee</h2>
+        <h2>July 20, 2020 | by John Lee</h2>
         <h2 className="settings-support">support: jlee14c@hotmail.com</h2>
       </div>
       <br/>

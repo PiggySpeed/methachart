@@ -106,8 +106,7 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
     setEndDateError(null);
   }
 
-  function handleFocusDatePanel(e) {
-    console.log('focus date panel');
+  function handleFocusDatePanel() {
     if (timerID) {
       // intercept blur event when focusing on
       // next date input element
