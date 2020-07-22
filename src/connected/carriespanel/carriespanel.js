@@ -1,5 +1,4 @@
 import './index.less';
-import 'wicg-inert';
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import { Checkbox } from 'semantic-ui-react';
@@ -36,7 +35,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
   }
 
   return (
-    <div inert="true">
+    <div>
       <CarriesSelector
         dose={dose}
         disabled={isTemp}
@@ -45,6 +44,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
         onDayClick={handleDayClick} />
       <div className="carries-options">
         <Checkbox
+          tabIndex={-1}
           disabled={isTemp}
           value={SCHEME_WEEKENDS}
           checked={carryScheme === SCHEME_WEEKENDS}
@@ -53,6 +53,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
             style: styles.checkbox(isTemp) }}
           onChange={handleSetCarryScheme} />
         <Checkbox
+          tabIndex={-1}
           disabled={isTemp}
           value={SCHEME_WEEKDAYS}
           checked={carryScheme === SCHEME_WEEKDAYS}

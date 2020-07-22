@@ -16,7 +16,7 @@ const styles = {
 function Error({error}) {
   return (
     <div className="chartfooter-error-container">
-      <i className="exclamation triangle icon yellow"></i>
+      <i className="exclamation triangle icon red"></i>
       <p>{error}</p>
     </div>
   )

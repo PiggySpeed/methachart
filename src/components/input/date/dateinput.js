@@ -2,6 +2,7 @@ import './index.less';
 import React, {useState, useEffect} from 'react';
 import classList from '../../../utils/classlist';
 import moment from 'moment';
+const numbers = new RegExp('^[0-9]{0,2}$');
 
 function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlur, onChange, onKeyDown}) {
   const [focus, setFocus] = useState(false);
@@ -12,6 +13,11 @@ function DateNumberInput({min, max, value, placeholder, disabled, onFocus, onBlu
   }, [value]);
 
   function handleChange(e) {
+    if (!numbers.test(e.target.value) || e.target.value.length > 2) {
+      e.preventDefault();
+      return;
+    }
+
     if (onChange) {
       onChange(e);
     }

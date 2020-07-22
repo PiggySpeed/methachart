@@ -11,6 +11,7 @@ function Day({disabled, label, day, dose, takehome, isCarry, onClick}) {
   return (
     <div className="carries-day-container">
       <button
+        tabIndex={-1}
         className={`carries-day-button ${classList({carry: isCarry, disabled})}`}
         onClick={handleDayClick}>
         <p className={`carries-day-label ${classList({carry: isCarry, disabled})}`}>
