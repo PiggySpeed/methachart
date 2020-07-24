@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const os = require('os');
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 
@@ -12,7 +13,7 @@ function createWindow () {
     icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
     webPreferences: {
       nodeIntegration: true
-    },
+    }
   });
 
   win.loadURL(
@@ -22,6 +23,12 @@ function createWindow () {
   );
 
   if (IS_DEV) {
+    // redux devtools
+    // https://www.electronjs.org/docs/tutorial/devtools-extension
+    BrowserWindow.addDevToolsExtension(
+      path.join(os.homedir(), '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
+    );
+
     win.webContents.openDevTools();
   }
 }

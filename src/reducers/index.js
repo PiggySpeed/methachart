@@ -1,18 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { combineReducers } from 'redux';
 
 import chart from './chart';
 
-const rootReducer = combineReducers({
+const reducer = combineReducers({
   chart
 });
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
-  rootReducer,
-  applyMiddleware(
+  reducer,
+  composeEnhancers(applyMiddleware(
     thunkMiddleware
-  )
+  ))
 );
 
 export default store;
