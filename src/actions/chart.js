@@ -64,7 +64,10 @@ const onSetTakehomeDose = (takehome) => {
 };
 
 const onSetError = (error) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    if (getState().chart.error === '') {
+      return;
+    }
     dispatch({ type: SET_ERROR, error });
   }
 };
