@@ -107,12 +107,27 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
     setFocus(true);
   }
 
-  function handleBlur() {
+  function handleBlur(key, value) {
+    const temp = { dd, mm, yy };
     setFocus(false);
 
+    // pad values upon blur
+    if (value.length === 1) {
+      const newVal = value.padStart(2, '0');
+      temp[key] = newVal;
+
+      if (key === 'dd') {
+        setDD(newVal);
+      } else if (key === 'mm') {
+        setMM(newVal);
+      } else if (key === 'yy') {
+        setYY(newVal);
+      }
+    }
+
     // validate error states upon blur
-    if (dd && mm && yy) {
-      let date = moment(`${dd}/${mm}/20${yy}`, 'DD/MM/YYYY', true);
+    if (temp.dd && temp.mm && temp.yy) {
+      let date = moment(`${temp.dd}/${temp.mm}/20${temp.yy}`, 'DD/MM/YYYY', true);
       onValidate(date);
     }
   }
@@ -144,8 +159,8 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
         value={dd}
         placeholder="dd"
         disabled={disabled}
-        onChange={(e) => handleChange('dd', e.target.value)}
-        onBlur={handleBlur}
+        onChange={e => handleChange('dd', e.target.value)}
+        onBlur={e => handleBlur('dd', e.target.value)}
         onFocus={handleFocus}
       />
       <DateNumberInput
@@ -154,8 +169,8 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
         value={mm}
         placeholder="mm"
         disabled={disabled}
-        onChange={(e) => handleChange('mm', e.target.value)}
-        onBlur={handleBlur}
+        onChange={e => handleChange('mm', e.target.value)}
+        onBlur={e => handleBlur('mm', e.target.value)}
         onFocus={handleFocus}
       />
       <DateNumberInput
@@ -164,8 +179,8 @@ function DateInput({style, disabled, error, label, defaultValue, onInputDate, on
         value={yy}
         placeholder="yy"
         disabled={disabled}
-        onChange={(e) => handleChange('yy', e.target.value)}
-        onBlur={handleBlur}
+        onChange={e => handleChange('yy', e.target.value)}
+        onBlur={e => handleBlur('yy', e.target.value)}
         onFocus={handleFocus}
         onKeyDown={handleKeyDown}
       />
