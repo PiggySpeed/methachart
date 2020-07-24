@@ -17,6 +17,8 @@ import {FORMTYPE_MAR, FORMTYPE_TEMP, isMAR, getDosageUnit} from '../../../consta
 import {navigate} from '../../../utils/history';
 import getDateRange from '../../../utils/getDateRange';
 
+const numbers = new RegExp('^[0-9]{0,2}$');
+
 const styles = {
   row1: {
     minHeight: '6rem',
@@ -74,11 +76,21 @@ function ChartMethadoneWrapper(props) {
   }
 
   function handleSetDose(e) {
+    if (!numbers.test(e.target.value)) {
+      e.preventDefault();
+      return;
+    }
+
     props.onSetError("");
     props.onSetDose(e.target.value);
   }
 
   function handleSetTakehomeDose(e) {
+    if (!numbers.test(e.target.value)) {
+      e.preventDefault();
+      return;
+    }
+
     props.onSetError("");
     props.onSetTakehomeDose(e.target.value);
   }

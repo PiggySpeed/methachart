@@ -194,7 +194,7 @@ function DatePanel({disabled, daterange, onSetDateRange, timeinterval}) {
           />
         </div>
       }
-      <div className="datepanel-container-notes">
+      <div className={`datepanel-container-notes ${disabled ? 'disabled' : ''}`}>
         {(startDate && endDate) && <p>{startDate.format('MMM DD, YYYY')} to {endDate.format('MMM DD, YYYY')}</p>}
         {timeinterval && <p>{timeinterval} days</p>}
       </div>
