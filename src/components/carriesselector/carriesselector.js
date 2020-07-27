@@ -2,25 +2,16 @@ import './index.less';
 import React, {useState} from 'react';
 import {DAYS_OF_WEEK} from '../../constants/constants';
 import Day from './day/day';
+import classList from '../../utils/classlist';
 
 
-function CarriesSelector({disabled, carries, dose, takehome, onDayClick}) {
-  const [hover, setHover] = useState(false);
-
-  function handleMouseEnter() {
-    setHover(true)
-  }
-
-  function handleMouseLeave() {
-    setHover(false)
-  }
+function CarriesSelector({hovered, disabled, carries, dose, takehome, onDayClick}) {
+  const hover = disabled ? false : hovered;
 
   return (
     <div
-      className={`carries-selector-container ${disabled ? 'disabled' : ''}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>
-      <p className={`carries-selector-label ${hover ? 'hover' : ''} ${disabled ? 'disabled' : ''}`}>Carries</p>
+      className={`carries-selector-container ${classList({disabled, hover})}`}>
+      <p className={`carries-selector-label ${classList({disabled, hover})}`}>Carries</p>
       {DAYS_OF_WEEK.map(day => {
         const currentDay = carries[day];
         return (

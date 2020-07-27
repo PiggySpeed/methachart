@@ -8,7 +8,7 @@ function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
     width: IS_DEV ? 1600 : 800,
-    height: 730,
+    height: 700,
     // icon: './assets/methachart-favicon.ico',
     icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
     webPreferences: {

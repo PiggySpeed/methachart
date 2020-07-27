@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: flex-start;
 
-  padding-top: 0.5rem;
+  //padding-top: 0.5rem;
 }
 
 .carries-day-button {
@@ -23,19 +23,19 @@
 
   border-style: solid;
   border-width: 1px;
-  border-color: @blue;
+  border-color: @white-4;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
 
   &:hover {
-    border-width: 2px;
+    //border-width: 2px;
+    border-color: @grey-1;
   }
 
   &.carry {
-    background-color: @white-2;
-    border-color: @grey-4;
-    border-width: 2px;
+    border-color: @blue;
+    //border-width: 2px;
     font-weight: 700;
   }
 
@@ -47,10 +47,14 @@
 
 .carries-day-label {
   font-size: @font-ms;
-  color: @blue;
+  color : @white-4;
+
+  &.hover {
+    color: @grey-1;
+  }
 
   &.carry {
-    color : @grey-4;
+    color: @blue;
   }
 
   &.disabled {
@@ -60,11 +64,11 @@
 
 .carries-label {
   font-size: @font-xs;
-  color: @blue;
+  color : @grey-4;
   margin-top: 0.15rem;
 
   &.carry {
-    color : @grey-4;
+    color: @blue;
   }
 
   &.disabled {
@@ -74,14 +78,14 @@
 
 .carries-th-label {
   font-size: @font-xs;
-  color: @blue;
   margin-top: 0.15rem;
+  color : @grey-4;
 
   &.disabled {
     color: @white-2;
   }
 
   &.carry {
-    color : @grey-4;
+    color: @blue;
   }
 }

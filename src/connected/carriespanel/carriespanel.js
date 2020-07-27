@@ -1,5 +1,5 @@
 import './index.less';
-import React from 'react';
+import React, {useState} from 'react';
 import {bindActionCreators} from 'redux';
 import { Checkbox } from 'semantic-ui-react';
 import chartActions from '../../actions/chart';
@@ -9,15 +9,26 @@ import {FORMTYPE_TEMP, SCHEME_WEEKDAYS, SCHEME_WEEKENDS} from '../../constants/c
 
 
 const styles = {
-  checkbox: isTemp => ({
+  checkbox: (isTemp, isHover) => ({
     fontSize: 12,
-    color: isTemp ? '#EBEBEB' : '#C3C3C3',
-    marginRight: 12
+    color: isTemp ? '#EBEBEB' : isHover ? '#9b9b9b' : '#C3C3C3',
+    marginRight: 12,
+    transition: 'none',
+    pointerEvents: isTemp ? 'none' : 'auto'
   })
 };
 
 function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, carryScheme, onSetCarryScheme}) {
+  const [hover, setHover] = useState(false);
   const isTemp = formType === FORMTYPE_TEMP;
+
+  function handleMouseEnter() {
+    setHover(true);
+  }
+
+  function handleMouseLeave() {
+    setHover(false);
+  }
 
   function handleSetCarryScheme(e, target) {
     if (target.checked) {
@@ -35,9 +46,12 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
   }
 
   return (
-    <div>
+    <div
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
       <CarriesSelector
         dose={dose}
+        hovered={hover}
         disabled={isTemp}
         takehome={takehome}
         carries={carries}
@@ -50,7 +64,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
           checked={carryScheme === SCHEME_WEEKENDS}
           label={{
             children: 'carry weekends',
-            style: styles.checkbox(isTemp) }}
+            style: styles.checkbox(isTemp, hover) }}
           onChange={handleSetCarryScheme} />
         <Checkbox
           tabIndex={-1}
@@ -59,7 +73,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
           checked={carryScheme === SCHEME_WEEKDAYS}
           label={{
             children: 'carry weekdays',
-            style: styles.checkbox(isTemp) }}
+            style: styles.checkbox(isTemp, hover) }}
           onChange={handleSetCarryScheme} />
       </div>
     </div>
