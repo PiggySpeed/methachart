@@ -97,9 +97,9 @@ const onDayClick = (day, isCarry) => {
   }
 };
 
-const onSetCarryScheme = (scheme) => {
+const onSetCarryScheme = (scheme, toggle) => {
   return dispatch => {
-    dispatch({ type: SET_CARRY_SCHEME, scheme });
+    dispatch({ type: SET_CARRY_SCHEME, scheme, toggle });
   }
 };
 

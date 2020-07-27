@@ -30,14 +30,6 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
     setHover(false);
   }
 
-  function handleSetCarryScheme(e, target) {
-    if (target.checked) {
-      onSetCarryScheme(target.value);
-    } else {
-      onSetCarryScheme(null);
-    }
-  }
-
   function handleDayClick(day, isCarry) {
     if (carryScheme !== null) {
       onSetCarryScheme(null);
@@ -65,7 +57,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
           label={{
             children: 'carry weekends',
             style: styles.checkbox(isTemp, hover) }}
-          onChange={handleSetCarryScheme} />
+          onChange={(e, target) => onSetCarryScheme(SCHEME_WEEKENDS, target.checked)} />
         <Checkbox
           tabIndex={-1}
           disabled={isTemp}
@@ -74,7 +66,7 @@ function CarriesPanelWrapper({formType, dose, takehome, carries, onDayClick, car
           label={{
             children: 'carry weekdays',
             style: styles.checkbox(isTemp, hover) }}
-          onChange={handleSetCarryScheme} />
+          onChange={(e, target) => onSetCarryScheme(SCHEME_WEEKDAYS, target.checked)} />
       </div>
     </div>
   )

@@ -108,29 +108,29 @@ const chart = (state = initialState, action) => {
       if (action.scheme === SCHEME_WEEKDAYS) {
         return {
           ...state,
-          carryScheme: SCHEME_WEEKDAYS,
+          carryScheme: action.toggle ? SCHEME_WEEKDAYS : null,
           carries: {
             SUN: { ...state.carries.SUN, isCarry: false },
-            MON: { ...state.carries.MON, isCarry: true },
-            TUE: { ...state.carries.TUE, isCarry: true },
-            WED: { ...state.carries.WED, isCarry: true },
-            THU: { ...state.carries.THU, isCarry: true },
-            FRI: { ...state.carries.FRI, isCarry: true },
+            MON: { ...state.carries.MON, isCarry: action.toggle },
+            TUE: { ...state.carries.TUE, isCarry: action.toggle },
+            WED: { ...state.carries.WED, isCarry: action.toggle },
+            THU: { ...state.carries.THU, isCarry: action.toggle },
+            FRI: { ...state.carries.FRI, isCarry: action.toggle },
             SAT: { ...state.carries.SAT, isCarry: false }
           }
         }
       } else if (action.scheme === SCHEME_WEEKENDS) {
         return {
           ...state,
-          carryScheme: SCHEME_WEEKENDS,
+          carryScheme: action.toggle ? SCHEME_WEEKENDS : null,
           carries: {
-            SUN: { ...state.carries.SUN, isCarry: true },
+            SUN: { ...state.carries.SUN, isCarry: action.toggle },
             MON: { ...state.carries.MON, isCarry: false },
             TUE: { ...state.carries.TUE, isCarry: false },
             WED: { ...state.carries.WED, isCarry: false },
             THU: { ...state.carries.THU, isCarry: false },
             FRI: { ...state.carries.FRI, isCarry: false },
-            SAT: { ...state.carries.SAT, isCarry: true }
+            SAT: { ...state.carries.SAT, isCarry: action.toggle }
           }
         }
       }
