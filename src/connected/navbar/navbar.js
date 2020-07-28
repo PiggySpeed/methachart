@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import chartActions from '../../actions/chart';
 import {navigate} from '../../utils/history';
+import {isExpired, daysLeft, EXPIRY_DATE} from '../../constants/constants';
 
 function NavBarIconButton({name, to}) {
   return (
@@ -38,6 +39,9 @@ function NavBarWrapper({selectedDrug, onClearFields, onSetError}) {
         onLogoClick={handleLogoClick}
       />
       <div className="navbar-inner-container-left">
+        { isExpired()
+          ? <p>Trial has expired</p>
+          : <p>Expires {EXPIRY_DATE.format('MMM DD YYYY')}. {daysLeft()} days left.</p>}
       </div>
 
       <div className="navbar-inner-container-right">
