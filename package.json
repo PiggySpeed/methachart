@@ -16,9 +16,10 @@
   "scripts": {
     "electron:dev": "NODE_ENV=development electron src/electron.js",
     "electron:prod": "NODE_ENV=production electron src/electron.js",
+    "electron-win:dev": "set NODE_ENV=development electron src/electron.js",
+    "electron-win:prod": "set NODE_ENV=production electron src/electron.js",
     "start:dev": "webpack-dev-server --config config/webpack.config.js --env.env=dev",
     "start:prod": "webpack --config config/webpack.config.js --env.env=prod",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
