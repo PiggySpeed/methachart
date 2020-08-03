@@ -16,7 +16,7 @@ function createWindow () {
     }
   });
 
-  if (IS_DEV) {
+  if (!IS_DEV) {
     win.setMenu(null);
   }
 
