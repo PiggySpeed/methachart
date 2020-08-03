@@ -16,6 +16,10 @@ function createWindow () {
     }
   });
 
+  if (IS_DEV) {
+    win.setMenu(null);
+  }
+
   win.loadURL(
     IS_DEV
     ? 'http://localhost:8000'
