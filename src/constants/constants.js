@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export const METHADONE = 'METHADONE';
 export const KADIAN = 'KADIAN';
 export const SUBOXONE = 'SUBOXONE';
@@ -36,11 +34,3 @@ export const SCHEME_WEEKDAYS = 'SCHEME_WEEKDAYS';
 export const FORMTYPE_MAIN = 'FORMTYPE_MAIN';
 export const FORMTYPE_TEMP = 'FORMTYPE_TEMP';
 export const FORMTYPE_MAR = 'FORMTYPE_MAR';
-
-export const EXPIRY_DATE = moment('2020-08-10T10:00:00');
-export function isExpired() {
-  return daysLeft() <= 0;
-}
-export function daysLeft() {
-  return Math.round(moment.duration(EXPIRY_DATE.diff(new moment())).asDays() + 1);
-}
