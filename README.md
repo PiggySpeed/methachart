@@ -11,21 +11,23 @@ I could go on for a few more paragraphs on the subtle design and engineering cho
 
 Tech Stack: react, redux, webpack, LESS, electr... aughh go look at the package.json!
 
+[Partial Demo](https://twitter.com/CNStimulant/status/1251281875282223104)
+
 # Quickstart
 ```
-# Development
+# development
 npm install
 npm run start:dev
 npm run electron:dev
 npm run electron-win:dev    # windows
 
-# Prod builds
+# prod builds
 npm install
 npm run start:prod
 npm run electron:prod
 npm run electron-win:prod   # windows
 
-# Create an executable for your current OS
+# create an executable for your current OS
 npm run dist
 ```
 
