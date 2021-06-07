@@ -18,7 +18,6 @@ export default function openPrintWindow(data) {
     // icon: './assets/methachart-favicon.ico',
     icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
     webPreferences: {
-      webSecurity: false,
       nodeIntegration: true
     }
   });

@@ -10,9 +10,11 @@ const config = {
     new Dotenv({
       path: './.env.development'
     }),
-    new CopyPlugin([
-      { from: './src/print', to: './' },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/print', to: './' },
+      ]
+    }),
   ],
   devServer: {
     contentBase: 'build',

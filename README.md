@@ -14,6 +14,16 @@ Tech Stack: react, redux, webpack, LESS, electr... aughh go look at the package.
 [Partial Demo](https://twitter.com/CNStimulant/status/1251281875282223104)
 
 # Quickstart
+First, create dotenv files in the root directory: `.env.development` and `.env.production`. Put the following text inside them:
+```
+# inside .env.development
+NODE_ENV=development
+
+# inside .env.production
+NODE_ENV=production
+```
+
+Then run the following commands to run the app:
 ```
 # development
 npm install

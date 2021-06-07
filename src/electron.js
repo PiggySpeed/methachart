@@ -12,7 +12,9 @@ function createWindow () {
     // icon: './assets/methachart-favicon.ico',
     icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
     }
   });
 
@@ -27,11 +29,12 @@ function createWindow () {
   );
 
   if (IS_DEV) {
-    // redux devtools
+    // redux devtools - uncomment the following lines if you want
+    // to use redux devtools, after following the instructions below
     // https://www.electronjs.org/docs/tutorial/devtools-extension
-    BrowserWindow.addDevToolsExtension(
-      path.join(os.homedir(), '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
-    );
+    // BrowserWindow.addDevToolsExtension(
+    //   path.join(os.homedir(), '/Library/Application Support/Google/Chrome/Default/Extensions/lmhkpmbekcpmknklioeibfkpmmfibljd/2.17.0_0')
+    // );
 
     win.webContents.openDevTools();
   }

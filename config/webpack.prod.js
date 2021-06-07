@@ -13,11 +13,13 @@ const config = {
     new Dotenv({
       path: './.env.production'
     }),
-    new CopyPlugin([
-      { from: './src/print', to: './' },
-      { from: './src/assets', to: './assets/' },
-      { from: './src/assets/icon.png', to: './icon.png' }
-    ]),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/print', to: './' },
+        { from: './src/assets', to: './assets/' },
+        { from: './src/assets/icon.png', to: './icon.png' }
+      ]
+    }),
   ]
 };
 
