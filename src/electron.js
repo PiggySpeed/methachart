@@ -59,6 +59,50 @@ ipcMain.on('open-new-window', (event, data) => {
   win.loadURL(`file://${__dirname}/` + `.html`)
 });
 
+/**
+ * Main steps to get electron multi-windows working:
+ * - webpack multiple entry points
+ * - target: node (allows recognizing require and others)
+ * - output.filename: [name].bundle.js
+ * - index.html imports the correct bundle, based on prod/dev url roots
+ * - loadURL: should be dev localhost server (dev) or file path (prod)
+ * - BrowserWindow webPreferences: nodeIntegration: true, contextIsolation: false
+ * **/
+ipcMain.on('open-print-window', (event, data) => {
+  let win = new BrowserWindow({
+    width: IS_DEV ? 1600 : 800,
+    height: 600,
+    // icon: './assets/methachart-favicon.ico',
+    icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
+  });
+  win.on('closed', () => win = null);
+
+  if (IS_DEV) {
+    win.openDevTools();
+  }
+
+  const PRINT_URL = IS_DEV
+      ? 'http://localhost:8000/print.html'
+      : `file://${path.join(__dirname, './build/print.html')}`;
+
+  win.loadURL(PRINT_URL)
+      .catch(err => console.error(err));
+
+  // Printing
+  win.webContents.on('did-finish-load', () => {
+    win.webContents.send('asynchronous-reply', data);
+    if (!IS_DEV) {
+      win.webContents.print({}, (error) => {
+        if (error) throw error;
+      });
+    }
+  });
+});
+
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
