@@ -3,14 +3,14 @@ const path = require('path');
 const os = require('os');
 
 const IS_DEV = process.env.NODE_ENV === 'development';
+const FAVICON_URL = `file://${path.join(__dirname, './assets/methachart_favicon.ico')}`;
 
 function createWindow () {
   // Create the browser window.
   const win = new BrowserWindow({
     width: IS_DEV ? 1600 : 800,
     height: 750,
-    // icon: './assets/methachart-favicon.ico',
-    icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
+    icon: FAVICON_URL,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -54,10 +54,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('open-new-window', (event, data) => {
-  let win = new BrowserWindow({width:960, height:540});
-  win.loadURL(`file://${__dirname}/` + `.html`)
-});
 
 /**
  * Main steps to get electron multi-windows working:
@@ -73,7 +69,7 @@ ipcMain.on('open-print-window', (event, data) => {
     width: IS_DEV ? 1600 : 800,
     height: 600,
     // icon: './assets/methachart-favicon.ico',
-    icon: `file://${path.join(__dirname, './assets/methachart-favicon.ico')}`,
+    icon: FAVICON_URL,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false
@@ -82,7 +78,7 @@ ipcMain.on('open-print-window', (event, data) => {
   win.on('closed', () => win = null);
 
   if (IS_DEV) {
-    win.openDevTools();
+    win.openDevTools()
   }
 
   const PRINT_URL = IS_DEV
