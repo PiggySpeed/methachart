@@ -34,7 +34,7 @@
     "copy-webpack-plugin": "^6.4.1",
     "css-loader": "^5.2.6",
     "dotenv-webpack": "^1.7.0",
-    "electron": "^13.1.1",
+    "electron": "^15.5.5",
     "electron-builder": "^22.11.5",
     "file-loader": "^5.1.0",
     "html-webpack-plugin": "^4.5.2",
